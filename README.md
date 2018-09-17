@@ -1,8 +1,6 @@
 # MobileRobotSimulator
 New simulator version
 
-xoxo 
- _________
 < pabazos >
  ---------
         \   ^__^
