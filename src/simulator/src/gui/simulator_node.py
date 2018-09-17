@@ -5,7 +5,7 @@ from simulator.srv import *
 import time
 import rospy
 
-
+#mi primer commit
 gui=MobileRobotSimulator()
 
 def handle_service(req):
