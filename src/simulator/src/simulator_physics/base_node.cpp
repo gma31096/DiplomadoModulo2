@@ -225,7 +225,7 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 	float x2;
 	float distance;
 
-	printf("x1:%f x2: %f y1:%f y2: %f m:%f  dis:%f\n",x1*600,x22*600,y1*600,y2*600,m,distance*600 );
+	printf("x1:%f x2: %f y1:%f y2: %f m:%f  dis:%f\n",x1,x22,y1,y2,m,distance );
 	if(x22-x1 >= 0)
 	{
 		for(x2 = x1; x2 <= x22; x2+=.001)

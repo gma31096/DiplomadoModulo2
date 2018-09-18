@@ -24,10 +24,16 @@ struct simulator_robot_stepResponse_
   typedef simulator_robot_stepResponse_<ContainerAllocator> Type;
 
   simulator_robot_stepResponse_()
-    : success(0)  {
+    : success(0)
+    , robot_x(0.0)
+    , robot_y(0.0)
+    , theta(0.0)  {
     }
   simulator_robot_stepResponse_(const ContainerAllocator& _alloc)
-    : success(0)  {
+    : success(0)
+    , robot_x(0.0)
+    , robot_y(0.0)
+    , theta(0.0)  {
   (void)_alloc;
     }
 
@@ -35,6 +41,15 @@ struct simulator_robot_stepResponse_
 
    typedef int64_t _success_type;
   _success_type success;
+
+   typedef float _robot_x_type;
+  _robot_x_type robot_x;
+
+   typedef float _robot_y_type;
+  _robot_y_type robot_y;
+
+   typedef float _theta_type;
+  _theta_type theta;
 
 
 
@@ -113,12 +128,12 @@ struct MD5Sum< ::simulator::simulator_robot_stepResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "0f26af2399fbfbc8170d9a60ed7b9846";
+    return "b14c95024f78daedb38b11b4fec62303";
   }
 
   static const char* value(const ::simulator::simulator_robot_stepResponse_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x0f26af2399fbfbc8ULL;
-  static const uint64_t static_value2 = 0x170d9a60ed7b9846ULL;
+  static const uint64_t static_value1 = 0xb14c95024f78daedULL;
+  static const uint64_t static_value2 = 0xb38b11b4fec62303ULL;
 };
 
 template<class ContainerAllocator>
@@ -138,6 +153,9 @@ struct Definition< ::simulator::simulator_robot_stepResponse_<ContainerAllocator
   static const char* value()
   {
     return "int64 success\n\
+float32 robot_x\n\
+float32 robot_y\n\
+float32 theta\n\
 \n\
 ";
   }
@@ -158,6 +176,9 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.success);
+      stream.next(m.robot_x);
+      stream.next(m.robot_y);
+      stream.next(m.theta);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -178,6 +199,12 @@ struct Printer< ::simulator::simulator_robot_stepResponse_<ContainerAllocator> >
   {
     s << indent << "success: ";
     Printer<int64_t>::stream(s, indent + "  ", v.success);
+    s << indent << "robot_x: ";
+    Printer<float>::stream(s, indent + "  ", v.robot_x);
+    s << indent << "robot_y: ";
+    Printer<float>::stream(s, indent + "  ", v.robot_y);
+    s << indent << "theta: ";
+    Printer<float>::stream(s, indent + "  ", v.theta);
   }
 };
 

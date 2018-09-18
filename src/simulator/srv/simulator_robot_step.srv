@@ -2,3 +2,6 @@ float32 theta
 float32 distance
 ---
 int64 success
+float32 robot_x
+float32 robot_y
+float32 theta

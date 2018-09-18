@@ -32,10 +32,16 @@ def handle_get_parameters(req):
 
 
 def handle_robot_step(req):
-	
+
+	resp = simulator_robot_stepResponse()
 	gui.handle_service(req.theta,req.distance)
+	parameters = gui.get_parameters()
+	resp.robot_x = parameters[0]
+	resp.robot_y = parameters[1]
+	resp.theta = parameters[2]
 	print ("DONE")
-	return robot_stepResponse(1)
+
+	return resp
 
 def ros():
 

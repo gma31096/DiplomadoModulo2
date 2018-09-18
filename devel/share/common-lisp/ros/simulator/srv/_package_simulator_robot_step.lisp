@@ -5,4 +5,10 @@
           DISTANCE
           SUCCESS-VAL
           SUCCESS
+          ROBOT_X-VAL
+          ROBOT_X
+          ROBOT_Y-VAL
+          ROBOT_Y
+          THETA-VAL
+          THETA
 ))

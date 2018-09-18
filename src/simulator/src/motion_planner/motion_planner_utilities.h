@@ -64,7 +64,7 @@ parameters wait_start()
 }
 
 
-int move_gui(float angle ,float distance)
+int move_gui(float angle ,float distance ,next_position *next )
 {
   
   ros::NodeHandle n;
@@ -76,12 +76,15 @@ int move_gui(float angle ,float distance)
   srv.request.distance=distance;
   
   if (client.call(srv))
-  {
-      printf("%s\n","Echo" );
+  {     
+      next->robot_x = srv.response.robot_x;
+      next->robot_y = srv.response.robot_y;
+      next->robot_theta =srv.response.theta;
+      printf("%s\n","Hecho" );
   }
   else
   {
-    ROS_ERROR("Failed to call service get_parameters");
+    ROS_ERROR("Failed to call service simulator_robot_step");
     
   }
   

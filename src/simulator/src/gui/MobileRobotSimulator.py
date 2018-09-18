@@ -235,15 +235,15 @@ class MobileRobotSimulator(threading.Thread):
 		if self.light >0:
 			self.w.delete(self.light)
 		self.light = self.w.create_image(event.x, event.y, image = self.gif2)
-		self.light_x = event.x
-		self.light_y = event.y
+		self.light_x = event.x / self.canvasX
+		self.light_y = event.y / self.canvasY
 
 
 	def left_click(self,event):
 		if self.robot > 0:
 			self.delete_robot()
-		self.robotX=event.x
-		self.robotY=event.y
+		self.robotX = event.x
+		self.robotY = event.y
 		self.plot_robot()	
 		
 	
@@ -454,16 +454,16 @@ class MobileRobotSimulator(threading.Thread):
 
 	def plot_robot(self):
 		
-		x=self.robotX
-		y=self.robotY
+		x = self.robotX
+		y = self.robotY
 		angle=self.robotAngle
 
 		try:
 			self.entryPoseX.delete ( 0, END )
 			self.entryPoseY.delete ( 0, END )
 			self.entryAngle.delete ( 0, END )
-			self.entryPoseX.insert ( 0, str(x) )
-			self.entryPoseY.insert ( 0, str(y) ) 
+			self.entryPoseX.insert ( 0, str(float(x) / self.canvasX) )
+			self.entryPoseY.insert ( 0, str(float(y) / self.canvasY) ) 
 			self.entryAngle.insert ( 0, str(angle) ) 
 
 		except ValueError:
@@ -549,7 +549,7 @@ class MobileRobotSimulator(threading.Thread):
 	def move_robot(self,*args):
 
 		theta = float(self.p_giro)
-		distance = float(self.p_distance)
+		distance = float(self.p_distance) 
 		
 		init_robotX = self.robotX
 		init_robotY = self.robotY
@@ -641,7 +641,7 @@ class MobileRobotSimulator(threading.Thread):
 
 	def handle_service(self,theta,distance):
 		self.p_giro = theta
-		self.p_distance = distance
+		self.p_distance = distance * self.canvasX 
 		self.a.set(1)
 		
 	def run(self):	

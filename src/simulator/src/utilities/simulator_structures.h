@@ -18,6 +18,12 @@ typedef struct parameters_
 	int behavior;
 } parameters;
 
+typedef struct next_position_
+{
+	float robot_x;
+	float robot_y;
+	float robot_theta;
+} next_position;
 
 
 

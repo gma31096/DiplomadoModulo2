@@ -40,15 +40,19 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "simulator_motion_planner_node");
   parameters params;
   float res;
+  next_position next;
   params = wait_start();
 
+  next.robot_x = params.robot_x; 
+  next.robot_y = params.robot_y;
 
-  for(int i=0; i<10; i++) 
+  for(int i=0; i<4; i++) 
     {
-      res= check_collision(params.robot_x/600 ,1-(params.robot_y/600),0.7,.2 )*600;
+      res= check_collision(next.robot_x ,next.robot_y,.7,.1 );
       printf("check_collision %f :\n",res);
-      move_gui(0.7,res);
-      wait_start();
+      move_gui(.7,res,&next);
+      printf("%f %f %f\n",next.robot_x,next.robot_y,next.robot_theta );
+      //wait_start();
     }
  /* sensors_laser = get_sensors_laser();
   sensor_light = get_sensor_light();

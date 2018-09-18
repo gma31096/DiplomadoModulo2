@@ -113,14 +113,17 @@ import struct
 
 
 class simulator_robot_stepResponse(genpy.Message):
-  _md5sum = "0f26af2399fbfbc8170d9a60ed7b9846"
+  _md5sum = "b14c95024f78daedb38b11b4fec62303"
   _type = "simulator/simulator_robot_stepResponse"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """int64 success
+float32 robot_x
+float32 robot_y
+float32 theta
 
 """
-  __slots__ = ['success']
-  _slot_types = ['int64']
+  __slots__ = ['success','robot_x','robot_y','theta']
+  _slot_types = ['int64','float32','float32','float32']
 
   def __init__(self, *args, **kwds):
     """
@@ -130,7 +133,7 @@ class simulator_robot_stepResponse(genpy.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       success
+       success,robot_x,robot_y,theta
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -141,8 +144,17 @@ class simulator_robot_stepResponse(genpy.Message):
       #message fields cannot be None, assign default values for those that are
       if self.success is None:
         self.success = 0
+      if self.robot_x is None:
+        self.robot_x = 0.
+      if self.robot_y is None:
+        self.robot_y = 0.
+      if self.theta is None:
+        self.theta = 0.
     else:
       self.success = 0
+      self.robot_x = 0.
+      self.robot_y = 0.
+      self.theta = 0.
 
   def _get_types(self):
     """
@@ -156,7 +168,8 @@ class simulator_robot_stepResponse(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_struct_q.pack(self.success))
+      _x = self
+      buff.write(_struct_q3f.pack(_x.success, _x.robot_x, _x.robot_y, _x.theta))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -167,9 +180,10 @@ class simulator_robot_stepResponse(genpy.Message):
     """
     try:
       end = 0
+      _x = self
       start = end
-      end += 8
-      (self.success,) = _struct_q.unpack(str[start:end])
+      end += 20
+      (_x.success, _x.robot_x, _x.robot_y, _x.theta,) = _struct_q3f.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -182,7 +196,8 @@ class simulator_robot_stepResponse(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      buff.write(_struct_q.pack(self.success))
+      _x = self
+      buff.write(_struct_q3f.pack(_x.success, _x.robot_x, _x.robot_y, _x.theta))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -194,17 +209,18 @@ class simulator_robot_stepResponse(genpy.Message):
     """
     try:
       end = 0
+      _x = self
       start = end
-      end += 8
-      (self.success,) = _struct_q.unpack(str[start:end])
+      end += 20
+      (_x.success, _x.robot_x, _x.robot_y, _x.theta,) = _struct_q3f.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_q = struct.Struct("<q")
+_struct_q3f = struct.Struct("<q3f")
 class simulator_robot_step(object):
   _type          = 'simulator/simulator_robot_step'
-  _md5sum = 'aa748166a5bb70fc4aeb3cae4da517f9'
+  _md5sum = '851b8b2ccdd280507cfab4425c086df0'
   _request_class  = simulator_robot_stepRequest
   _response_class = simulator_robot_stepResponse
