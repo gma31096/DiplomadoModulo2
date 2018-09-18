@@ -3,6 +3,7 @@
 #include "../utilities/utilities.h"
 #include "simulator/simulator_robot_step.h"
 #include "simulator/simulator_parameters.h"
+#include "simulator/simulator_base.h"
 #include <string.h>
 
 #include <stdio.h>
@@ -13,6 +14,8 @@
 #define NUM_MAX_VERTEX 10
 #define STRSIZ 300
 #define SIZE_LINE 10000
+
+parameters params;
 
 typedef struct Vertex_ {
         float x;
@@ -199,39 +202,55 @@ int sat(float robot_x, float robot_y, float robot_r)
 			if( (r_min.y < polygons_wrl[i].max.y && polygons_wrl[i].max.y < r_max.y) || ( r_min.y < polygons_wrl[i].min.y && polygons_wrl[i].min.y < r_max.y)   )
 				for(int j = 0; j < polygons_wrl[i].num_vertex; j++)
 		 			if( pDistance(robot_x, robot_y, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y, polygons_wrl[i].vertex[j + 1].x, polygons_wrl[i].vertex[j + 1].y) <= robot_r ) 
-						printf("******** Si esta intersectado :o\n");	
+						printf("******** Si esta intersectado :o\n");
+						return 1;	
 	return 0;
 }
 
 
 
 	
-			
+	
 
-bool check_path(beginner_tutorials::AddTwoInts::Request  &req,beginner_tutorials::AddTwoInts::Response &res)
+
+bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_base::Response &res)
 {
-  
-	x1
-	x22
-	y1
-	y2
-	m = tan(angle);
+  	printf("Aquiii\n");
+	float x1=req.x1;
+	float y1=req.y1;
 
+    float x22 = req.distance * cos(req.theta) + x1;
+	float y2 = req.distance * sin(req.theta) + y1;
+	float m = tan(req.theta);
+	float x2;
+	float distance;
 
-  for(x2 = x1; x2 <= x22; x2++)
-  {
-  	y2 = m * (x2 - x1) + y1;
-  	if(!sat(x2,y2,rs))
-  	{
-  		
-  		break;
-  	}
-
-  }	
+	printf("x1:%f x2: %f y1:%f y2: %f m:%f  dis:%f\n",x1*600,x22*600,y1*600,y2*600,m,distance*600 );
+	if(x22-x1 >= 0)
+	{
+		for(x2 = x1; x2 <= x22; x2+=.001)
+		{
+			y2 = m * (x2 - x1) + y1;
+			//printf(" x: %f y: %f\n",x2*600,y2*600 );
+			if(!sat(x2, y2, params.robot_radio))
+				break;
+		}
+	}
+	else
+	{
+		for(x2 = x1; x2 >= x22; x2-=.001)
+		{
+			y2 = m * (x2 - x1) + y1;
+			if(!sat(x2, y2, params.robot_radio))
+				break;
+		}
+	}
+		
   	
    distance = sqrt( pow( x1-x2  ,2) + pow(y1-y2 ,2)  );
-   
-   return distance;
+   res.distance = distance;
+
+   return true;
 }
 
 
@@ -240,12 +259,17 @@ int main(int argc, char *argv[])
 	ros::init(argc, argv, "simulator_base_node");
 	ros::NodeHandle n;
 	ros::ServiceServer service = n.advertiseService("simulator_base", check_path);
-	parameters params;
+	
 	params = wait_start();
-	strcat(params.world_name,".wrl");	
-	read_environment(wrl_name,0);
+	char path[50];
+	strcpy(path,"../data/");
+	strcat(path,params.world_name);
+	strcat(path,"/");
+	strcat(path,params.world_name);
+	strcpy(path,"./src/simulator/src/data/random_2/random_2.wrl");	
+	read_environment(path,0);
 
-	ros::spin()
+	ros::spin();
 
 
 	

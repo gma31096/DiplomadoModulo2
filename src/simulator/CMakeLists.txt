@@ -58,6 +58,7 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    simulator_robot_step.srv
    simulator_parameters.srv
+   simulator_base.srv
 
  )
 
@@ -202,3 +203,7 @@ include_directories(
 add_executable(motion_planner_node src/motion_planner/motion_planner_node.cpp)
 target_link_libraries(motion_planner_node ${catkin_LIBRARIES})
 add_dependencies(motion_planner_node simulator_generate_messages_cpp)
+
+add_executable(base_node src/simulator_physics/base_node.cpp)
+target_link_libraries(base_node ${catkin_LIBRARIES})
+add_dependencies(base_node simulator_generate_messages_cpp)

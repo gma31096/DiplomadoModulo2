@@ -1,5 +1,6 @@
 
-
+#include "simulator/simulator_robot_step.h"
+#include "simulator/simulator_parameters.h"
 
 parameters wait_start()
 {

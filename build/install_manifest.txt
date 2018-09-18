@@ -7,8 +7,12 @@
 /home/diego/catkin_ws/install/share/simulator/msg/Parameters.msg
 /home/diego/catkin_ws/install/share/simulator/srv/simulator_robot_step.srv
 /home/diego/catkin_ws/install/share/simulator/srv/simulator_parameters.srv
+/home/diego/catkin_ws/install/share/simulator/srv/simulator_base.srv
 /home/diego/catkin_ws/install/share/simulator/cmake/simulator-msg-paths.cmake
 /home/diego/catkin_ws/install/include/simulator/simulator_parametersRequest.h
+/home/diego/catkin_ws/install/include/simulator/simulator_base.h
+/home/diego/catkin_ws/install/include/simulator/simulator_baseResponse.h
+/home/diego/catkin_ws/install/include/simulator/simulator_baseRequest.h
 /home/diego/catkin_ws/install/include/simulator/move_test.h
 /home/diego/catkin_ws/install/include/simulator/simulator_parametersResponse.h
 /home/diego/catkin_ws/install/include/simulator/robot_stepResponse.h
@@ -21,10 +25,12 @@
 /home/diego/catkin_ws/install/include/simulator/move_testResponse.h
 /home/diego/catkin_ws/install/include/simulator/simulator_robot_stepResponse.h
 /home/diego/catkin_ws/install/include/simulator/simulator_parameters.h
+/home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/_package_simulator_base.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/_package_simulator_parameters.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/simulator-srv.asd
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/simulator_robot_step.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/move_test.lisp
+/home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/simulator_base.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/_package_move_test.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/simulator_parameters.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/_package_simulator_robot_step.lisp
@@ -41,9 +47,11 @@
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_move_test.py
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/__init__.py
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/__init__.pyc
+/home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_simulator_base.pyc
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_simulator_robot_step.pyc
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_simulator_parameters.py
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_move_test.pyc
+/home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_simulator_base.py
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_simulator_parameters.pyc
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/__init__.py
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/__init__.pyc

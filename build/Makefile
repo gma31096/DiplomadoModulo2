@@ -254,6 +254,19 @@ _simulator_generate_messages_check_deps_Parameters/fast:
 .PHONY : _simulator_generate_messages_check_deps_Parameters/fast
 
 #=============================================================================
+# Target rules for targets named _simulator_generate_messages_check_deps_simulator_base
+
+# Build rule for target.
+_simulator_generate_messages_check_deps_simulator_base: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _simulator_generate_messages_check_deps_simulator_base
+.PHONY : _simulator_generate_messages_check_deps_simulator_base
+
+# fast build rule for target.
+_simulator_generate_messages_check_deps_simulator_base/fast:
+	$(MAKE) -f simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_base.dir/build.make simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_base.dir/build
+.PHONY : _simulator_generate_messages_check_deps_simulator_base/fast
+
+#=============================================================================
 # Target rules for targets named _simulator_generate_messages_check_deps_simulator_parameters
 
 # Build rule for target.
@@ -278,6 +291,19 @@ _simulator_generate_messages_check_deps_simulator_robot_step: cmake_check_build_
 _simulator_generate_messages_check_deps_simulator_robot_step/fast:
 	$(MAKE) -f simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_step.dir/build.make simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_step.dir/build
 .PHONY : _simulator_generate_messages_check_deps_simulator_robot_step/fast
+
+#=============================================================================
+# Target rules for targets named base_node
+
+# Build rule for target.
+base_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 base_node
+.PHONY : base_node
+
+# fast build rule for target.
+base_node/fast:
+	$(MAKE) -f simulator/CMakeFiles/base_node.dir/build.make simulator/CMakeFiles/base_node.dir/build
+.PHONY : base_node/fast
 
 #=============================================================================
 # Target rules for targets named motion_planner_node
@@ -521,8 +547,10 @@ help:
 	@echo "... gtest"
 	@echo "... gtest_main"
 	@echo "... _simulator_generate_messages_check_deps_Parameters"
+	@echo "... _simulator_generate_messages_check_deps_simulator_base"
 	@echo "... _simulator_generate_messages_check_deps_simulator_parameters"
 	@echo "... _simulator_generate_messages_check_deps_simulator_robot_step"
+	@echo "... base_node"
 	@echo "... motion_planner_node"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_lisp"

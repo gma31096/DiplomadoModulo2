@@ -3,6 +3,7 @@ FILE(REMOVE_RECURSE
   "/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/msg/Parameters.lisp"
   "/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_step.lisp"
   "/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_parameters.lisp"
+  "/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_base.lisp"
 )
 
 # Per-language clean rules from dependency scanning.

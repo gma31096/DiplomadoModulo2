@@ -40,6 +40,7 @@ IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
   FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/simulator/srv" TYPE FILE FILES
     "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv"
     "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv"
+    "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

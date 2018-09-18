@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "simulator: 1 messages, 2 services")
+message(STATUS "simulator: 1 messages, 3 services")
 
 set(MSG_I_FLAGS "-Isimulator:/home/diego/catkin_ws/src/simulator/msg;-Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg")
 
@@ -30,6 +30,11 @@ add_custom_target(_simulator_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" ""
 )
 
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv" NAME_WE)
+add_custom_target(_simulator_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv" ""
+)
+
 #
 #  langs = gencpp;genlisp;genpy
 #
@@ -56,6 +61,12 @@ _generate_srv_cpp(simulator
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
 )
+_generate_srv_cpp(simulator
+  "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
+)
 
 ### Generating Module File
 _generate_module_cpp(simulator
@@ -74,6 +85,8 @@ add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_ch
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -105,6 +118,12 @@ _generate_srv_lisp(simulator
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
 )
+_generate_srv_lisp(simulator
+  "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
+)
 
 ### Generating Module File
 _generate_module_lisp(simulator
@@ -123,6 +142,8 @@ add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_c
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -154,6 +175,12 @@ _generate_srv_py(simulator
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
 )
+_generate_srv_py(simulator
+  "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
+)
 
 ### Generating Module File
 _generate_module_py(simulator
@@ -172,6 +199,8 @@ add_dependencies(simulator_generate_messages_py _simulator_generate_messages_che
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
