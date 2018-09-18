@@ -46,7 +46,8 @@ CMAKE_BINARY_DIR = /home/diego/catkin_ws/build
 include simulator/CMakeFiles/simulator_generate_messages_lisp.dir/progress.make
 
 simulator/CMakeFiles/simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/msg/Parameters.lisp
-simulator/CMakeFiles/simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/robot_step.lisp
+simulator/CMakeFiles/simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_step.lisp
+simulator/CMakeFiles/simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_parameters.lisp
 
 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/msg/Parameters.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/msg/Parameters.lisp: /home/diego/catkin_ws/src/simulator/msg/Parameters.msg
@@ -54,15 +55,22 @@ simulator/CMakeFiles/simulator_generate_messages_lisp: /home/diego/catkin_ws/dev
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from simulator/Parameters.msg"
 	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/diego/catkin_ws/src/simulator/msg/Parameters.msg -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/msg
 
-/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/robot_step.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
-/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/robot_step.lisp: /home/diego/catkin_ws/src/simulator/srv/robot_step.srv
+/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_step.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_step.lisp: /home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from simulator/robot_step.srv"
-	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/diego/catkin_ws/src/simulator/srv/robot_step.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from simulator/simulator_robot_step.srv"
+	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv
+
+/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_parameters.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_parameters.lisp: /home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from simulator/simulator_parameters.srv"
+	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv
 
 simulator_generate_messages_lisp: simulator/CMakeFiles/simulator_generate_messages_lisp
 simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/msg/Parameters.lisp
-simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/robot_step.lisp
+simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_step.lisp
+simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_parameters.lisp
 simulator_generate_messages_lisp: simulator/CMakeFiles/simulator_generate_messages_lisp.dir/build.make
 .PHONY : simulator_generate_messages_lisp
 

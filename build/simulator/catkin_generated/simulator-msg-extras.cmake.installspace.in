@@ -1,2 +1,2 @@
 set(simulator_MESSAGE_FILES "msg/Parameters.msg")
-set(simulator_SERVICE_FILES "srv/robot_step.srv")
+set(simulator_SERVICE_FILES "srv/simulator_robot_step.srv;srv/simulator_parameters.srv")

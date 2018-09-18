@@ -7,7 +7,7 @@ import struct
 
 
 class Parameters(genpy.Message):
-  _md5sum = "755c9aa110b0db29409f1bf3fac9c8f0"
+  _md5sum = "4e7613e1bd8252f81ab8e53ca6b6c2a0"
   _type = "simulator/Parameters"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """float32 robot_x
@@ -22,9 +22,12 @@ float32 laser_range
 float32 laser_value
 string world_name
 bool noise
+bool run
+float32 light_x
+float32 light_y
 """
-  __slots__ = ['robot_x','robot_y','robot_theta','robot_radio','robot_max_advance','robot_turn_angle','laser_num_sensors','laser_origin','laser_range','laser_value','world_name','noise']
-  _slot_types = ['float32','float32','float32','float32','float32','float32','int32','float32','float32','float32','string','bool']
+  __slots__ = ['robot_x','robot_y','robot_theta','robot_radio','robot_max_advance','robot_turn_angle','laser_num_sensors','laser_origin','laser_range','laser_value','world_name','noise','run','light_x','light_y']
+  _slot_types = ['float32','float32','float32','float32','float32','float32','int32','float32','float32','float32','string','bool','bool','float32','float32']
 
   def __init__(self, *args, **kwds):
     """
@@ -34,7 +37,7 @@ bool noise
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       robot_x,robot_y,robot_theta,robot_radio,robot_max_advance,robot_turn_angle,laser_num_sensors,laser_origin,laser_range,laser_value,world_name,noise
+       robot_x,robot_y,robot_theta,robot_radio,robot_max_advance,robot_turn_angle,laser_num_sensors,laser_origin,laser_range,laser_value,world_name,noise,run,light_x,light_y
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -67,6 +70,12 @@ bool noise
         self.world_name = ''
       if self.noise is None:
         self.noise = False
+      if self.run is None:
+        self.run = False
+      if self.light_x is None:
+        self.light_x = 0.
+      if self.light_y is None:
+        self.light_y = 0.
     else:
       self.robot_x = 0.
       self.robot_y = 0.
@@ -80,6 +89,9 @@ bool noise
       self.laser_value = 0.
       self.world_name = ''
       self.noise = False
+      self.run = False
+      self.light_x = 0.
+      self.light_y = 0.
 
   def _get_types(self):
     """
@@ -104,7 +116,8 @@ bool noise
         buff.write(struct.pack('<I%sB'%length, length, *_x))
       else:
         buff.write(struct.pack('<I%ss'%length, length, _x))
-      buff.write(_struct_B.pack(self.noise))
+      _x = self
+      buff.write(_struct_2B2f.pack(_x.noise, _x.run, _x.light_x, _x.light_y))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -128,10 +141,12 @@ bool noise
         self.world_name = str[start:end].decode('utf-8')
       else:
         self.world_name = str[start:end]
+      _x = self
       start = end
-      end += 1
-      (self.noise,) = _struct_B.unpack(str[start:end])
+      end += 10
+      (_x.noise, _x.run, _x.light_x, _x.light_y,) = _struct_2B2f.unpack(str[start:end])
       self.noise = bool(self.noise)
+      self.run = bool(self.run)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -155,7 +170,8 @@ bool noise
         buff.write(struct.pack('<I%sB'%length, length, *_x))
       else:
         buff.write(struct.pack('<I%ss'%length, length, _x))
-      buff.write(_struct_B.pack(self.noise))
+      _x = self
+      buff.write(_struct_2B2f.pack(_x.noise, _x.run, _x.light_x, _x.light_y))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -180,14 +196,16 @@ bool noise
         self.world_name = str[start:end].decode('utf-8')
       else:
         self.world_name = str[start:end]
+      _x = self
       start = end
-      end += 1
-      (self.noise,) = _struct_B.unpack(str[start:end])
+      end += 10
+      (_x.noise, _x.run, _x.light_x, _x.light_y,) = _struct_2B2f.unpack(str[start:end])
       self.noise = bool(self.noise)
+      self.run = bool(self.run)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_B = struct.Struct("<B")
+_struct_2B2f = struct.Struct("<2B2f")
 _struct_6fi3f = struct.Struct("<6fi3f")

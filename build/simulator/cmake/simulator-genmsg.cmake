@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "simulator: 1 messages, 1 services")
+message(STATUS "simulator: 1 messages, 2 services")
 
 set(MSG_I_FLAGS "-Isimulator:/home/diego/catkin_ws/src/simulator/msg;-Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg")
 
@@ -20,9 +20,14 @@ add_custom_target(_simulator_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg" ""
 )
 
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/robot_step.srv" NAME_WE)
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
 add_custom_target(_simulator_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/robot_step.srv" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" ""
+)
+
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
+add_custom_target(_simulator_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" ""
 )
 
 #
@@ -40,7 +45,13 @@ _generate_msg_cpp(simulator
 
 ### Generating Services
 _generate_srv_cpp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/robot_step.srv"
+  "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
+)
+_generate_srv_cpp(simulator
+  "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
@@ -60,7 +71,9 @@ add_dependencies(simulator_generate_messages simulator_generate_messages_cpp)
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/robot_step.srv" NAME_WE)
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -81,7 +94,13 @@ _generate_msg_lisp(simulator
 
 ### Generating Services
 _generate_srv_lisp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/robot_step.srv"
+  "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
+)
+_generate_srv_lisp(simulator
+  "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
@@ -101,7 +120,9 @@ add_dependencies(simulator_generate_messages simulator_generate_messages_lisp)
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/robot_step.srv" NAME_WE)
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -122,7 +143,13 @@ _generate_msg_py(simulator
 
 ### Generating Services
 _generate_srv_py(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/robot_step.srv"
+  "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
+)
+_generate_srv_py(simulator
+  "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
@@ -142,7 +169,9 @@ add_dependencies(simulator_generate_messages simulator_generate_messages_py)
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/robot_step.srv" NAME_WE)
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

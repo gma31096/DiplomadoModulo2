@@ -1,7 +1,7 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
 messages_str = "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg"
-services_str = "/home/diego/catkin_ws/src/simulator/srv/robot_step.srv"
+services_str = "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv;/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv"
 pkg_name = "simulator"
 dependencies_str = "std_msgs"
 langs = "gencpp;genlisp;genpy"

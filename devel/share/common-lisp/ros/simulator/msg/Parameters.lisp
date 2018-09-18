@@ -66,7 +66,22 @@
     :reader noise
     :initarg :noise
     :type cl:boolean
-    :initform cl:nil))
+    :initform cl:nil)
+   (run
+    :reader run
+    :initarg :run
+    :type cl:boolean
+    :initform cl:nil)
+   (light_x
+    :reader light_x
+    :initarg :light_x
+    :type cl:float
+    :initform 0.0)
+   (light_y
+    :reader light_y
+    :initarg :light_y
+    :type cl:float
+    :initform 0.0))
 )
 
 (cl:defclass Parameters (<Parameters>)
@@ -136,6 +151,21 @@
 (cl:defmethod noise-val ((m <Parameters>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-msg:noise-val is deprecated.  Use simulator-msg:noise instead.")
   (noise m))
+
+(cl:ensure-generic-function 'run-val :lambda-list '(m))
+(cl:defmethod run-val ((m <Parameters>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-msg:run-val is deprecated.  Use simulator-msg:run instead.")
+  (run m))
+
+(cl:ensure-generic-function 'light_x-val :lambda-list '(m))
+(cl:defmethod light_x-val ((m <Parameters>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-msg:light_x-val is deprecated.  Use simulator-msg:light_x instead.")
+  (light_x m))
+
+(cl:ensure-generic-function 'light_y-val :lambda-list '(m))
+(cl:defmethod light_y-val ((m <Parameters>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-msg:light_y-val is deprecated.  Use simulator-msg:light_y instead.")
+  (light_y m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <Parameters>) ostream)
   "Serializes a message object of type '<Parameters>"
   (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'robot_x))))
@@ -196,6 +226,17 @@
     (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
   (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'world_name))
   (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'noise) 1 0)) ostream)
+  (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'run) 1 0)) ostream)
+  (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'light_x))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
+  (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'light_y))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <Parameters>) istream)
   "Deserializes a message object of type '<Parameters>"
@@ -268,6 +309,19 @@
       (cl:dotimes (__ros_str_idx __ros_str_len msg)
         (cl:setf (cl:char (cl:slot-value msg 'world_name) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
     (cl:setf (cl:slot-value msg 'noise) (cl:not (cl:zerop (cl:read-byte istream))))
+    (cl:setf (cl:slot-value msg 'run) (cl:not (cl:zerop (cl:read-byte istream))))
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'light_x) (roslisp-utils:decode-single-float-bits bits)))
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'light_y) (roslisp-utils:decode-single-float-bits bits)))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<Parameters>)))
@@ -278,16 +332,16 @@
   "simulator/Parameters")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<Parameters>)))
   "Returns md5sum for a message object of type '<Parameters>"
-  "755c9aa110b0db29409f1bf3fac9c8f0")
+  "4e7613e1bd8252f81ab8e53ca6b6c2a0")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'Parameters)))
   "Returns md5sum for a message object of type 'Parameters"
-  "755c9aa110b0db29409f1bf3fac9c8f0")
+  "4e7613e1bd8252f81ab8e53ca6b6c2a0")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<Parameters>)))
   "Returns full string definition for message of type '<Parameters>"
-  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%float32 robot_radio~%float32 robot_max_advance~%float32 robot_turn_angle~%int32 laser_num_sensors~%float32 laser_origin~%float32 laser_range~%float32 laser_value~%string world_name~%bool noise~%~%~%"))
+  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%float32 robot_radio~%float32 robot_max_advance~%float32 robot_turn_angle~%int32 laser_num_sensors~%float32 laser_origin~%float32 laser_range~%float32 laser_value~%string world_name~%bool noise~%bool run~%float32 light_x~%float32 light_y~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'Parameters)))
   "Returns full string definition for message of type 'Parameters"
-  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%float32 robot_radio~%float32 robot_max_advance~%float32 robot_turn_angle~%int32 laser_num_sensors~%float32 laser_origin~%float32 laser_range~%float32 laser_value~%string world_name~%bool noise~%~%~%"))
+  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%float32 robot_radio~%float32 robot_max_advance~%float32 robot_turn_angle~%int32 laser_num_sensors~%float32 laser_origin~%float32 laser_range~%float32 laser_value~%string world_name~%bool noise~%bool run~%float32 light_x~%float32 light_y~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <Parameters>))
   (cl:+ 0
      4
@@ -302,6 +356,9 @@
      4
      4 (cl:length (cl:slot-value msg 'world_name))
      1
+     1
+     4
+     4
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <Parameters>))
   "Converts a ROS message object to a list"
@@ -318,4 +375,7 @@
     (cl:cons ':laser_value (laser_value msg))
     (cl:cons ':world_name (world_name msg))
     (cl:cons ':noise (noise msg))
+    (cl:cons ':run (run msg))
+    (cl:cons ':light_x (light_x msg))
+    (cl:cons ':light_y (light_y msg))
 ))

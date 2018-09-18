@@ -1,7 +1,13 @@
+#include "ros/ros.h"
+#include "../utilities/simulator_structures.h"
+#include "../utilities/utilities.h"
+#include "simulator/simulator_robot_step.h"
+#include "simulator/simulator_parameters.h"
+#include <string.h>
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#include <string.h>
 
 #define MAX_NUM_POLYGONS 100
 #define NUM_MAX_VERTEX 10
@@ -116,6 +122,7 @@ int ReadPolygons(char *file,Polygon *polygons){
 
 void read_environment(char *file, int debug)
 {
+
  	int i;                                                                            
 	int j;
 
@@ -196,21 +203,53 @@ int sat(float robot_x, float robot_y, float robot_r)
 	return 0;
 }
 
-int main()
+
+
+	
+			
+
+bool check_path(beginner_tutorials::AddTwoInts::Request  &req,beginner_tutorials::AddTwoInts::Response &res)
 {
-	char wrl_name[50];
-	strcpy(wrl_name,"random_1.wrl");
+  
+	x1
+	x22
+	y1
+	y2
+	m = tan(angle);
+
+
+  for(x2 = x1; x2 <= x22; x2++)
+  {
+  	y2 = m * (x2 - x1) + y1;
+  	if(!sat(x2,y2,rs))
+  	{
+  		
+  		break;
+  	}
+
+  }	
+  	
+   distance = sqrt( pow( x1-x2  ,2) + pow(y1-y2 ,2)  );
+   
+   return distance;
+}
+
+
+int main(int argc, char *argv[])
+{
+	ros::init(argc, argv, "simulator_base_node");
+	ros::NodeHandle n;
+	ros::ServiceServer service = n.advertiseService("simulator_base", check_path);
+	parameters params;
+	params = wait_start();
+	strcat(params.world_name,".wrl");	
+	read_environment(wrl_name,0);
+
+	ros::spin()
+
+
 	
-	read_environment(wrl_name,1);
-	float xs=1;
-	float ys=1;
-	float rs=.2;
-	printf("self.w.create_rectangle(%f* self.canvasX/2, (self.canvasY-( %f* self.canvasY )/2) ,  (%f* self.canvasX)/2, (self.canvasY-(%f* self.canvasX)/2), outline='#000000', width=1)\n",xs+rs ,ys+rs,xs-rs,ys-rs);
-	printf("self.w.create_oval(%f* self.canvasX/2, (self.canvasY-( %f* self.canvasY )/2) ,  (%f* self.canvasX)/2, (self.canvasY-(%f* self.canvasX)/2), outline='#000000', width=1)\n",xs+rs ,ys+rs,xs-rs,ys-rs);
 	
-	int num_vertex;
-	int index[10];
-	sat(xs,ys,rs);
-	//printf("Distancia %f \n", pDistance(3, 5, 4, 5, 6, 7) );	
+
 	return 0;
 }

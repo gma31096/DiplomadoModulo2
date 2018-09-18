@@ -10,3 +10,6 @@ float32 laser_range
 float32 laser_value
 string world_name
 bool noise
+bool run
+float32 light_x
+float32 light_y

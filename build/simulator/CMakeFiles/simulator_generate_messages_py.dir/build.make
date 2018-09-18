@@ -46,7 +46,8 @@ CMAKE_BINARY_DIR = /home/diego/catkin_ws/build
 include simulator/CMakeFiles/simulator_generate_messages_py.dir/progress.make
 
 simulator/CMakeFiles/simulator_generate_messages_py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/_Parameters.py
-simulator/CMakeFiles/simulator_generate_messages_py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_robot_step.py
+simulator/CMakeFiles/simulator_generate_messages_py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_robot_step.py
+simulator/CMakeFiles/simulator_generate_messages_py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_parameters.py
 simulator/CMakeFiles/simulator_generate_messages_py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/__init__.py
 simulator/CMakeFiles/simulator_generate_messages_py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/__init__.py
 
@@ -56,29 +57,38 @@ simulator/CMakeFiles/simulator_generate_messages_py: /home/diego/catkin_ws/devel
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python from MSG simulator/Parameters"
 	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/diego/catkin_ws/src/simulator/msg/Parameters.msg -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg
 
-/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_robot_step.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/gensrv_py.py
-/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_robot_step.py: /home/diego/catkin_ws/src/simulator/srv/robot_step.srv
+/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_robot_step.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/gensrv_py.py
+/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_robot_step.py: /home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python code from SRV simulator/robot_step"
-	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/diego/catkin_ws/src/simulator/srv/robot_step.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python code from SRV simulator/simulator_robot_step"
+	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv
+
+/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_parameters.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/gensrv_py.py
+/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_parameters.py: /home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python code from SRV simulator/simulator_parameters"
+	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv
 
 /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/__init__.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
 /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/__init__.py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/_Parameters.py
-/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/__init__.py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_robot_step.py
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_3)
+/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/__init__.py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_robot_step.py
+/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/__init__.py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_parameters.py
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python msg __init__.py for simulator"
 	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg --initpy
 
 /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/__init__.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
 /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/__init__.py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/_Parameters.py
-/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/__init__.py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_robot_step.py
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_4)
+/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/__init__.py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_robot_step.py
+/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/__init__.py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_parameters.py
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python srv __init__.py for simulator"
 	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv --initpy
 
 simulator_generate_messages_py: simulator/CMakeFiles/simulator_generate_messages_py
 simulator_generate_messages_py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/_Parameters.py
-simulator_generate_messages_py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_robot_step.py
+simulator_generate_messages_py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_robot_step.py
+simulator_generate_messages_py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_parameters.py
 simulator_generate_messages_py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/__init__.py
 simulator_generate_messages_py: /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/__init__.py
 simulator_generate_messages_py: simulator/CMakeFiles/simulator_generate_messages_py.dir/build.make

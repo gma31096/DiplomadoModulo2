@@ -1,14 +1,37 @@
 #!/usr/bin/env python
 from MobileRobotSimulator import *
-from simulator.msg import Parameters
 from simulator.srv import *
 import time
 import rospy
 
-#mi primer commit
 gui=MobileRobotSimulator()
 
-def handle_service(req):
+
+def handle_get_parameters(req):
+	
+	resp = simulator_parametersResponse()
+	parameters = gui.get_parameters()
+	resp.robot_x = parameters[0]
+	resp.robot_y = parameters[1]
+	resp.robot_theta = parameters[2]
+	resp.robot_radio = parameters[3]
+	resp.robot_max_advance = parameters[4]
+	resp.robot_turn_angle = parameters[5]
+	resp.laser_num_sensors = parameters[6]
+	resp.laser_origin = parameters[7]
+	resp.laser_range = parameters[8]
+	resp.laser_value = parameters[9]
+	resp.world_name = parameters[10]
+	resp.noise = parameters[11]
+	resp.light_x = parameters[12]
+	resp.light_y = parameters[13]
+	resp.run = parameters[14]
+	resp.behavior = parameters[15]
+
+	return resp
+
+
+def handle_robot_step(req):
 	
 	gui.handle_service(req.theta,req.distance)
 	print ("DONE")
@@ -16,47 +39,12 @@ def handle_service(req):
 
 def ros():
 
-	rospy.init_node('Gui_simulator', anonymous=True)
-	pub = rospy.Publisher('/parameters', Parameters, queue_size=10)
-	s = rospy.Service('robot_step', robot_step, handle_service)
+	rospy.init_node('simulator_gui_node')
+	s = rospy.Service('simulator_robot_step', simulator_robot_step, handle_robot_step)
+	s = rospy.Service('simulator_get_parameters', simulator_parameters, handle_get_parameters)
+	rospy.spin()
 
-	rate = rospy.Rate(10) # 10hz
-	msg = Parameters()
-	while not gui.stopped:
-		parameters= gui.get_parameters()
-		msg.robot_x = parameters[0]
-		msg.robot_y = parameters[1]
-		msg.robot_theta = parameters[2]
-		msg.robot_radio = parameters[3]
-		msg.robot_max_advance = parameters[4]
-		msg.robot_turn_angle = parameters[5]
-		msg.laser_num_sensors = parameters[6]
-		msg.laser_origin = parameters[7]
-		msg.laser_range = parameters[8]
-		msg.laser_value = parameters[9]
-		msg.world_name = parameters[10]
-		msg.noise = parameters[11]
-		pub.publish(msg)
+if __name__ == "__main__":
+    ros()
 
-		for  item in parameters:
-			if item ==' ':
-				parameters[parameters.index(item)]=0
-		#parameters[:] = [x if x != '' else 0 for x in parameters ]
 
-		rate.sleep()
-
-ros()
-
-#if __name__ == "__main__":
-#	rospy.init_node('parameters', anonymous=True)
-#	s = rospy.Service('move_test', move_test, handle_service)
-#	time.sleep(5)
-#	while 1:
-#
-#		gui.move_robot(3.14,200)
-#		time.sleep(1)
-#
-#
-#	rospy.spin()
-    #ros()
-    #add_two_ints_server()

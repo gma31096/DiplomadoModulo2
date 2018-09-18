@@ -38,6 +38,10 @@ class MobileRobotSimulator(threading.Thread):
 
 		self.flagOnce=False
 
+		self.light_x = 0
+		self.light_y = 0
+		self.startFlag = False
+
 		self.start()
 
 
@@ -97,6 +101,22 @@ class MobileRobotSimulator(threading.Thread):
 			parameters.append( bool(self.varAddNoise.get() ))
 		except ValueError:
 			parameters.append(False)
+		try:
+			parameters.append( float(self.light_x))
+		except ValueError:
+			parameters.append(0.0)
+		try:
+			parameters.append( float(self.light_y))
+		except ValueError:
+			parameters.append(0.0)
+		try:
+			parameters.append( bool(self.startFlag ))
+		except ValueError:
+			parameters.append(False)
+		try:
+			parameters.append( int(self.entryBehavior.get() ))
+		except ValueError:
+			parameters.append(-1)
 
 		return parameters
 
@@ -179,8 +199,10 @@ class MobileRobotSimulator(threading.Thread):
 	def s_t_simulation(self,star_stop):
 		if star_stop :
 			state = 'disable'
+			self.startFlag=True
 		else: 
 			state = 'normal'
+			self.startFlag=False
 
 		self.entryFile          .configure(state=state)     
 		self.entrySteps         .configure(state=state) 
@@ -202,6 +224,8 @@ class MobileRobotSimulator(threading.Thread):
 		self.entryOrigin        .configure(state=state)    
 		self.entryRange         .configure(state=state)    
 		self.entryValue         .configure(state=state)
+
+
 		#self.buttonShowNodes     
 		#self.buttonRunSimulation  
 		#self.buttonStop        
@@ -211,6 +235,8 @@ class MobileRobotSimulator(threading.Thread):
 		if self.light >0:
 			self.w.delete(self.light)
 		self.light = self.w.create_image(event.x, event.y, image = self.gif2)
+		self.light_x = event.x
+		self.light_y = event.y
 
 
 	def left_click(self,event):
@@ -524,9 +550,7 @@ class MobileRobotSimulator(threading.Thread):
 
 		theta = float(self.p_giro)
 		distance = float(self.p_distance)
-	
 		
-
 		init_robotX = self.robotX
 		init_robotY = self.robotY
 		init_robotAngle = self.robotAngle

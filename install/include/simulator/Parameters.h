@@ -35,7 +35,10 @@ struct Parameters_
     , laser_range(0.0)
     , laser_value(0.0)
     , world_name()
-    , noise(false)  {
+    , noise(false)
+    , run(false)
+    , light_x(0.0)
+    , light_y(0.0)  {
     }
   Parameters_(const ContainerAllocator& _alloc)
     : robot_x(0.0)
@@ -49,7 +52,10 @@ struct Parameters_
     , laser_range(0.0)
     , laser_value(0.0)
     , world_name(_alloc)
-    , noise(false)  {
+    , noise(false)
+    , run(false)
+    , light_x(0.0)
+    , light_y(0.0)  {
   (void)_alloc;
     }
 
@@ -90,6 +96,15 @@ struct Parameters_
 
    typedef uint8_t _noise_type;
   _noise_type noise;
+
+   typedef uint8_t _run_type;
+  _run_type run;
+
+   typedef float _light_x_type;
+  _light_x_type light_x;
+
+   typedef float _light_y_type;
+  _light_y_type light_y;
 
 
 
@@ -168,12 +183,12 @@ struct MD5Sum< ::simulator::Parameters_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "755c9aa110b0db29409f1bf3fac9c8f0";
+    return "4e7613e1bd8252f81ab8e53ca6b6c2a0";
   }
 
   static const char* value(const ::simulator::Parameters_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x755c9aa110b0db29ULL;
-  static const uint64_t static_value2 = 0x409f1bf3fac9c8f0ULL;
+  static const uint64_t static_value1 = 0x4e7613e1bd8252f8ULL;
+  static const uint64_t static_value2 = 0x1ab8e53ca6b6c2a0ULL;
 };
 
 template<class ContainerAllocator>
@@ -204,6 +219,9 @@ float32 laser_range\n\
 float32 laser_value\n\
 string world_name\n\
 bool noise\n\
+bool run\n\
+float32 light_x\n\
+float32 light_y\n\
 ";
   }
 
@@ -234,6 +252,9 @@ namespace serialization
       stream.next(m.laser_value);
       stream.next(m.world_name);
       stream.next(m.noise);
+      stream.next(m.run);
+      stream.next(m.light_x);
+      stream.next(m.light_y);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -276,6 +297,12 @@ struct Printer< ::simulator::Parameters_<ContainerAllocator> >
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.world_name);
     s << indent << "noise: ";
     Printer<uint8_t>::stream(s, indent + "  ", v.noise);
+    s << indent << "run: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.run);
+    s << indent << "light_x: ";
+    Printer<float>::stream(s, indent + "  ", v.light_x);
+    s << indent << "light_y: ";
+    Printer<float>::stream(s, indent + "  ", v.light_y);
   }
 };
 

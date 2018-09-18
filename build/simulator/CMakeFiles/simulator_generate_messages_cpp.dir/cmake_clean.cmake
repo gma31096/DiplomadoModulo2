@@ -1,7 +1,8 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/simulator_generate_messages_cpp"
   "/home/diego/catkin_ws/devel/include/simulator/Parameters.h"
-  "/home/diego/catkin_ws/devel/include/simulator/robot_step.h"
+  "/home/diego/catkin_ws/devel/include/simulator/simulator_robot_step.h"
+  "/home/diego/catkin_ws/devel/include/simulator/simulator_parameters.h"
 )
 
 # Per-language clean rules from dependency scanning.

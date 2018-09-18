@@ -23,4 +23,10 @@
           WORLD_NAME
           NOISE-VAL
           NOISE
+          RUN-VAL
+          RUN
+          LIGHT_X-VAL
+          LIGHT_X
+          LIGHT_Y-VAL
+          LIGHT_Y
 ))
