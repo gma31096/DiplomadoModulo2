@@ -41,19 +41,20 @@ int main(int argc, char **argv)
   parameters params;
   float res;
   next_position next;
-  while(1)
+  //while(1)
   {
     params = wait_start();
 
     next.robot_x = params.robot_x; 
     next.robot_y = params.robot_y;
+    next.robot_theta = params.robot_theta;
 
-    for(int i=0; i<10; i++) 
+    for(int i=0; i<20; i++) 
       {
-        res= check_collision(next.robot_x ,next.robot_y,.7,.1 );
+        res= check_collision(next.robot_x ,next.robot_y ,next.robot_theta + .5 ,.1 );
         printf("check_collision %f :\n",res);
-        move_gui(0.7,res,&next);
-        printf("%f %f %f\n",next.robot_x,next.robot_y,next.robot_theta );
+        move_gui(0.5,res,&next);
+        printf("%f %f %f\n",next.robot_x ,next.robot_y ,next.robot_theta );
         //wait_start();
       }
     }

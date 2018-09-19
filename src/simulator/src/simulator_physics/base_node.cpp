@@ -225,39 +225,101 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 	float x1=req.x1;
 	float y1=req.y1;
 
-    float x22 = req.distance * cos(req.theta) + x1;
-	float y2 = req.distance * sin(req.theta) + y1;
+    //float x22 = req.distance * cos(req.theta) + x1;
+	//float y2 = req.distance * sin(req.theta) + y1;
 	float m = tan(req.theta);
-	float x2;
+	//float x2;
+	float x2,x22,y2,y22;
 	float distance;
-
-	printf("x1:%f x2: %f y1:%f y2: %f m:%f  \n",x1,x22,y1,y2,m );
-	if(x22-x1 >= 0)
-	{
-		for(x2 = x1; x2 <= x22; x2+=.00001)
-		{
-			y2 = m * (x2 - x1) + y1;
-			//printf(" x: %f y: %f\n",x2*600,y2*600 );
-			if(sat(x2, y2, params.robot_radio))
-			{printf("Fuera\n");	break;}
+	//printf("M: %f \n",m);
+	//printf("x1:%f x2: %f y1:%f y2: %f m:%f  \n",x1,x22,y1,y2,m );
+	if(m > 1 || m < -1 )
+	{	
+		y22 = req.distance * sin(req.theta) + y1;
+		x2 = req.distance * cos(req.theta) + x1;
+		y2 = 0;
+		printf("YY\n");
+		if(y22 > y1)
+		{	printf("AAAA\n");
+			for(y2 = y1; y2 <= y22; y2+=.001)
+			{
+				//y2 -y1= m ( x2 - x1)
+				x2 =  (y2 - y1) / m + x1 ;
+				
+				if(sat(x2, y2, params.robot_radio))
+				{printf("y2:%f y1:%f \n",y2,y1);	break;}
+			}
+			if(x2 != x1)
+			//printf("y1:%f x1:%f y2 %f x2 %f\n",y1,x1,y2,x2 );
+			{	
+				y2-=.001;
+				x2 =  (y2 - y1) / m + x1 ;	
+			}
+			printf("y1:%f x1:%f y2 %f x2 %f\n",y1,x1,y2,x2 );
+			
 		}
-		x2-=.01;
+		else
+		{
+			printf("BBB\n");
+			for(y2 = y1; y2 >= y22; y2-=.001)
+			{
+				//y2 -y1= m ( x2 - x1)
+				x2 =  (y2 - y1) / m + x1 ;
+				if(sat(x2, y2, params.robot_radio))
+				{printf("Fuera\n");	break;}
+			}
+			if(x2 != x1)
+			{
+				y2+=.001;
+				x2 =  (y2 - y1) / m + x1 ;
+			}
+		}
+
 	}
 	else
 	{
-		for(x2 = x1; x2 >= x22; x2-=.00001)
+		x22 = req.distance * cos(req.theta) + x1;
+		y2 = req.distance * sin(req.theta) + y1;
+		x2 = 0;
+
+		if(x22-x1 >= 0)
 		{
-			y2 = m * (x2 - x1) + y1;
-			if(sat(x2, y2, params.robot_radio))
-				break;
+			printf("CCC\n");
+			for(x2 = x1; x2 <= x22; x2+=.001)
+			{   
+				y2 = m * (x2 - x1) + y1;
+				//printf(" x: %f y: %f\n",x2*600,y2*600 );
+				if(sat(x2, y2, params.robot_radio))
+				{printf("Fuera\n");	break;}
+			}
+			if(x2 != x1)
+			{
+				x2-=.001;
+				y2 = m * (x2 - x1) + y1;
+			}
 		}
-		x2+=.01;
+		else
+		{
+			printf("DDD\n");
+			for(x2 = x1; x2 >= x22; x2-=.001)
+			{
+				y2 = m * (x2 - x1) + y1;
+				if(sat(x2, y2, params.robot_radio))
+					break;
+			}
+			if(x2 != x1)
+			{
+				x2+=.001;
+				y2 = m * (x2 - x1) + y1;
+			}
+		}
 	}
+	
 		
-  	
-   distance = sqrt( pow( x1-x2  ,2) + pow(y1-y2 ,2)  );
-   res.distance = distance;
-   printf("x2 %f distance %f \n",x2,distance);
+  	printf("y1:%f x1:%f y2 %f x2 %f\n",y1,x1,y2,x2 );
+    distance = sqrt( pow( x1-x2  ,2) + pow(y1-y2 ,2)  );
+    res.distance = distance;
+    printf("distance %f \n",distance);
    return true;
 }
 
@@ -275,7 +337,7 @@ int main(int argc, char *argv[])
 	strcat(path,"/");
 	strcat(path,params.world_name);
 	strcpy(path,"./src/simulator/src/data/random_2/random_2.wrl");	
-	read_environment(path,1);
+	read_environment(path,0);
 	//sat(.425,.521,.04);
 	//sat(.39,.59,.04);
 	ros::spin();
