@@ -198,7 +198,7 @@ class MobileRobotSimulator(threading.Thread):
 
 	def s_t_simulation(self,star_stop):
 		if star_stop :
-			state = 'disable'
+			state = 'normal'
 			self.startFlag=True
 		else: 
 			state = 'normal'
@@ -463,7 +463,7 @@ class MobileRobotSimulator(threading.Thread):
 			self.entryPoseY.delete ( 0, END )
 			self.entryAngle.delete ( 0, END )
 			self.entryPoseX.insert ( 0, str(float(x) / self.canvasX) )
-			self.entryPoseY.insert ( 0, str(float(y) / self.canvasY) ) 
+			self.entryPoseY.insert ( 0, str(self.mapY  - (float(y) / self.canvasY )  )) 
 			self.entryAngle.insert ( 0, str(angle) ) 
 
 		except ValueError:
@@ -648,4 +648,21 @@ class MobileRobotSimulator(threading.Thread):
 		self.gui_init()
 		self.print_grid()
 		self.read_map()
+		#self.w.create_rectangle(0.010000* self.canvasX, (self.canvasY-( 0.990000* self.canvasY )) ,  (0.000000* self.canvasX), (self.canvasY-(0.000000* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(1.000000* self.canvasX, (self.canvasY-( 1.000000* self.canvasY )) ,  (0.000000* self.canvasX), (self.canvasY-(0.990000* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(1.000000* self.canvasX, (self.canvasY-( 1.000000* self.canvasY )) ,  (0.990000* self.canvasX), (self.canvasY-(0.000000* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(1.000000* self.canvasX, (self.canvasY-( 0.010000* self.canvasY )) ,  (0.000000* self.canvasX), (self.canvasY-(0.000000* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(0.771493* self.canvasX, (self.canvasY-( 0.821316* self.canvasY )) ,  (0.645470* self.canvasX), (self.canvasY-(0.713081* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(0.500906* self.canvasX, (self.canvasY-( 0.411829* self.canvasY )) ,  (0.390196* self.canvasX), (self.canvasY-(0.269637* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(0.915681* self.canvasX, (self.canvasY-( 0.227208* self.canvasY )) ,  (0.781156* self.canvasX), (self.canvasY-(0.136487* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(0.383984* self.canvasX, (self.canvasY-( 0.776612* self.canvasY )) ,  (0.256041* self.canvasX), (self.canvasY-(0.663362* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(0.248994* self.canvasX, (self.canvasY-( 0.320795* self.canvasY )) ,  (0.137446* self.canvasX), (self.canvasY-(0.219173* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(0.209660* self.canvasX, (self.canvasY-( 0.631059* self.canvasY )) ,  (0.116433* self.canvasX), (self.canvasY-(0.490052* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(0.795078* self.canvasX, (self.canvasY-( 0.588163* self.canvasY )) ,  (0.671304* self.canvasX), (self.canvasY-(0.493697* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(0.538616* self.canvasX, (self.canvasY-( 0.880417* self.canvasY )) ,  (0.452314* self.canvasX), (self.canvasY-(0.758960* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(0.650005* self.canvasX, (self.canvasY-( 0.228883* self.canvasY )) ,  (0.527580* self.canvasX), (self.canvasY-(0.109133* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(0.551021* self.canvasX, (self.canvasY-( 0.651132* self.canvasY )) ,  (0.422105* self.canvasX), (self.canvasY-(0.528609* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_rectangle(0.430000* self.canvasX, (self.canvasY-( 0.630000* self.canvasY )) ,  (0.350000* self.canvasX), (self.canvasY-(0.550000* self.canvasX)), outline='#000000', width=1)
+		#self.w.create_oval(0.430000* self.canvasX, (self.canvasY-( 0.630000* self.canvasY )) ,  (0.350000* self.canvasX), (self.canvasY-(0.550000* self.canvasX)), outline='#000000', width=1)
+
 		self.root.mainloop()

@@ -138,14 +138,14 @@ void read_environment(char *file, int debug)
 	if(debug == 1)
 	for(i = 0; i < num_polygons_wrl; i++)
 	{
-		//printf("\npolygon[%d].name=%s\n",i,polygons_wrl[i].name);
-		//printf("polygon[%d].type=%s\n",i,polygons_wrl[i].type);
-		//printf("Num vertex  polygon[%d].num_vertex=%d\n",i,polygons_wrl[i].num_vertex);
-	    //printf("max x,y = (%f, %f)  min x,y = (%f, %f) \n", polygons_wrl[i].max.x, polygons_wrl[i].max.y, polygons_wrl[i].min.x, polygons_wrl[i].min.y);
-	    printf("self.w.create_rectangle(%f* self.canvasX/2, (self.canvasY-( %f* self.canvasY )/2) ,  (%f* self.canvasX)/2, (self.canvasY-(%f* self.canvasX)/2), outline='#000000', width=1)\n", polygons_wrl[i].max.x, polygons_wrl[i].max.y, polygons_wrl[i].min.x, polygons_wrl[i].min.y);
+		printf("\npolygon[%d].name=%s\n",i,polygons_wrl[i].name);
+		printf("polygon[%d].type=%s\n",i,polygons_wrl[i].type);
+		printf("Num vertex  polygon[%d].num_vertex=%d\n",i,polygons_wrl[i].num_vertex);
+	    printf("max x,y = (%f, %f)  min x,y = (%f, %f) \n", polygons_wrl[i].max.x, polygons_wrl[i].max.y, polygons_wrl[i].min.x, polygons_wrl[i].min.y);
+	    //printf("self.w.create_rectangle(%f* self.canvasX/2, (self.canvasY-( %f* self.canvasY )/2) ,  (%f* self.canvasX)/2, (self.canvasY-(%f* self.canvasX)/2), outline='#000000', width=1)\n", polygons_wrl[i].max.x, polygons_wrl[i].max.y, polygons_wrl[i].min.x, polygons_wrl[i].min.y);
 		for(j = 0; j < polygons_wrl[i].num_vertex+1 ; j++)
 		{
-		//	printf("polygon[%d].vertex[%d] x=%f y=%f\n", i, j, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y);
+			printf("polygon[%d].vertex[%d] x=%f y=%f\n", i, j, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y);
 			//printf("polygon[%d].line[%d] m=%f b=%f\n", i, j, polygons_wrl[i].line[j].m, polygons_wrl[i].line[j].b);
 		}
 	}
@@ -197,13 +197,19 @@ int sat(float robot_x, float robot_y, float robot_r)
 	r_max.x = robot_x + robot_r; r_max.y = robot_y + robot_r;
 	r_min.x = robot_x - robot_r; r_min.y = robot_y - robot_r;
 
+	 //printf("self.w.create_rectangle(%f* self.canvasX, (self.canvasY-( %f* self.canvasY )) ,  (%f* self.canvasX), (self.canvasY-(%f* self.canvasX)), outline='#000000', width=1)\n", r_max.x, r_max.y, r_min.x, r_min.y);
+		
 	for(i = 0; i < num_polygons_wrl; i++)
-		if( (r_min.x < polygons_wrl[i].max.x && polygons_wrl[i].max.x <   r_max.x) || ( r_min.x < polygons_wrl[i].min.x && polygons_wrl[i].min.x < r_max.x)   )
-			if( (r_min.y < polygons_wrl[i].max.y && polygons_wrl[i].max.y < r_max.y) || ( r_min.y < polygons_wrl[i].min.y && polygons_wrl[i].min.y < r_max.y)   )
+		if( (r_min.x < polygons_wrl[i].max.x && polygons_wrl[i].max.x <   r_max.x) || ( r_min.x < polygons_wrl[i].min.x && polygons_wrl[i].min.x < r_max.x)  || ( polygons_wrl[i].min.x < r_min.x && r_max.x < polygons_wrl[i].max.x )  )
+			if( (r_min.y < polygons_wrl[i].max.y && polygons_wrl[i].max.y < r_max.y) || ( r_min.y < polygons_wrl[i].min.y && polygons_wrl[i].min.y < r_max.y) || ( polygons_wrl[i].min.y < r_min.y && r_max.y < polygons_wrl[i].max.y )   )
 				for(int j = 0; j < polygons_wrl[i].num_vertex; j++)
-		 			if( pDistance(robot_x, robot_y, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y, polygons_wrl[i].vertex[j + 1].x, polygons_wrl[i].vertex[j + 1].y) <= robot_r ) 
-						printf("******** Si esta intersectado :o\n");
-						return 1;	
+		 			{
+		 				//printf("Distancia al polig %f\n",pDistance(robot_x, robot_y, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y, polygons_wrl[i].vertex[j + 1].x, polygons_wrl[i].vertex[j + 1].y));
+		 				if( pDistance(robot_x, robot_y, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y, polygons_wrl[i].vertex[j + 1].x, polygons_wrl[i].vertex[j + 1].y) <= robot_r ) 
+						{	printf("******** Si esta intersectado :o\n");
+						    return 1;
+		 				}
+		 			}	
 	return 0;
 }
 
@@ -225,31 +231,33 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 	float x2;
 	float distance;
 
-	printf("x1:%f x2: %f y1:%f y2: %f m:%f  dis:%f\n",x1,x22,y1,y2,m,distance );
+	printf("x1:%f x2: %f y1:%f y2: %f m:%f  \n",x1,x22,y1,y2,m );
 	if(x22-x1 >= 0)
 	{
-		for(x2 = x1; x2 <= x22; x2+=.001)
+		for(x2 = x1; x2 <= x22; x2+=.00001)
 		{
 			y2 = m * (x2 - x1) + y1;
 			//printf(" x: %f y: %f\n",x2*600,y2*600 );
-			if(!sat(x2, y2, params.robot_radio))
-				break;
+			if(sat(x2, y2, params.robot_radio))
+			{printf("Fuera\n");	break;}
 		}
+		x2-=.01;
 	}
 	else
 	{
-		for(x2 = x1; x2 >= x22; x2-=.001)
+		for(x2 = x1; x2 >= x22; x2-=.00001)
 		{
 			y2 = m * (x2 - x1) + y1;
-			if(!sat(x2, y2, params.robot_radio))
+			if(sat(x2, y2, params.robot_radio))
 				break;
 		}
+		x2+=.01;
 	}
 		
   	
    distance = sqrt( pow( x1-x2  ,2) + pow(y1-y2 ,2)  );
    res.distance = distance;
-
+   printf("x2 %f distance %f \n",x2,distance);
    return true;
 }
 
@@ -267,8 +275,9 @@ int main(int argc, char *argv[])
 	strcat(path,"/");
 	strcat(path,params.world_name);
 	strcpy(path,"./src/simulator/src/data/random_2/random_2.wrl");	
-	read_environment(path,0);
-
+	read_environment(path,1);
+	//sat(.425,.521,.04);
+	//sat(.39,.59,.04);
 	ros::spin();
 
 
