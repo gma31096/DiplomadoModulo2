@@ -14,15 +14,15 @@ class MobileRobotSimulator(threading.Thread):
 	def __init__(self):
 		threading.Thread.__init__(self)
 		
-		self.stopped=False 
+		self.stopped = False 
 
-		self.mapX=1
-		self.mapY=1
+		self.mapX = 0
+		self.mapY = 0
 
 		self.canvasX= 600
 		self.canvasY= 600
 		
-		self.flagF=0
+		self.flagF=True
 
 		self.robotAngle=0
 		self.robotX=200
@@ -41,6 +41,8 @@ class MobileRobotSimulator(threading.Thread):
 		self.light_x = 0
 		self.light_y = 0
 		self.startFlag = False
+
+		self.lasers = []
 
 		self.start()
 
@@ -128,6 +130,7 @@ class MobileRobotSimulator(threading.Thread):
 			self.nodes=None
 		else:
 			self.w.delete(self.nodes_image)	
+			nodes_coords = []
 			image = Image.new('RGBA', (self.canvasX, self.canvasY))
 			draw = ImageDraw.Draw(image)
 			map_file = open('../data/'+self.entryFile.get()+'/'+self.entryFile.get()+'.top','r')                  #Open file
@@ -142,8 +145,14 @@ class MobileRobotSimulator(threading.Thread):
 							numNode = words[2]
 							nodeXm = float (words[3]) * self.canvasX / self.mapX
 							nodeYm = self.canvasY - ( float (words[4]) * self.canvasY) / self.mapY
+							nodes_coords.append([nodeXm,nodeYm])
 							draw.ellipse((nodeXm - 3 ,nodeYm - 3 ,nodeXm + 3 ,nodeYm + 3), outline = '#9C4FDB', fill = '#9C4FDB')
 							draw.text( (nodeXm,nodeYm + 2) ,fill = "darkblue" ,text = str(numNode) )
+						elif words[1] == "connection":				  #to get polygons vertex
+							c1 = int(words[2])
+							c2 = int(words[3])
+							draw.line( (nodes_coords[c1][0],nodes_coords[c1][1] ,nodes_coords[c2][0] ,nodes_coords[c2][1] ) , fill = '#9C4FDB')
+							
 			map_file.close()
 			image.save('nodes.png')
 			self.gif1 = PhotoImage( file = 'nodes.png')
@@ -156,6 +165,7 @@ class MobileRobotSimulator(threading.Thread):
 			self.w.delete(polygon)
 		self.polygonMap = []	
 		try:
+			self.w.delete("all")
 			map_file = open('../data/'+self.entryFile.get()+'/'+self.entryFile.get()+'.wrl','r') #Open file
 			lines = map_file.readlines()                          #Split the file in lines
 			for line in lines: 									  #To read line by line
@@ -163,13 +173,15 @@ class MobileRobotSimulator(threading.Thread):
 				if words:										  #To avoid empty lines							
 					if words[0] == "(":							  #To avoid coments
 						if words[1] == "dimensions":			  #To get world dimensions
-							mapX = float (words[3])	
-							mapY = float (words[4])
+							self.mapX = float (words[3])	
+							self.mapY = float (words[4])
+							self.print_grid()
 						elif words[1] == "polygon":				  #to get polygons vertex
-							vertex_x = [ ( ( self.canvasX * float(x) ) / mapX ) for x in words[4:len(words)-1:2]	]
-							vertex_y = [ ( self.canvasY -  ( self.canvasY * float(y) ) / mapY ) for y in words[5:len(words)-1:2]	]
+							vertex_x = [ ( ( self.canvasX * float(x) ) / self.mapX ) for x in words[4:len(words)-1:2]	]
+							vertex_y = [ ( self.canvasY -  ( self.canvasY * float(y) ) / self.mapY ) for y in words[5:len(words)-1:2]	]
 							vertexs = (zip(vertex_x, vertex_y))
 							self.polygonMap.append(self.w.create_polygon(vertexs, outline='#002B7A', fill='#447CFF', width=1))
+			
 		except IOError:
 			tkMessageBox.showerror("World erros ", "World  '"+self.entryFile.get()+"' doesn' t exist \n Provide another file name ")
 	
@@ -198,7 +210,8 @@ class MobileRobotSimulator(threading.Thread):
 
 	def s_t_simulation(self,star_stop):
 		if star_stop :
-			state = 'normal'
+			state = 'disabled'
+			self.read_map()
 			self.startFlag=True
 		else: 
 			state = 'normal'
@@ -214,9 +227,9 @@ class MobileRobotSimulator(threading.Thread):
 		self.checkAddNoise      .configure(state=state)    
 		self.checkShowNodes     .configure(state=state)             
 		self.entryRobot         .configure(state=state)   
-		self.entryPoseX         .configure(state=state)   
-		self.entryPoseY         .configure(state=state)   
-		self.entryAngle         .configure(state=state)   
+		#self.entryPoseX         .configure(state=state)   
+		#self.entryPoseY         .configure(state=state)   
+		#self.entryAngle         .configure(state=state)   
 		self.entryRadio         .configure(state=state)   
 		self.entryAdvance       .configure(state=state)   
 		self.entryTurnAngle     .configure(state=state)   
@@ -441,10 +454,10 @@ class MobileRobotSimulator(threading.Thread):
 
 
 	def print_grid(self):
-		for self.i in range(0, int(self.mapX)*10):
-			self.w.create_line( self.i*self.canvasX/(self.mapX*10),0, self.i*self.canvasX/(self.mapX*10), self.canvasY,  dash=(4, 4), fill="#D1D2D4")
-		for self.i in range(0, int(self.mapY)*10):
-			self.w.create_line( 0,self.i*self.canvasY/(self.mapY*10),self.canvasX, self.i*self.canvasY/(self.mapY*10),   dash=(4, 4), fill="#D1D2D4")
+		for i in range(0, int(self.mapX)*10):
+			self.w.create_line( i * self.canvasX/(self.mapX*10),0, i*self.canvasX/(self.mapX*10), self.canvasY,  dash=(4, 4), fill="#D1D2D4")
+		for i in range(0, int(self.mapY)*10):
+			self.w.create_line( 0, i*self.canvasY/(self.mapY*10),self.canvasX, i*self.canvasY/(self.mapY*10),   dash=(4, 4), fill="#D1D2D4")
 	
 	def rotate_point(self,theta,ox,oy, x, y):
 		rotate = -theta
@@ -462,8 +475,8 @@ class MobileRobotSimulator(threading.Thread):
 			self.entryPoseX.delete ( 0, END )
 			self.entryPoseY.delete ( 0, END )
 			self.entryAngle.delete ( 0, END )
-			self.entryPoseX.insert ( 0, str(float(x) / self.canvasX) )
-			self.entryPoseY.insert ( 0, str(self.mapY  - (float(y) / self.canvasY )  )) 
+			self.entryPoseX.insert ( 0, str(float(x)*self.mapX / self.canvasX) )
+			self.entryPoseY.insert ( 0, str(self.mapY  - (float(y)*self.mapX / self.canvasY )  )) 
 			self.entryAngle.insert ( 0, str(angle) ) 
 
 		except ValueError:
@@ -504,6 +517,10 @@ class MobileRobotSimulator(threading.Thread):
 		self.w.update()
 		if self.varShowSensors.get():
 			self.plot_sensors(angle,x,y)
+		else:
+			for i in self.lasers:
+				self.w.delete(i)
+			self.lasers = []
 		
 
 	def get_ray(self,angle,x,y,r):
@@ -518,24 +535,37 @@ class MobileRobotSimulator(threading.Thread):
 		numSensor    = int(self.entryNumSensors.get())
 		#angle=math.radians(math.degrees(angle))
 		x =  ( float( self.entryValue.get() ) * self.canvasX ) / self.mapY
+		
 		y = ry
 		
 		f = angle + originSensor
 		step = float( float( rangeSensor ) / float( numSensor - 1 ) )
 
-		if self.flagF == 0:
-			self.lasers = []
-			for x in range(0, numSensor):	
-				self.lasers.append(self.w.create_line(rx ,ry ,self.get_ray(f ,rx ,ry ,x) ,fill = "#00DD41") )
-				f = f + step
-			self.flagF=1
-		else:
-			for i in range(0, numSensor):	
-				q,w =self.get_ray(f ,rx ,ry ,x)
-				self.w.coords(self.lasers[i],rx ,ry,q,w )
-				f = f + step
-				#print "line "+str(rx)+" "+str(ry)+" "+str(self.get_ray(f ,rx ,ry ,x))
-			self.w.update()
+		for i in self.lasers:
+			self.w.delete(i)
+		self.lasers = []
+		for i in range(0, numSensor):	
+			q,w =self.get_ray(f ,rx ,ry ,x)
+			self.lasers.append(self.w.create_line(rx ,ry ,q ,w ,fill = "#00DD41") )
+			f = f + step
+
+		#if self.flagF :
+		#	
+		#	for x in self.lasers:
+		#		self.w.delete(x)
+		#	self.lasers = []
+		#	for i in range(0, numSensor):	
+		#		q,w =self.get_ray(f ,rx ,ry ,x)
+		#		self.lasers.append(self.w.create_line(rx ,ry ,q ,w ,fill = "#00DD41") )
+		#		f = f + step
+		#	#self.flagF=False
+		#else:
+		#	for i in range(0, numSensor):	
+		#		q,w =self.get_ray(f ,rx ,ry ,x)
+		#		self.w.coords(self.lasers[i],rx ,ry,q,w )
+		#		f = f + step
+		#		#print "line "+str(rx)+" "+str(ry)+" "+str(self.get_ray(f ,rx ,ry ,x))
+		#	self.w.update()
 
 		
 	def delete_robot(self):
@@ -646,8 +676,8 @@ class MobileRobotSimulator(threading.Thread):
 		
 	def run(self):	
 		self.gui_init()
-		self.print_grid()
 		self.read_map()
+		
 		#self.w.create_rectangle(0.010000* self.canvasX, (self.canvasY-( 0.990000* self.canvasY )) ,  (0.000000* self.canvasX), (self.canvasY-(0.000000* self.canvasX)), outline='#000000', width=1)
 		#self.w.create_rectangle(1.000000* self.canvasX, (self.canvasY-( 1.000000* self.canvasY )) ,  (0.000000* self.canvasX), (self.canvasY-(0.990000* self.canvasX)), outline='#000000', width=1)
 		#self.w.create_rectangle(1.000000* self.canvasX, (self.canvasY-( 1.000000* self.canvasY )) ,  (0.990000* self.canvasX), (self.canvasY-(0.000000* self.canvasX)), outline='#000000', width=1)
@@ -664,5 +694,11 @@ class MobileRobotSimulator(threading.Thread):
 		#self.w.create_rectangle(0.551021* self.canvasX, (self.canvasY-( 0.651132* self.canvasY )) ,  (0.422105* self.canvasX), (self.canvasY-(0.528609* self.canvasX)), outline='#000000', width=1)
 		#self.w.create_rectangle(0.430000* self.canvasX, (self.canvasY-( 0.630000* self.canvasY )) ,  (0.350000* self.canvasX), (self.canvasY-(0.550000* self.canvasX)), outline='#000000', width=1)
 		#self.w.create_oval(0.430000* self.canvasX, (self.canvasY-( 0.630000* self.canvasY )) ,  (0.350000* self.canvasX), (self.canvasY-(0.550000* self.canvasX)), outline='#000000', width=1)
-
+		algo = []
+		x= [1,2]
+		y=[4,5]
+		algo.append(x)
+		algo.append(y)
+		print(algo)
+		print(algo[0][1])
 		self.root.mainloop()

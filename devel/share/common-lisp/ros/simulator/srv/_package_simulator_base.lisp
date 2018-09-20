@@ -7,6 +7,8 @@
           X1
           Y1-VAL
           Y1
+          NEW_SIMULATION-VAL
+          NEW_SIMULATION
           DISTANCE-VAL
           DISTANCE
 ))

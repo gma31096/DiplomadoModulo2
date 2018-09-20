@@ -7,7 +7,7 @@
 #include <string.h>
 
 
-float check_collision(float x1 ,float y1, float theta ,float distance )
+float check_collision(float x1 ,float y1, float theta ,float distance ,int new_simulation )
 {
   float final_distance=0;
   ros::NodeHandle n;
@@ -19,6 +19,7 @@ float check_collision(float x1 ,float y1, float theta ,float distance )
   srv.request.y1 = y1;
   srv.request.theta = theta;
   srv.request.distance = distance;
+  srv.request.new_simulation =new_simulation;
  
     if (client.call(srv))
     {
@@ -38,25 +39,30 @@ float check_collision(float x1 ,float y1, float theta ,float distance )
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "simulator_motion_planner_node");
+  ros::NodeHandle n;
   parameters params;
   float res;
+  int new_simulation=1;
   next_position next;
-  //while(1)
+  while(ros::ok())
   {
     params = wait_start();
-
+    new_simulation=1;
     next.robot_x = params.robot_x; 
     next.robot_y = params.robot_y;
     next.robot_theta = params.robot_theta;
 
-    for(int i=0; i<20; i++) 
+    for(int i=0; i<10; i++) 
       {
-        res= check_collision(next.robot_x ,next.robot_y ,next.robot_theta + .5 ,.1 );
-        printf("check_collision %f :\n",res);
+        res= check_collision(next.robot_x ,next.robot_y ,next.robot_theta + .5 ,.1,new_simulation );
+        //printf("check_collision %f :\n",res);
         move_gui(0.5,res,&next);
-        printf("%f %f %f\n",next.robot_x ,next.robot_y ,next.robot_theta );
+        //printf("%f %f %f\n",next.robot_x ,next.robot_y ,next.robot_theta );
         //wait_start();
+        new_simulation=0;
       }
+
+      ros::spinOnce();
     }
  /* sensors_laser = get_sensors_laser();
   sensor_light = get_sensor_light();

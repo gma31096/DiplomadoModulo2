@@ -27,13 +27,15 @@ struct simulator_baseRequest_
     : theta(0.0)
     , distance(0.0)
     , x1(0.0)
-    , y1(0.0)  {
+    , y1(0.0)
+    , new_simulation(false)  {
     }
   simulator_baseRequest_(const ContainerAllocator& _alloc)
     : theta(0.0)
     , distance(0.0)
     , x1(0.0)
-    , y1(0.0)  {
+    , y1(0.0)
+    , new_simulation(false)  {
   (void)_alloc;
     }
 
@@ -50,6 +52,9 @@ struct simulator_baseRequest_
 
    typedef float _y1_type;
   _y1_type y1;
+
+   typedef uint8_t _new_simulation_type;
+  _new_simulation_type new_simulation;
 
 
 
@@ -128,12 +133,12 @@ struct MD5Sum< ::simulator::simulator_baseRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "118a6cdc8d03da07e943b274cbdb33b2";
+    return "698ab2190f0f38f38a2229fdeba1f75c";
   }
 
   static const char* value(const ::simulator::simulator_baseRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x118a6cdc8d03da07ULL;
-  static const uint64_t static_value2 = 0xe943b274cbdb33b2ULL;
+  static const uint64_t static_value1 = 0x698ab2190f0f38f3ULL;
+  static const uint64_t static_value2 = 0x8a2229fdeba1f75cULL;
 };
 
 template<class ContainerAllocator>
@@ -156,6 +161,7 @@ struct Definition< ::simulator::simulator_baseRequest_<ContainerAllocator> >
 float32 distance\n\
 float32 x1\n\
 float32 y1\n\
+bool new_simulation\n\
 ";
   }
 
@@ -178,6 +184,7 @@ namespace serialization
       stream.next(m.distance);
       stream.next(m.x1);
       stream.next(m.y1);
+      stream.next(m.new_simulation);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -204,6 +211,8 @@ struct Printer< ::simulator::simulator_baseRequest_<ContainerAllocator> >
     Printer<float>::stream(s, indent + "  ", v.x1);
     s << indent << "y1: ";
     Printer<float>::stream(s, indent + "  ", v.y1);
+    s << indent << "new_simulation: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.new_simulation);
   }
 };
 

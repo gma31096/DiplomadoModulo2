@@ -231,8 +231,25 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 	//float x2;
 	float x2,x22,y2,y22;
 	float distance;
+	char path[50];
+	parameters params;
 	//printf("M: %f \n",m);
 	//printf("x1:%f x2: %f y1:%f y2: %f m:%f  \n",x1,x22,y1,y2,m );
+	
+
+	//if(req.new_simulation)
+	{
+			params = wait_start();
+			strcpy(path,"./src/simulator/src/data/");
+			strcat(path,params.world_name);
+			strcat(path,"/");
+			strcat(path,params.world_name);
+			strcat(path,".wrl");
+			//strcpy(path,"./src/simulator/src/data/random_2/random_2.wrl");	
+			read_environment(path,0);
+	}
+
+
 	if(m > 1 || m < -1 )
 	{	
 		y22 = req.distance * sin(req.theta) + y1;
@@ -241,7 +258,7 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 		printf("YY\n");
 		if(y22 > y1)
 		{	printf("AAAA\n");
-			for(y2 = y1; y2 <= y22; y2+=.001)
+			for(y2 = y1; y2 <= y22; y2+=.005)
 			{
 				//y2 -y1= m ( x2 - x1)
 				x2 =  (y2 - y1) / m + x1 ;
@@ -252,7 +269,7 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 			if(x2 != x1)
 			//printf("y1:%f x1:%f y2 %f x2 %f\n",y1,x1,y2,x2 );
 			{	
-				y2-=.001;
+				y2-=.005;
 				x2 =  (y2 - y1) / m + x1 ;	
 			}
 			printf("y1:%f x1:%f y2 %f x2 %f\n",y1,x1,y2,x2 );
@@ -261,7 +278,7 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 		else
 		{
 			printf("BBB\n");
-			for(y2 = y1; y2 >= y22; y2-=.001)
+			for(y2 = y1; y2 >= y22; y2-=.005)
 			{
 				//y2 -y1= m ( x2 - x1)
 				x2 =  (y2 - y1) / m + x1 ;
@@ -270,7 +287,7 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 			}
 			if(x2 != x1)
 			{
-				y2+=.001;
+				y2+=.005;
 				x2 =  (y2 - y1) / m + x1 ;
 			}
 		}
@@ -285,7 +302,7 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 		if(x22-x1 >= 0)
 		{
 			printf("CCC\n");
-			for(x2 = x1; x2 <= x22; x2+=.001)
+			for(x2 = x1; x2 <= x22; x2+=.005)
 			{   
 				y2 = m * (x2 - x1) + y1;
 				//printf(" x: %f y: %f\n",x2*600,y2*600 );
@@ -294,14 +311,14 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 			}
 			if(x2 != x1)
 			{
-				x2-=.001;
+				x2-=.005;
 				y2 = m * (x2 - x1) + y1;
 			}
 		}
 		else
 		{
 			printf("DDD\n");
-			for(x2 = x1; x2 >= x22; x2-=.001)
+			for(x2 = x1; x2 >= x22; x2-=.005)
 			{
 				y2 = m * (x2 - x1) + y1;
 				if(sat(x2, y2, params.robot_radio))
@@ -309,7 +326,7 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 			}
 			if(x2 != x1)
 			{
-				x2+=.001;
+				x2+=.005;
 				y2 = m * (x2 - x1) + y1;
 			}
 		}
@@ -330,16 +347,16 @@ int main(int argc, char *argv[])
 	ros::NodeHandle n;
 	ros::ServiceServer service = n.advertiseService("simulator_base", check_path);
 	
-	params = wait_start();
-	char path[50];
-	strcpy(path,"../data/");
-	strcat(path,params.world_name);
-	strcat(path,"/");
-	strcat(path,params.world_name);
-	strcpy(path,"./src/simulator/src/data/random_2/random_2.wrl");	
-	read_environment(path,0);
-	//sat(.425,.521,.04);
-	//sat(.39,.59,.04);
+
+	//while (ros::ok())
+
+	//params = wait_start();
+			
+	//continue;
+
+	
+
+
 	ros::spin();
 
 
