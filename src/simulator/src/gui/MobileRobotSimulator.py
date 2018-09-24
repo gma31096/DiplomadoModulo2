@@ -165,7 +165,7 @@ class MobileRobotSimulator(threading.Thread):
 			self.w.delete(polygon)
 		self.polygonMap = []	
 		try:
-			self.w.delete("all")
+			#self.w.delete("all")
 			map_file = open('../data/'+self.entryFile.get()+'/'+self.entryFile.get()+'.wrl','r') #Open file
 			lines = map_file.readlines()                          #Split the file in lines
 			for line in lines: 									  #To read line by line

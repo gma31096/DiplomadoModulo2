@@ -86,8 +86,8 @@ int ReadPolygons(char *file,Polygon *polygons){
 				if(strcmp(")",data) == 0) 
 				{
 					polygons[num_poly].num_vertex = i - 1;
-					polygons[num_poly].vertex[i].x = polygons[num_poly].vertex[0].x; // to calculate intersecction range
-					polygons[num_poly].vertex[i].y = polygons[num_poly].vertex[0].y; // the first vertex its repeated on the last
+					polygons[num_poly].vertex[i].x = polygons[num_poly].vertex[1].x; // to calculate intersecction range
+					polygons[num_poly].vertex[i].y = polygons[num_poly].vertex[1].y; // the first vertex its repeated on the last
 					num_poly++;
 					flg = 0;
 				}
@@ -143,7 +143,7 @@ void read_environment(char *file, int debug)
 		printf("Num vertex  polygon[%d].num_vertex=%d\n",i,polygons_wrl[i].num_vertex);
 	    printf("max x,y = (%f, %f)  min x,y = (%f, %f) \n", polygons_wrl[i].max.x, polygons_wrl[i].max.y, polygons_wrl[i].min.x, polygons_wrl[i].min.y);
 	    //printf("self.w.create_rectangle(%f* self.canvasX/2, (self.canvasY-( %f* self.canvasY )/2) ,  (%f* self.canvasX)/2, (self.canvasY-(%f* self.canvasX)/2), outline='#000000', width=1)\n", polygons_wrl[i].max.x, polygons_wrl[i].max.y, polygons_wrl[i].min.x, polygons_wrl[i].min.y);
-		for(j = 0; j <= polygons_wrl[i].num_vertex+1 ; j++)
+		for(j = 0; j < polygons_wrl[i].num_vertex+1 ; j++)
 		{
 			printf("polygon[%d].vertex[%d] x=%f y=%f\n", i, j, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y);
 			//printf("polygon[%d].line[%d] m=%f b=%f\n", i, j, polygons_wrl[i].line[j].m, polygons_wrl[i].line[j].b);
@@ -202,14 +202,13 @@ int sat(float robot_x, float robot_y, float robot_r)
 	for(i = 0; i < num_polygons_wrl; i++)
 		if( (r_min.x < polygons_wrl[i].max.x && polygons_wrl[i].max.x <   r_max.x) || ( r_min.x < polygons_wrl[i].min.x && polygons_wrl[i].min.x < r_max.x)  || ( polygons_wrl[i].min.x < r_min.x && r_max.x < polygons_wrl[i].max.x )  )
 			if( (r_min.y < polygons_wrl[i].max.y && polygons_wrl[i].max.y < r_max.y) || ( r_min.y < polygons_wrl[i].min.y && polygons_wrl[i].min.y < r_max.y) || ( polygons_wrl[i].min.y < r_min.y && r_max.y < polygons_wrl[i].max.y )   )
-				for(int j = 0; j <= polygons_wrl[i].num_vertex; j++)
+				for(int j = 0; j < polygons_wrl[i].num_vertex; j++)
 		 			{
 		 				//printf("Distancia al polig %f\n",pDistance(robot_x, robot_y, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y, polygons_wrl[i].vertex[j + 1].x, polygons_wrl[i].vertex[j + 1].y));
 		 				if( pDistance(robot_x, robot_y, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y, polygons_wrl[i].vertex[j + 1].x, polygons_wrl[i].vertex[j + 1].y) <= robot_r ) 
 						{	printf("******** Si esta intersectado :o\n");
 						    return 1;
 		 				}
-		 				//else{ printf("Rx %f Ry %f v1x %f  V1y %f v2x %f v2y %f  \n",robot_x, robot_y, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y, polygons_wrl[i].vertex[j + 1].x, polygons_wrl[i].vertex[j + 1].y) ;  }
 		 			}	
 	return 0;
 }
@@ -343,11 +342,12 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 
 
 int main(int argc, char *argv[])
-{	
+{
 	ros::init(argc, argv, "simulator_base_node");
 	ros::NodeHandle n;
 	ros::ServiceServer service = n.advertiseService("simulator_base", check_path);
 	
+
 	//while (ros::ok())
 
 	//params = wait_start();
