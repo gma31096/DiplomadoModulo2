@@ -59,6 +59,8 @@ find_package(catkin REQUIRED COMPONENTS
    simulator_robot_step.srv
    simulator_parameters.srv
    simulator_base.srv
+   simulator_laser.srv
+   simulator_robot_laser_values.srv
 
  )
 
@@ -207,3 +209,7 @@ add_dependencies(motion_planner_node simulator_generate_messages_cpp)
 add_executable(base_node src/simulator_physics/base_node.cpp)
 target_link_libraries(base_node ${catkin_LIBRARIES})
 add_dependencies(base_node simulator_generate_messages_cpp)
+
+add_executable(laser_node src/simulator_physics/laser_node.cpp)
+target_link_libraries(laser_node ${catkin_LIBRARIES})
+add_dependencies(laser_node simulator_generate_messages_cpp)

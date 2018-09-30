@@ -46,6 +46,8 @@ CMAKE_BINARY_DIR = /home/diego/catkin_ws/build
 include simulator/CMakeFiles/simulator_generate_messages_cpp.dir/progress.make
 
 simulator/CMakeFiles/simulator_generate_messages_cpp: /home/diego/catkin_ws/devel/include/simulator/Parameters.h
+simulator/CMakeFiles/simulator_generate_messages_cpp: /home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_values.h
+simulator/CMakeFiles/simulator_generate_messages_cpp: /home/diego/catkin_ws/devel/include/simulator/simulator_laser.h
 simulator/CMakeFiles/simulator_generate_messages_cpp: /home/diego/catkin_ws/devel/include/simulator/simulator_robot_step.h
 simulator/CMakeFiles/simulator_generate_messages_cpp: /home/diego/catkin_ws/devel/include/simulator/simulator_parameters.h
 simulator/CMakeFiles/simulator_generate_messages_cpp: /home/diego/catkin_ws/devel/include/simulator/simulator_base.h
@@ -57,11 +59,27 @@ simulator/CMakeFiles/simulator_generate_messages_cpp: /home/diego/catkin_ws/deve
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from simulator/Parameters.msg"
 	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/diego/catkin_ws/src/simulator/msg/Parameters.msg -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/include/simulator -e /opt/ros/indigo/share/gencpp/cmake/..
 
+/home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_values.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
+/home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_values.h: /home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv
+/home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_values.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
+/home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_values.h: /opt/ros/indigo/share/gencpp/cmake/../srv.h.template
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from simulator/simulator_robot_laser_values.srv"
+	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/include/simulator -e /opt/ros/indigo/share/gencpp/cmake/..
+
+/home/diego/catkin_ws/devel/include/simulator/simulator_laser.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
+/home/diego/catkin_ws/devel/include/simulator/simulator_laser.h: /home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv
+/home/diego/catkin_ws/devel/include/simulator/simulator_laser.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
+/home/diego/catkin_ws/devel/include/simulator/simulator_laser.h: /opt/ros/indigo/share/gencpp/cmake/../srv.h.template
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from simulator/simulator_laser.srv"
+	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/include/simulator -e /opt/ros/indigo/share/gencpp/cmake/..
+
 /home/diego/catkin_ws/devel/include/simulator/simulator_robot_step.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
 /home/diego/catkin_ws/devel/include/simulator/simulator_robot_step.h: /home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv
 /home/diego/catkin_ws/devel/include/simulator/simulator_robot_step.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
 /home/diego/catkin_ws/devel/include/simulator/simulator_robot_step.h: /opt/ros/indigo/share/gencpp/cmake/../srv.h.template
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from simulator/simulator_robot_step.srv"
 	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/include/simulator -e /opt/ros/indigo/share/gencpp/cmake/..
 
@@ -69,7 +87,7 @@ simulator/CMakeFiles/simulator_generate_messages_cpp: /home/diego/catkin_ws/deve
 /home/diego/catkin_ws/devel/include/simulator/simulator_parameters.h: /home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv
 /home/diego/catkin_ws/devel/include/simulator/simulator_parameters.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
 /home/diego/catkin_ws/devel/include/simulator/simulator_parameters.h: /opt/ros/indigo/share/gencpp/cmake/../srv.h.template
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from simulator/simulator_parameters.srv"
 	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/include/simulator -e /opt/ros/indigo/share/gencpp/cmake/..
 
@@ -77,12 +95,14 @@ simulator/CMakeFiles/simulator_generate_messages_cpp: /home/diego/catkin_ws/deve
 /home/diego/catkin_ws/devel/include/simulator/simulator_base.h: /home/diego/catkin_ws/src/simulator/srv/simulator_base.srv
 /home/diego/catkin_ws/devel/include/simulator/simulator_base.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
 /home/diego/catkin_ws/devel/include/simulator/simulator_base.h: /opt/ros/indigo/share/gencpp/cmake/../srv.h.template
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from simulator/simulator_base.srv"
 	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/diego/catkin_ws/src/simulator/srv/simulator_base.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/include/simulator -e /opt/ros/indigo/share/gencpp/cmake/..
 
 simulator_generate_messages_cpp: simulator/CMakeFiles/simulator_generate_messages_cpp
 simulator_generate_messages_cpp: /home/diego/catkin_ws/devel/include/simulator/Parameters.h
+simulator_generate_messages_cpp: /home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_values.h
+simulator_generate_messages_cpp: /home/diego/catkin_ws/devel/include/simulator/simulator_laser.h
 simulator_generate_messages_cpp: /home/diego/catkin_ws/devel/include/simulator/simulator_robot_step.h
 simulator_generate_messages_cpp: /home/diego/catkin_ws/devel/include/simulator/simulator_parameters.h
 simulator_generate_messages_cpp: /home/diego/catkin_ws/devel/include/simulator/simulator_base.h

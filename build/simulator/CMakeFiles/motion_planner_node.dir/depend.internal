@@ -5,9 +5,15 @@ simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_n
  /home/diego/catkin_ws/devel/include/simulator/simulator_base.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_baseRequest.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_baseResponse.h
+ /home/diego/catkin_ws/devel/include/simulator/simulator_laser.h
+ /home/diego/catkin_ws/devel/include/simulator/simulator_laserRequest.h
+ /home/diego/catkin_ws/devel/include/simulator/simulator_laserResponse.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_parameters.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_parametersRequest.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_parametersResponse.h
+ /home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_values.h
+ /home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_valuesRequest.h
+ /home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_valuesResponse.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_robot_step.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_robot_stepRequest.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_robot_stepResponse.h

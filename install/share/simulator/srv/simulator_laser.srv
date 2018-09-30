@@ -1,0 +1,5 @@
+float32 robot_x
+float32 robot_y
+float32 robot_theta
+---
+float32[1024] sensors

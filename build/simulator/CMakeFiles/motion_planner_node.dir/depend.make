@@ -4,9 +4,15 @@
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_base.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_baseRequest.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_baseResponse.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_laser.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_laserRequest.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_laserResponse.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_parameters.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_parametersRequest.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_parametersResponse.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_values.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_valuesRequest.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_valuesResponse.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_robot_step.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_robot_stepRequest.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_robot_stepResponse.h

@@ -46,6 +46,8 @@ CMAKE_BINARY_DIR = /home/diego/catkin_ws/build
 include simulator/CMakeFiles/simulator_generate_messages_lisp.dir/progress.make
 
 simulator/CMakeFiles/simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/msg/Parameters.lisp
+simulator/CMakeFiles/simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_laser_values.lisp
+simulator/CMakeFiles/simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_laser.lisp
 simulator/CMakeFiles/simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_step.lisp
 simulator/CMakeFiles/simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_parameters.lisp
 simulator/CMakeFiles/simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_base.lisp
@@ -56,26 +58,40 @@ simulator/CMakeFiles/simulator_generate_messages_lisp: /home/diego/catkin_ws/dev
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from simulator/Parameters.msg"
 	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/diego/catkin_ws/src/simulator/msg/Parameters.msg -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/msg
 
+/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_laser_values.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_laser_values.lisp: /home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from simulator/simulator_robot_laser_values.srv"
+	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv
+
+/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_laser.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_laser.lisp: /home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from simulator/simulator_laser.srv"
+	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv
+
 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_step.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_step.lisp: /home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from simulator/simulator_robot_step.srv"
 	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv
 
 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_parameters.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_parameters.lisp: /home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from simulator/simulator_parameters.srv"
 	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv
 
 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_base.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_base.lisp: /home/diego/catkin_ws/src/simulator/srv/simulator_base.srv
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from simulator/simulator_base.srv"
 	cd /home/diego/catkin_ws/build/simulator && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/diego/catkin_ws/src/simulator/srv/simulator_base.srv -Isimulator:/home/diego/catkin_ws/src/simulator/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p simulator -o /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv
 
 simulator_generate_messages_lisp: simulator/CMakeFiles/simulator_generate_messages_lisp
 simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/msg/Parameters.lisp
+simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_laser_values.lisp
+simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_laser.lisp
 simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_step.lisp
 simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_parameters.lisp
 simulator_generate_messages_lisp: /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_base.lisp

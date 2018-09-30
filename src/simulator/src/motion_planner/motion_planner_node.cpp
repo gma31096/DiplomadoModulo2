@@ -4,6 +4,7 @@
 #include "simulator/simulator_robot_step.h"
 #include "simulator/simulator_parameters.h"
 #include "simulator/simulator_base.h"
+#include "simulator/simulator_laser.h"
 #include <string.h>
 
 
@@ -36,6 +37,34 @@ float check_collision(float x1 ,float y1, float theta ,float distance ,int new_s
 }
 
 
+void lasers(float x1 ,float y1, float theta,float  *lectures )
+{
+  float final_distance=0;
+  ros::NodeHandle n;
+  ros::ServiceClient client;
+  simulator::simulator_laser srv;
+  client = n.serviceClient<simulator::simulator_laser>("simulator_laser"); //create the client
+  
+  srv.request.robot_x = x1;
+  srv.request.robot_y = y1;
+  srv.request.robot_theta = theta;
+ 
+    if (client.call(srv))
+    {
+      
+      for(int i=0;i<1024;i++)
+        printf("Valor : %f \n",lectures[i] = srv.response.sensors[i]);
+        
+    }
+    else
+    {
+      ROS_ERROR("Failed to call service get_parameters");
+      
+    }
+
+
+}
+
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "simulator_motion_planner_node");
@@ -44,6 +73,10 @@ int main(int argc, char **argv)
   float res;
   int new_simulation=1;
   next_position next;
+
+
+  float lecturas[1024];
+
   while(ros::ok())
   {
     params = wait_start();
@@ -54,9 +87,16 @@ int main(int argc, char **argv)
 
     for(int i=0; i<10; i++) 
       {
-        res= check_collision(next.robot_x ,next.robot_y ,next.robot_theta + .5 ,.1,new_simulation );
+
+        lasers(next.robot_x ,next.robot_y ,next.robot_theta,lecturas);
+        laser_gui(lecturas);
+
+        for(int i=0;i<1024;i++)
+        printf("Valor 2 : %f \n",lecturas[i]);
+        
+        res= check_collision(next.robot_x ,next.robot_y ,next.robot_theta + 0.0 ,0.0,new_simulation );
         //printf("check_collision %f :\n",res);
-        move_gui(0.5,res,&next);
+        move_gui(0.0,res,&next);
         //printf("%f %f %f\n",next.robot_x ,next.robot_y ,next.robot_theta );
         //wait_start();
         new_simulation=0;
