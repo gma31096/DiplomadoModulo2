@@ -5,6 +5,7 @@
 #include "simulator/simulator_base.h"
 #include "simulator/simulator_laser.h"
 #include "simulator/simulator_light.h"
+#include "simulator/simulator_algorithm_result.h"
 #include <string.h>
 
 parameters wait_start();
@@ -220,4 +221,28 @@ int get_light_values(float *values)
   {
     ROS_ERROR("Failed to call service get_parameters"); 
   } 
+}
+
+
+
+int print_algorithm_graph (step *steps )
+{
+  ros::NodeHandle n;
+  ros::ServiceClient client;
+  simulator::simulator_algorithm_result srv;
+  client = n.serviceClient<simulator::simulator_algorithm_result>("simulator_print_graph"); //create the client
+  
+  for(int i=0;i<200;i++)
+    srv.request.nodes_algorithm[i] = steps[i].node;
+
+  if (client.call(srv))
+  {          
+      //printf("%s\n","Hecho" );
+  }
+  else
+  {
+    ROS_ERROR("Failed to call service simulator_robot_step");
+    
+  }
+  return 1;
 }

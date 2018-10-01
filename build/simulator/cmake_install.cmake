@@ -44,6 +44,7 @@ IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
     "/home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv"
     "/home/diego/catkin_ws/src/simulator/srv/simulator_light.srv"
     "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv"
+    "/home/diego/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

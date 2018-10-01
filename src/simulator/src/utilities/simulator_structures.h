@@ -31,4 +31,11 @@ typedef struct movement_
 	float advance;
 } movement;
 
+typedef struct step_
+{
+	int node;
+	float x;
+	float y;	
+} step;
+
 

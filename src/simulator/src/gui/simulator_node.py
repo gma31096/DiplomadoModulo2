@@ -43,6 +43,14 @@ def handle_robot_step(req):
 
 	return resp
 
+def handle_print_graph(req):
+
+	resp = simulator_algorithm_resultResponse()
+	gui.handle_print_graph(req.nodes_algorithm)
+	resp.success=1;
+	print ("DONE3")
+	return resp
+
 def handle_robot_laser_values(req):
 
 	resp = simulator_robot_laser_valuesResponse()
@@ -59,6 +67,8 @@ def ros():
 	s = rospy.Service('simulator_robot_step', simulator_robot_step, handle_robot_step)
 	s = rospy.Service('simulator_get_parameters', simulator_parameters, handle_get_parameters)
 	s = rospy.Service('simulator_robot_laser_values', simulator_robot_laser_values, handle_robot_laser_values)
+	s = rospy.Service('simulator_print_graph', simulator_algorithm_result, handle_print_graph)
+	
 	rospy.spin()
 
 if __name__ == "__main__":

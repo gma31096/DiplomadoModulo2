@@ -62,6 +62,7 @@ find_package(catkin REQUIRED COMPONENTS
    simulator_laser.srv
    simulator_light.srv
    simulator_robot_laser_values.srv
+   simulator_algorithm_result.srv
 
  )
 

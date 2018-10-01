@@ -16,4 +16,6 @@
     (:file "_package_simulator_robot_step" :depends-on ("_package"))
     (:file "simulator_laser" :depends-on ("_package_simulator_laser"))
     (:file "_package_simulator_laser" :depends-on ("_package"))
+    (:file "simulator_algorithm_result" :depends-on ("_package_simulator_algorithm_result"))
+    (:file "_package_simulator_algorithm_result" :depends-on ("_package"))
   ))
