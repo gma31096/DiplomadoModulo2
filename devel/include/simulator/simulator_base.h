@@ -40,7 +40,7 @@ template<>
 struct MD5Sum< ::simulator::simulator_base > {
   static const char* value()
   {
-    return "ec23e67bce036a9847d712ec6ce2eedb";
+    return "8e983985b8c042c16203b4cfe29be041";
   }
 
   static const char* value(const ::simulator::simulator_base&) { return value(); }

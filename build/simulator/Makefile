@@ -458,6 +458,20 @@ simulator_genpy/fast:
 .PHONY : simulator_genpy/fast
 
 # Convenience name for target.
+simulator/CMakeFiles/simulator_pub.dir/rule:
+	cd /home/diego/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_pub.dir/rule
+.PHONY : simulator/CMakeFiles/simulator_pub.dir/rule
+
+# Convenience name for target.
+simulator_pub: simulator/CMakeFiles/simulator_pub.dir/rule
+.PHONY : simulator_pub
+
+# fast build rule for target.
+simulator_pub/fast:
+	cd /home/diego/catkin_ws/build && $(MAKE) -f simulator/CMakeFiles/simulator_pub.dir/build.make simulator/CMakeFiles/simulator_pub.dir/build
+.PHONY : simulator_pub/fast
+
+# Convenience name for target.
 simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
 	cd /home/diego/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 .PHONY : simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
@@ -522,6 +536,30 @@ src/motion_planner/motion_planner_node.s: src/motion_planner/motion_planner_node
 src/motion_planner/motion_planner_node.cpp.s:
 	cd /home/diego/catkin_ws/build && $(MAKE) -f simulator/CMakeFiles/motion_planner_node.dir/build.make simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.s
 .PHONY : src/motion_planner/motion_planner_node.cpp.s
+
+src/motion_planner/simulator_pub.o: src/motion_planner/simulator_pub.cpp.o
+.PHONY : src/motion_planner/simulator_pub.o
+
+# target to build an object file
+src/motion_planner/simulator_pub.cpp.o:
+	cd /home/diego/catkin_ws/build && $(MAKE) -f simulator/CMakeFiles/simulator_pub.dir/build.make simulator/CMakeFiles/simulator_pub.dir/src/motion_planner/simulator_pub.cpp.o
+.PHONY : src/motion_planner/simulator_pub.cpp.o
+
+src/motion_planner/simulator_pub.i: src/motion_planner/simulator_pub.cpp.i
+.PHONY : src/motion_planner/simulator_pub.i
+
+# target to preprocess a source file
+src/motion_planner/simulator_pub.cpp.i:
+	cd /home/diego/catkin_ws/build && $(MAKE) -f simulator/CMakeFiles/simulator_pub.dir/build.make simulator/CMakeFiles/simulator_pub.dir/src/motion_planner/simulator_pub.cpp.i
+.PHONY : src/motion_planner/simulator_pub.cpp.i
+
+src/motion_planner/simulator_pub.s: src/motion_planner/simulator_pub.cpp.s
+.PHONY : src/motion_planner/simulator_pub.s
+
+# target to generate assembly for a file
+src/motion_planner/simulator_pub.cpp.s:
+	cd /home/diego/catkin_ws/build && $(MAKE) -f simulator/CMakeFiles/simulator_pub.dir/build.make simulator/CMakeFiles/simulator_pub.dir/src/motion_planner/simulator_pub.cpp.s
+.PHONY : src/motion_planner/simulator_pub.cpp.s
 
 src/simulator_physics/base_node.o: src/simulator_physics/base_node.cpp.o
 .PHONY : src/simulator_physics/base_node.o
@@ -605,6 +643,7 @@ help:
 	@echo "... simulator_generate_messages_py"
 	@echo "... simulator_genlisp"
 	@echo "... simulator_genpy"
+	@echo "... simulator_pub"
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... std_msgs_generate_messages_py"
@@ -612,6 +651,9 @@ help:
 	@echo "... src/motion_planner/motion_planner_node.o"
 	@echo "... src/motion_planner/motion_planner_node.i"
 	@echo "... src/motion_planner/motion_planner_node.s"
+	@echo "... src/motion_planner/simulator_pub.o"
+	@echo "... src/motion_planner/simulator_pub.i"
+	@echo "... src/motion_planner/simulator_pub.s"
 	@echo "... src/simulator_physics/base_node.o"
 	@echo "... src/simulator_physics/base_node.i"
 	@echo "... src/simulator_physics/base_node.s"

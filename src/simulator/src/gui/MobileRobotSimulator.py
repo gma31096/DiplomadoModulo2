@@ -162,7 +162,7 @@ class MobileRobotSimulator(threading.Thread):
 
 
 	def read_map(self):
-		pp=0
+		#pp=0
 		for polygon in self.polygonMap :
 			self.w.delete(polygon)
 		self.polygonMap = []	
@@ -182,10 +182,9 @@ class MobileRobotSimulator(threading.Thread):
 							vertex_x = [ ( ( self.canvasX * float(x) ) / self.mapX ) for x in words[4:len(words)-1:2]	]
 							vertex_y = [ ( self.canvasY -  ( self.canvasY * float(y) ) / self.mapY ) for y in words[5:len(words)-1:2]	]
 							vertexs = (zip(vertex_x, vertex_y))
-							self.polygonMap.append(self.w.create_polygon(vertexs, outline='#002B7A', fill='#447CFF', width=1))
-								
-							self.w.create_text( self.canvasX * float(words[4]) / self.mapX,  self.canvasY -  ( self.canvasY * float(words[5]) ) / self.mapY, text=str(pp))
-							pp=pp+1
+							self.polygonMap.append(self.w.create_polygon(vertexs, outline='#002B7A', fill='#447CFF', width=1))	
+							#self.w.create_text( self.canvasX * float(words[4]) / self.mapX,  self.canvasY -  ( self.canvasY * float(words[5]) ) / self.mapY, text=str(pp))
+							#pp=pp+1
 		except IOError:
 			tkMessageBox.showerror("World erros ", "World  '"+self.entryFile.get()+"' doesn' t exist \n Provide another file name ")
 	

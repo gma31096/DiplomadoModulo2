@@ -26,6 +26,7 @@
 /home/diego/catkin_ws/build/simulator/CMakeFiles/simulator_generate_messages_py.dir
 /home/diego/catkin_ws/build/simulator/CMakeFiles/simulator_genlisp.dir
 /home/diego/catkin_ws/build/simulator/CMakeFiles/simulator_genpy.dir
+/home/diego/catkin_ws/build/simulator/CMakeFiles/simulator_pub.dir
 /home/diego/catkin_ws/build/simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir
 /home/diego/catkin_ws/build/simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir
 /home/diego/catkin_ws/build/simulator/CMakeFiles/std_msgs_generate_messages_py.dir

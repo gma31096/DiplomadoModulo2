@@ -16,7 +16,7 @@
 #define STRSIZ 300
 #define SIZE_LINE 10000
 
-parameters params;
+
 
 typedef struct Vertex_ {
         float x;
@@ -33,6 +33,7 @@ typedef struct Polygon_ {
 
 Polygon polygons_wrl[100];
 int num_polygons_wrl = 0;
+parameters params;
 
 // it reads the file that conteins the environment description
 int ReadPolygons(char *file,Polygon *polygons){
@@ -276,13 +277,16 @@ bool check_environment(simulator::simulator_laser::Request  &req ,simulator::sim
 	char path[50];
 	params = wait_start();
 	float   valores[1024];
-	strcpy(path,"./src/simulator/src/data/");
-	strcat(path,params.world_name);
-	strcat(path,"/");
-	strcat(path,params.world_name);
-	strcat(path,".wrl");
-	//strcpy(path,"./src/simulator/src/data/random_2/random_2.wrl");	
-	read_environment(path,1);
+		
+	if(req.new_simulation==1)
+	{
+		strcpy(path,"./src/simulator/src/data/");
+		strcat(path,params.world_name);
+		strcat(path,"/");
+		strcat(path,params.world_name);
+		strcat(path,".wrl");
+		read_environment(path,0);
+	}
 
     getValues(params.laser_num_sensors ,params.laser_origin ,params.laser_range ,params.laser_value ,params.robot_x ,params.robot_y ,params.robot_theta ,valores);
 	
@@ -292,14 +296,6 @@ bool check_environment(simulator::simulator_laser::Request  &req ,simulator::sim
 	for (int i =0 ; i<1024;i++)
 		res.sensors[i] = valores[i];
 
-	for (int i =0 ; i<20;i++)
-		printf("valors: %f \n",valores[i]);
-
-	/*	if( (pingpong*=-1) ==1)
-		 res.sensors[i] = .4 ;
-  		else
-  		 res.sensors[i] = .2 ;
-*/
 	return true;    
 }
 
@@ -307,14 +303,7 @@ int main(int argc, char *argv[])
 {	
 	ros::init(argc, argv, "simulator_laser_node");
 	ros::NodeHandle n;
-	ros::ServiceServer service = n.advertiseService("simulator_laser", check_environment);
-	
-	//while (ros::ok())
-
-	//params = wait_start();
-			
-	//continue;
-
+	ros::ServiceServer service = n.advertiseService("simulator_laser", check_environment);	
 	ros::spin();
 
 	return 0;

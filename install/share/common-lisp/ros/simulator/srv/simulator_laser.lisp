@@ -21,7 +21,12 @@
     :reader robot_theta
     :initarg :robot_theta
     :type cl:float
-    :initform 0.0))
+    :initform 0.0)
+   (new_simulation
+    :reader new_simulation
+    :initarg :new_simulation
+    :type cl:integer
+    :initform 0))
 )
 
 (cl:defclass simulator_laser-request (<simulator_laser-request>)
@@ -46,6 +51,11 @@
 (cl:defmethod robot_theta-val ((m <simulator_laser-request>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-srv:robot_theta-val is deprecated.  Use simulator-srv:robot_theta instead.")
   (robot_theta m))
+
+(cl:ensure-generic-function 'new_simulation-val :lambda-list '(m))
+(cl:defmethod new_simulation-val ((m <simulator_laser-request>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-srv:new_simulation-val is deprecated.  Use simulator-srv:new_simulation instead.")
+  (new_simulation m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <simulator_laser-request>) ostream)
   "Serializes a message object of type '<simulator_laser-request>"
   (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'robot_x))))
@@ -63,6 +73,12 @@
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
+  (cl:let* ((signed (cl:slot-value msg 'new_simulation)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
+    )
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <simulator_laser-request>) istream)
   "Deserializes a message object of type '<simulator_laser-request>"
@@ -84,6 +100,12 @@
       (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
     (cl:setf (cl:slot-value msg 'robot_theta) (roslisp-utils:decode-single-float-bits bits)))
+    (cl:let ((unsigned 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'new_simulation) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<simulator_laser-request>)))
@@ -94,18 +116,19 @@
   "simulator/simulator_laserRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<simulator_laser-request>)))
   "Returns md5sum for a message object of type '<simulator_laser-request>"
-  "b11a2966f954e38e34941ef62f7cf6b7")
+  "66d6f75241bb6927d1a0ae712a806a98")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'simulator_laser-request)))
   "Returns md5sum for a message object of type 'simulator_laser-request"
-  "b11a2966f954e38e34941ef62f7cf6b7")
+  "66d6f75241bb6927d1a0ae712a806a98")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<simulator_laser-request>)))
   "Returns full string definition for message of type '<simulator_laser-request>"
-  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%~%~%"))
+  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%int32 new_simulation~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'simulator_laser-request)))
   "Returns full string definition for message of type 'simulator_laser-request"
-  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%~%~%"))
+  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%int32 new_simulation~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <simulator_laser-request>))
   (cl:+ 0
+     4
      4
      4
      4
@@ -116,6 +139,7 @@
     (cl:cons ':robot_x (robot_x msg))
     (cl:cons ':robot_y (robot_y msg))
     (cl:cons ':robot_theta (robot_theta msg))
+    (cl:cons ':new_simulation (new_simulation msg))
 ))
 ;//! \htmlinclude simulator_laser-response.msg.html
 
@@ -169,10 +193,10 @@
   "simulator/simulator_laserResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<simulator_laser-response>)))
   "Returns md5sum for a message object of type '<simulator_laser-response>"
-  "b11a2966f954e38e34941ef62f7cf6b7")
+  "66d6f75241bb6927d1a0ae712a806a98")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'simulator_laser-response)))
   "Returns md5sum for a message object of type 'simulator_laser-response"
-  "b11a2966f954e38e34941ef62f7cf6b7")
+  "66d6f75241bb6927d1a0ae712a806a98")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<simulator_laser-response>)))
   "Returns full string definition for message of type '<simulator_laser-response>"
   (cl:format cl:nil "float32[1024] sensors~%~%~%~%"))

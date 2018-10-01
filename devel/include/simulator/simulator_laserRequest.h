@@ -26,12 +26,14 @@ struct simulator_laserRequest_
   simulator_laserRequest_()
     : robot_x(0.0)
     , robot_y(0.0)
-    , robot_theta(0.0)  {
+    , robot_theta(0.0)
+    , new_simulation(0)  {
     }
   simulator_laserRequest_(const ContainerAllocator& _alloc)
     : robot_x(0.0)
     , robot_y(0.0)
-    , robot_theta(0.0)  {
+    , robot_theta(0.0)
+    , new_simulation(0)  {
   (void)_alloc;
     }
 
@@ -45,6 +47,9 @@ struct simulator_laserRequest_
 
    typedef float _robot_theta_type;
   _robot_theta_type robot_theta;
+
+   typedef int32_t _new_simulation_type;
+  _new_simulation_type new_simulation;
 
 
 
@@ -123,12 +128,12 @@ struct MD5Sum< ::simulator::simulator_laserRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "b5912b3f7415e4bfa50e61e9c2f4a793";
+    return "b9121e8f7eca3a126128d3865e9b6a1c";
   }
 
   static const char* value(const ::simulator::simulator_laserRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xb5912b3f7415e4bfULL;
-  static const uint64_t static_value2 = 0xa50e61e9c2f4a793ULL;
+  static const uint64_t static_value1 = 0xb9121e8f7eca3a12ULL;
+  static const uint64_t static_value2 = 0x6128d3865e9b6a1cULL;
 };
 
 template<class ContainerAllocator>
@@ -150,6 +155,7 @@ struct Definition< ::simulator::simulator_laserRequest_<ContainerAllocator> >
     return "float32 robot_x\n\
 float32 robot_y\n\
 float32 robot_theta\n\
+int32 new_simulation\n\
 ";
   }
 
@@ -171,6 +177,7 @@ namespace serialization
       stream.next(m.robot_x);
       stream.next(m.robot_y);
       stream.next(m.robot_theta);
+      stream.next(m.new_simulation);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -195,6 +202,8 @@ struct Printer< ::simulator::simulator_laserRequest_<ContainerAllocator> >
     Printer<float>::stream(s, indent + "  ", v.robot_y);
     s << indent << "robot_theta: ";
     Printer<float>::stream(s, indent + "  ", v.robot_theta);
+    s << indent << "new_simulation: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.new_simulation);
   }
 };
 

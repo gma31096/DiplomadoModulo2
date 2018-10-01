@@ -5,6 +5,8 @@
           ROBOT_Y
           ROBOT_THETA-VAL
           ROBOT_THETA
+          NEW_SIMULATION-VAL
+          NEW_SIMULATION
           SENSORS-VAL
           SENSORS
 ))

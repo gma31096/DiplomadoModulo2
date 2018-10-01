@@ -28,14 +28,14 @@ struct simulator_baseRequest_
     , distance(0.0)
     , x1(0.0)
     , y1(0.0)
-    , new_simulation(false)  {
+    , new_simulation(0)  {
     }
   simulator_baseRequest_(const ContainerAllocator& _alloc)
     : theta(0.0)
     , distance(0.0)
     , x1(0.0)
     , y1(0.0)
-    , new_simulation(false)  {
+    , new_simulation(0)  {
   (void)_alloc;
     }
 
@@ -53,7 +53,7 @@ struct simulator_baseRequest_
    typedef float _y1_type;
   _y1_type y1;
 
-   typedef uint8_t _new_simulation_type;
+   typedef int32_t _new_simulation_type;
   _new_simulation_type new_simulation;
 
 
@@ -133,12 +133,12 @@ struct MD5Sum< ::simulator::simulator_baseRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "698ab2190f0f38f38a2229fdeba1f75c";
+    return "b479603405130a3c6f5c654e918df66b";
   }
 
   static const char* value(const ::simulator::simulator_baseRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x698ab2190f0f38f3ULL;
-  static const uint64_t static_value2 = 0x8a2229fdeba1f75cULL;
+  static const uint64_t static_value1 = 0xb479603405130a3cULL;
+  static const uint64_t static_value2 = 0x6f5c654e918df66bULL;
 };
 
 template<class ContainerAllocator>
@@ -161,7 +161,7 @@ struct Definition< ::simulator::simulator_baseRequest_<ContainerAllocator> >
 float32 distance\n\
 float32 x1\n\
 float32 y1\n\
-bool new_simulation\n\
+int32 new_simulation\n\
 ";
   }
 
@@ -212,7 +212,7 @@ struct Printer< ::simulator::simulator_baseRequest_<ContainerAllocator> >
     s << indent << "y1: ";
     Printer<float>::stream(s, indent + "  ", v.y1);
     s << indent << "new_simulation: ";
-    Printer<uint8_t>::stream(s, indent + "  ", v.new_simulation);
+    Printer<int32_t>::stream(s, indent + "  ", v.new_simulation);
   }
 };
 

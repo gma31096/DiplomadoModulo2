@@ -30,8 +30,8 @@
    (new_simulation
     :reader new_simulation
     :initarg :new_simulation
-    :type cl:boolean
-    :initform cl:nil))
+    :type cl:integer
+    :initform 0))
 )
 
 (cl:defclass simulator_base-request (<simulator_base-request>)
@@ -88,7 +88,12 @@
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
-  (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'new_simulation) 1 0)) ostream)
+  (cl:let* ((signed (cl:slot-value msg 'new_simulation)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
+    )
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <simulator_base-request>) istream)
   "Deserializes a message object of type '<simulator_base-request>"
@@ -116,7 +121,12 @@
       (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
     (cl:setf (cl:slot-value msg 'y1) (roslisp-utils:decode-single-float-bits bits)))
-    (cl:setf (cl:slot-value msg 'new_simulation) (cl:not (cl:zerop (cl:read-byte istream))))
+    (cl:let ((unsigned 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'new_simulation) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<simulator_base-request>)))
@@ -127,23 +137,23 @@
   "simulator/simulator_baseRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<simulator_base-request>)))
   "Returns md5sum for a message object of type '<simulator_base-request>"
-  "ec23e67bce036a9847d712ec6ce2eedb")
+  "8e983985b8c042c16203b4cfe29be041")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'simulator_base-request)))
   "Returns md5sum for a message object of type 'simulator_base-request"
-  "ec23e67bce036a9847d712ec6ce2eedb")
+  "8e983985b8c042c16203b4cfe29be041")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<simulator_base-request>)))
   "Returns full string definition for message of type '<simulator_base-request>"
-  (cl:format cl:nil "float32 theta~%float32 distance~%float32 x1~%float32 y1~%bool new_simulation~%~%~%"))
+  (cl:format cl:nil "float32 theta~%float32 distance~%float32 x1~%float32 y1~%int32 new_simulation~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'simulator_base-request)))
   "Returns full string definition for message of type 'simulator_base-request"
-  (cl:format cl:nil "float32 theta~%float32 distance~%float32 x1~%float32 y1~%bool new_simulation~%~%~%"))
+  (cl:format cl:nil "float32 theta~%float32 distance~%float32 x1~%float32 y1~%int32 new_simulation~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <simulator_base-request>))
   (cl:+ 0
      4
      4
      4
      4
-     1
+     4
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <simulator_base-request>))
   "Converts a ROS message object to a list"
@@ -202,10 +212,10 @@
   "simulator/simulator_baseResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<simulator_base-response>)))
   "Returns md5sum for a message object of type '<simulator_base-response>"
-  "ec23e67bce036a9847d712ec6ce2eedb")
+  "8e983985b8c042c16203b4cfe29be041")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'simulator_base-response)))
   "Returns md5sum for a message object of type 'simulator_base-response"
-  "ec23e67bce036a9847d712ec6ce2eedb")
+  "8e983985b8c042c16203b4cfe29be041")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<simulator_base-response>)))
   "Returns full string definition for message of type '<simulator_base-response>"
   (cl:format cl:nil "float32 distance~%~%~%"))

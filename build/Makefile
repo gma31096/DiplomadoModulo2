@@ -527,6 +527,19 @@ simulator_genpy/fast:
 .PHONY : simulator_genpy/fast
 
 #=============================================================================
+# Target rules for targets named simulator_pub
+
+# Build rule for target.
+simulator_pub: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 simulator_pub
+.PHONY : simulator_pub
+
+# fast build rule for target.
+simulator_pub/fast:
+	$(MAKE) -f simulator/CMakeFiles/simulator_pub.dir/build.make simulator/CMakeFiles/simulator_pub.dir/build
+.PHONY : simulator_pub/fast
+
+#=============================================================================
 # Target rules for targets named std_msgs_generate_messages_cpp
 
 # Build rule for target.
@@ -607,6 +620,7 @@ help:
 	@echo "... simulator_generate_messages_py"
 	@echo "... simulator_genlisp"
 	@echo "... simulator_genpy"
+	@echo "... simulator_pub"
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... std_msgs_generate_messages_py"

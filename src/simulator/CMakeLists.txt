@@ -206,6 +206,10 @@ add_executable(motion_planner_node src/motion_planner/motion_planner_node.cpp)
 target_link_libraries(motion_planner_node ${catkin_LIBRARIES})
 add_dependencies(motion_planner_node simulator_generate_messages_cpp)
 
+add_executable(simulator_pub src/motion_planner/simulator_pub.cpp)
+target_link_libraries(simulator_pub ${catkin_LIBRARIES})
+add_dependencies(simulator_pub simulator_generate_messages_cpp)
+
 add_executable(base_node src/simulator_physics/base_node.cpp)
 target_link_libraries(base_node ${catkin_LIBRARIES})
 add_dependencies(base_node simulator_generate_messages_cpp)

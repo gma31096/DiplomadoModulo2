@@ -293,6 +293,7 @@ simulator/all: simulator/CMakeFiles/base_node.dir/all
 simulator/all: simulator/CMakeFiles/laser_node.dir/all
 simulator/all: simulator/CMakeFiles/motion_planner_node.dir/all
 simulator/all: simulator/CMakeFiles/simulator_generate_messages.dir/all
+simulator/all: simulator/CMakeFiles/simulator_pub.dir/all
 .PHONY : simulator/all
 
 # Convenience name for "clean" pass in the directory.
@@ -318,6 +319,7 @@ simulator/clean: simulator/CMakeFiles/simulator_generate_messages_lisp.dir/clean
 simulator/clean: simulator/CMakeFiles/simulator_generate_messages_py.dir/clean
 simulator/clean: simulator/CMakeFiles/simulator_genlisp.dir/clean
 simulator/clean: simulator/CMakeFiles/simulator_genpy.dir/clean
+simulator/clean: simulator/CMakeFiles/simulator_pub.dir/clean
 simulator/clean: simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/clean
 simulator/clean: simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/clean
 simulator/clean: simulator/CMakeFiles/std_msgs_generate_messages_py.dir/clean
@@ -839,9 +841,9 @@ clean: simulator/CMakeFiles/simulator_gencpp.dir/clean
 # Target rules for target simulator/CMakeFiles/simulator_generate_messages.dir
 
 # All Build rule for target.
+simulator/CMakeFiles/simulator_generate_messages.dir/all: simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all
 simulator/CMakeFiles/simulator_generate_messages.dir/all: simulator/CMakeFiles/simulator_generate_messages_lisp.dir/all
 simulator/CMakeFiles/simulator_generate_messages.dir/all: simulator/CMakeFiles/simulator_generate_messages_py.dir/all
-simulator/CMakeFiles/simulator_generate_messages.dir/all: simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all
 	$(MAKE) -f simulator/CMakeFiles/simulator_generate_messages.dir/build.make simulator/CMakeFiles/simulator_generate_messages.dir/depend
 	$(MAKE) -f simulator/CMakeFiles/simulator_generate_messages.dir/build.make simulator/CMakeFiles/simulator_generate_messages.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles 
@@ -876,13 +878,13 @@ clean: simulator/CMakeFiles/simulator_generate_messages.dir/clean
 # Target rules for target simulator/CMakeFiles/simulator_generate_messages_cpp.dir
 
 # All Build rule for target.
-simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_parameters.dir/all
-simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all: simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
 simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_laser.dir/all
-simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_Parameters.dir/all
-simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_step.dir/all
 simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_base.dir/all
+simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_parameters.dir/all
+simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_step.dir/all
 simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_laser_values.dir/all
+simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all: simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
+simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_Parameters.dir/all
 	$(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_cpp.dir/build.make simulator/CMakeFiles/simulator_generate_messages_cpp.dir/depend
 	$(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_cpp.dir/build.make simulator/CMakeFiles/simulator_generate_messages_cpp.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles  6 7 8 9 10 11
@@ -913,13 +915,13 @@ clean: simulator/CMakeFiles/simulator_generate_messages_cpp.dir/clean
 # Target rules for target simulator/CMakeFiles/simulator_generate_messages_lisp.dir
 
 # All Build rule for target.
-simulator/CMakeFiles/simulator_generate_messages_lisp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_parameters.dir/all
-simulator/CMakeFiles/simulator_generate_messages_lisp.dir/all: simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
 simulator/CMakeFiles/simulator_generate_messages_lisp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_laser.dir/all
-simulator/CMakeFiles/simulator_generate_messages_lisp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_Parameters.dir/all
-simulator/CMakeFiles/simulator_generate_messages_lisp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_step.dir/all
 simulator/CMakeFiles/simulator_generate_messages_lisp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_base.dir/all
+simulator/CMakeFiles/simulator_generate_messages_lisp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_parameters.dir/all
+simulator/CMakeFiles/simulator_generate_messages_lisp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_step.dir/all
 simulator/CMakeFiles/simulator_generate_messages_lisp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_laser_values.dir/all
+simulator/CMakeFiles/simulator_generate_messages_lisp.dir/all: simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
+simulator/CMakeFiles/simulator_generate_messages_lisp.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_Parameters.dir/all
 	$(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_lisp.dir/build.make simulator/CMakeFiles/simulator_generate_messages_lisp.dir/depend
 	$(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_lisp.dir/build.make simulator/CMakeFiles/simulator_generate_messages_lisp.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles  12 13 14 15 16 17
@@ -950,13 +952,13 @@ clean: simulator/CMakeFiles/simulator_generate_messages_lisp.dir/clean
 # Target rules for target simulator/CMakeFiles/simulator_generate_messages_py.dir
 
 # All Build rule for target.
-simulator/CMakeFiles/simulator_generate_messages_py.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_parameters.dir/all
 simulator/CMakeFiles/simulator_generate_messages_py.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_laser.dir/all
+simulator/CMakeFiles/simulator_generate_messages_py.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_base.dir/all
+simulator/CMakeFiles/simulator_generate_messages_py.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_parameters.dir/all
+simulator/CMakeFiles/simulator_generate_messages_py.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_step.dir/all
+simulator/CMakeFiles/simulator_generate_messages_py.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_laser_values.dir/all
 simulator/CMakeFiles/simulator_generate_messages_py.dir/all: simulator/CMakeFiles/std_msgs_generate_messages_py.dir/all
 simulator/CMakeFiles/simulator_generate_messages_py.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_Parameters.dir/all
-simulator/CMakeFiles/simulator_generate_messages_py.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_step.dir/all
-simulator/CMakeFiles/simulator_generate_messages_py.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_base.dir/all
-simulator/CMakeFiles/simulator_generate_messages_py.dir/all: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_laser_values.dir/all
 	$(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_py.dir/build.make simulator/CMakeFiles/simulator_generate_messages_py.dir/depend
 	$(MAKE) -f simulator/CMakeFiles/simulator_generate_messages_py.dir/build.make simulator/CMakeFiles/simulator_generate_messages_py.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles  18 19 20 21 22 23 24 25
@@ -1043,6 +1045,41 @@ simulator/CMakeFiles/simulator_genpy.dir/clean:
 
 # clean rule for target.
 clean: simulator/CMakeFiles/simulator_genpy.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target simulator/CMakeFiles/simulator_pub.dir
+
+# All Build rule for target.
+simulator/CMakeFiles/simulator_pub.dir/all: simulator/CMakeFiles/simulator_generate_messages_cpp.dir/all
+	$(MAKE) -f simulator/CMakeFiles/simulator_pub.dir/build.make simulator/CMakeFiles/simulator_pub.dir/depend
+	$(MAKE) -f simulator/CMakeFiles/simulator_pub.dir/build.make simulator/CMakeFiles/simulator_pub.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/diego/catkin_ws/build/CMakeFiles  26
+	@echo "Built target simulator_pub"
+.PHONY : simulator/CMakeFiles/simulator_pub.dir/all
+
+# Include target in all.
+all: simulator/CMakeFiles/simulator_pub.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+simulator/CMakeFiles/simulator_pub.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/diego/catkin_ws/build/CMakeFiles 7
+	$(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/simulator_pub.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/diego/catkin_ws/build/CMakeFiles 0
+.PHONY : simulator/CMakeFiles/simulator_pub.dir/rule
+
+# Convenience name for target.
+simulator_pub: simulator/CMakeFiles/simulator_pub.dir/rule
+.PHONY : simulator_pub
+
+# clean rule for target.
+simulator/CMakeFiles/simulator_pub.dir/clean:
+	$(MAKE) -f simulator/CMakeFiles/simulator_pub.dir/build.make simulator/CMakeFiles/simulator_pub.dir/clean
+.PHONY : simulator/CMakeFiles/simulator_pub.dir/clean
+
+# clean rule for target.
+clean: simulator/CMakeFiles/simulator_pub.dir/clean
 .PHONY : clean
 
 #=============================================================================

@@ -1,7 +1,30 @@
-
+#include "ros/ros.h"
 #include "simulator/simulator_robot_step.h"
 #include "simulator/simulator_parameters.h"
 #include "simulator/simulator_robot_laser_values.h"
+#include "simulator/simulator_base.h"
+#include "simulator/simulator_laser.h"
+#include <string.h>
+
+parameters wait_start();
+int move_gui(float angle ,float distance ,next_position *next );
+int laser_gui(float *lasers );
+float check_collision(float theta ,float distance ,int new_simulation );
+void get_lidar_values(float *lectures );
+int move_robot(float theta,float advance);
+
+next_position next;
+int new_simulation = 1;
+parameters params;
+
+void simulation_init()
+{
+  params = wait_start();
+  next.robot_x = params.robot_x; 
+  next.robot_y = params.robot_y;
+  next.robot_theta = params.robot_theta;
+  new_simulation = 1;
+}
 
 parameters wait_start()
 {
@@ -43,7 +66,7 @@ parameters wait_start()
     }
   }
 
-  printf("Inicial parameters:\n" );
+  printf("\n\nINICIAL PARAMETERS:\n" );
   printf("robot_x %f \n",params.robot_x )       ;   
   printf("robot_y %f \n",params.robot_y )      ;
   printf("robot_theta %f \n",params.robot_theta             );
@@ -67,7 +90,6 @@ parameters wait_start()
 
 int move_gui(float angle ,float distance ,next_position *next )
 {
-  
   ros::NodeHandle n;
   ros::ServiceClient client;
   simulator::simulator_robot_step srv;
@@ -81,20 +103,17 @@ int move_gui(float angle ,float distance ,next_position *next )
       next->robot_x = srv.response.robot_x;
       next->robot_y = srv.response.robot_y;
       next->robot_theta =srv.response.theta;
-      printf("%s\n","Hecho" );
+      //printf("%s\n","Hecho" );
   }
   else
   {
     ROS_ERROR("Failed to call service simulator_robot_step");
     
   }
-  
-
   return 1;
 }
 
-
-int laser_gui(float *lasers )
+int laser_gui(float *lasers)
 {
   
   ros::NodeHandle n;
@@ -105,20 +124,76 @@ int laser_gui(float *lasers )
    for(int i=0;i<1024;i++)
       srv.request.sensors[i]=lasers[i];
         
-  
-
-  
   if (client.call(srv))
   {     
- 
-      printf("%s\n","Hecho lasers" );
+      //printf("%s\n","Hecho lasers" );
   }
   else
   {
     ROS_ERROR("Failed to call service simulator_robot_step");
     
   }
-  
+  return 1;
+}
 
+float check_collision(float theta ,float distance ,int new_simulation )
+{
+  float final_distance=0;
+  ros::NodeHandle n;
+  ros::ServiceClient client;
+  simulator::simulator_base srv;
+  client = n.serviceClient<simulator::simulator_base>("simulator_base"); //create the client
+  
+  srv.request.x1 = next.robot_x;
+  srv.request.y1 = next.robot_y;
+  srv.request.theta = next.robot_theta+theta;
+  srv.request.distance = distance;
+  srv.request.new_simulation =new_simulation;
+ 
+  if (client.call(srv))
+  {
+    final_distance = srv.response.distance;
+  }
+  else
+  {
+    ROS_ERROR("Failed to call service get_parameters");    
+  }
+
+  return final_distance;
+}
+
+void get_lidar_values(float *lectures )
+{
+  ros::NodeHandle n;
+  ros::ServiceClient client;
+  simulator::simulator_laser srv;
+  client = n.serviceClient<simulator::simulator_laser>("simulator_laser"); //create the client
+  srv.request.robot_x = next.robot_x ;
+  srv.request.robot_y = next.robot_y ;
+  srv.request.robot_theta = next.robot_theta;
+  srv.request.new_simulation =new_simulation;
+
+ 
+  if (client.call(srv))
+  {
+    
+    for(int i=0;i<1024;i++)
+      //printf("Valor : %f \n",lectures[i] = srv.response.sensors[i]);
+      lectures[i] = srv.response.sensors[i];
+    laser_gui(lectures);
+  }
+  else
+  {
+    ROS_ERROR("Failed to call service get_parameters"); 
+  }
+}
+
+
+int move_robot(float theta,float advance)
+{
+  float res;
+  res = check_collision(theta ,advance ,new_simulation);
+  move_gui(theta ,res ,&next);
+  ros::spinOnce();
   return 1;
 }

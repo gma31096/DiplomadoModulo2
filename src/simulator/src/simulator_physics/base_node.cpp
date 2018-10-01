@@ -15,7 +15,6 @@
 #define STRSIZ 300
 #define SIZE_LINE 10000
 
-parameters params;
 
 typedef struct Vertex_ {
         float x;
@@ -32,6 +31,7 @@ typedef struct Polygon_ {
 
 Polygon polygons_wrl[100];
 int num_polygons_wrl = 0;
+parameters params;
 
 // it reads the file that conteins the environment description
 int ReadPolygons(char *file,Polygon *polygons){
@@ -213,32 +213,17 @@ int sat(float robot_x, float robot_y, float robot_r)
 		 			}	
 	return 0;
 }
-
-
-
 	
-	
-
-
 bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_base::Response &res)
 {
-  	printf("Aquiii\n");
 	float x1=req.x1;
 	float y1=req.y1;
-
-    //float x22 = req.distance * cos(req.theta) + x1;
-	//float y2 = req.distance * sin(req.theta) + y1;
 	float m = tan(req.theta);
-	//float x2;
 	float x2,x22,y2,y22;
 	float distance;
 	char path[50];
-	parameters params;
-	//printf("M: %f \n",m);
-	//printf("x1:%f x2: %f y1:%f y2: %f m:%f  \n",x1,x22,y1,y2,m );
-	
 
-	//if(req.new_simulation)
+	if(req.new_simulation==1)
 	{
 			params = wait_start();
 			strcpy(path,"./src/simulator/src/data/");
@@ -256,16 +241,17 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 		y22 = req.distance * sin(req.theta) + y1;
 		x2 = req.distance * cos(req.theta) + x1;
 		y2 = 0;
-		printf("YY\n");
+		//printf("YY\n");
 		if(y22 > y1)
-		{	printf("AAAA\n");
+		{	//printf("AAAA\n");
 			for(y2 = y1; y2 <= y22; y2+=.005)
 			{
 				//y2 -y1= m ( x2 - x1)
 				x2 =  (y2 - y1) / m + x1 ;
 				
 				if(sat(x2, y2, params.robot_radio))
-				{printf("y2:%f y1:%f \n",y2,y1);	break;}
+				{//printf("y2:%f y1:%f \n",y2,y1);	
+				break;}
 			}
 			if(x2 != x1)
 			//printf("y1:%f x1:%f y2 %f x2 %f\n",y1,x1,y2,x2 );
@@ -273,18 +259,19 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 				y2-=.005;
 				x2 =  (y2 - y1) / m + x1 ;	
 			}
-			printf("y1:%f x1:%f y2 %f x2 %f\n",y1,x1,y2,x2 );
+			//printf("y1:%f x1:%f y2 %f x2 %f\n",y1,x1,y2,x2 );
 			
 		}
 		else
 		{
-			printf("BBB\n");
+			//printf("BBB\n");
 			for(y2 = y1; y2 >= y22; y2-=.005)
 			{
 				//y2 -y1= m ( x2 - x1)
 				x2 =  (y2 - y1) / m + x1 ;
 				if(sat(x2, y2, params.robot_radio))
-				{printf("Fuera\n");	break;}
+				{//printf("Fuera\n");	
+				break;}
 			}
 			if(x2 != x1)
 			{
@@ -302,13 +289,14 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 
 		if(x22-x1 >= 0)
 		{
-			printf("CCC\n");
+			//printf("CCC\n");
 			for(x2 = x1; x2 <= x22; x2+=.005)
 			{   
 				y2 = m * (x2 - x1) + y1;
 				//printf(" x: %f y: %f\n",x2*600,y2*600 );
 				if(sat(x2, y2, params.robot_radio))
-				{printf("Fuera\n");	break;}
+				{//printf("Fuera\n");
+				break;}
 			}
 			if(x2 != x1)
 			{
@@ -318,7 +306,7 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 		}
 		else
 		{
-			printf("DDD\n");
+			//printf("DDD\n");
 			for(x2 = x1; x2 >= x22; x2-=.005)
 			{
 				y2 = m * (x2 - x1) + y1;
@@ -332,12 +320,11 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 			}
 		}
 	}
-	
-		
-  	printf("y1:%f x1:%f y2 %f x2 %f\n",y1,x1,y2,x2 );
+			
+  	//printf("y1:%f x1:%f y2 %f x2 %f\n",y1,x1,y2,x2 );
     distance = sqrt( pow( x1-x2  ,2) + pow(y1-y2 ,2)  );
     res.distance = distance;
-    printf("distance %f \n",distance);
+    //printf("distance %f \n",distance);
    return true;
 }
 
@@ -348,20 +335,6 @@ int main(int argc, char *argv[])
 	ros::NodeHandle n;
 	ros::ServiceServer service = n.advertiseService("simulator_base", check_path);
 	
-	//while (ros::ok())
-
-	//params = wait_start();
-			
-	//continue;
-
-	
-
-
 	ros::spin();
-
-
-	
-	
-
 	return 0;
 }
