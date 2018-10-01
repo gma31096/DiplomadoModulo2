@@ -192,6 +192,20 @@ _simulator_generate_messages_check_deps_simulator_laser/fast:
 .PHONY : _simulator_generate_messages_check_deps_simulator_laser/fast
 
 # Convenience name for target.
+simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_light.dir/rule:
+	cd /home/diego/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_light.dir/rule
+.PHONY : simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_light.dir/rule
+
+# Convenience name for target.
+_simulator_generate_messages_check_deps_simulator_light: simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_light.dir/rule
+.PHONY : _simulator_generate_messages_check_deps_simulator_light
+
+# fast build rule for target.
+_simulator_generate_messages_check_deps_simulator_light/fast:
+	cd /home/diego/catkin_ws/build && $(MAKE) -f simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_light.dir/build.make simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_light.dir/build
+.PHONY : _simulator_generate_messages_check_deps_simulator_light/fast
+
+# Convenience name for target.
 simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_parameters.dir/rule:
 	cd /home/diego/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_parameters.dir/rule
 .PHONY : simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_parameters.dir/rule
@@ -260,6 +274,20 @@ laser_node: simulator/CMakeFiles/laser_node.dir/rule
 laser_node/fast:
 	cd /home/diego/catkin_ws/build && $(MAKE) -f simulator/CMakeFiles/laser_node.dir/build.make simulator/CMakeFiles/laser_node.dir/build
 .PHONY : laser_node/fast
+
+# Convenience name for target.
+simulator/CMakeFiles/light_node.dir/rule:
+	cd /home/diego/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 simulator/CMakeFiles/light_node.dir/rule
+.PHONY : simulator/CMakeFiles/light_node.dir/rule
+
+# Convenience name for target.
+light_node: simulator/CMakeFiles/light_node.dir/rule
+.PHONY : light_node
+
+# fast build rule for target.
+light_node/fast:
+	cd /home/diego/catkin_ws/build && $(MAKE) -f simulator/CMakeFiles/light_node.dir/build.make simulator/CMakeFiles/light_node.dir/build
+.PHONY : light_node/fast
 
 # Convenience name for target.
 simulator/CMakeFiles/motion_planner_node.dir/rule:
@@ -609,6 +637,30 @@ src/simulator_physics/laser_node.cpp.s:
 	cd /home/diego/catkin_ws/build && $(MAKE) -f simulator/CMakeFiles/laser_node.dir/build.make simulator/CMakeFiles/laser_node.dir/src/simulator_physics/laser_node.cpp.s
 .PHONY : src/simulator_physics/laser_node.cpp.s
 
+src/simulator_physics/light_node.o: src/simulator_physics/light_node.cpp.o
+.PHONY : src/simulator_physics/light_node.o
+
+# target to build an object file
+src/simulator_physics/light_node.cpp.o:
+	cd /home/diego/catkin_ws/build && $(MAKE) -f simulator/CMakeFiles/light_node.dir/build.make simulator/CMakeFiles/light_node.dir/src/simulator_physics/light_node.cpp.o
+.PHONY : src/simulator_physics/light_node.cpp.o
+
+src/simulator_physics/light_node.i: src/simulator_physics/light_node.cpp.i
+.PHONY : src/simulator_physics/light_node.i
+
+# target to preprocess a source file
+src/simulator_physics/light_node.cpp.i:
+	cd /home/diego/catkin_ws/build && $(MAKE) -f simulator/CMakeFiles/light_node.dir/build.make simulator/CMakeFiles/light_node.dir/src/simulator_physics/light_node.cpp.i
+.PHONY : src/simulator_physics/light_node.cpp.i
+
+src/simulator_physics/light_node.s: src/simulator_physics/light_node.cpp.s
+.PHONY : src/simulator_physics/light_node.s
+
+# target to generate assembly for a file
+src/simulator_physics/light_node.cpp.s:
+	cd /home/diego/catkin_ws/build && $(MAKE) -f simulator/CMakeFiles/light_node.dir/build.make simulator/CMakeFiles/light_node.dir/src/simulator_physics/light_node.cpp.s
+.PHONY : src/simulator_physics/light_node.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -618,6 +670,7 @@ help:
 	@echo "... _simulator_generate_messages_check_deps_Parameters"
 	@echo "... _simulator_generate_messages_check_deps_simulator_base"
 	@echo "... _simulator_generate_messages_check_deps_simulator_laser"
+	@echo "... _simulator_generate_messages_check_deps_simulator_light"
 	@echo "... _simulator_generate_messages_check_deps_simulator_parameters"
 	@echo "... _simulator_generate_messages_check_deps_simulator_robot_laser_values"
 	@echo "... _simulator_generate_messages_check_deps_simulator_robot_step"
@@ -627,6 +680,7 @@ help:
 	@echo "... install/local"
 	@echo "... install/strip"
 	@echo "... laser_node"
+	@echo "... light_node"
 	@echo "... list_install_components"
 	@echo "... motion_planner_node"
 	@echo "... rebuild_cache"
@@ -660,6 +714,9 @@ help:
 	@echo "... src/simulator_physics/laser_node.o"
 	@echo "... src/simulator_physics/laser_node.i"
 	@echo "... src/simulator_physics/laser_node.s"
+	@echo "... src/simulator_physics/light_node.o"
+	@echo "... src/simulator_physics/light_node.i"
+	@echo "... src/simulator_physics/light_node.s"
 .PHONY : help
 
 

@@ -9,8 +9,10 @@
 /home/diego/catkin_ws/install/share/simulator/srv/simulator_parameters.srv
 /home/diego/catkin_ws/install/share/simulator/srv/simulator_base.srv
 /home/diego/catkin_ws/install/share/simulator/srv/simulator_laser.srv
+/home/diego/catkin_ws/install/share/simulator/srv/simulator_light.srv
 /home/diego/catkin_ws/install/share/simulator/srv/simulator_robot_laser_values.srv
 /home/diego/catkin_ws/install/share/simulator/cmake/simulator-msg-paths.cmake
+/home/diego/catkin_ws/install/include/simulator/simulator_lightResponse.h
 /home/diego/catkin_ws/install/include/simulator/simulator_parametersRequest.h
 /home/diego/catkin_ws/install/include/simulator/simulator_base.h
 /home/diego/catkin_ws/install/include/simulator/simulator_baseResponse.h
@@ -26,6 +28,7 @@
 /home/diego/catkin_ws/install/include/simulator/robot_stepRequest.h
 /home/diego/catkin_ws/install/include/simulator/simulator_robot_laser_valuesRequest.h
 /home/diego/catkin_ws/install/include/simulator/simulator_robot_laser_valuesResponse.h
+/home/diego/catkin_ws/install/include/simulator/simulator_lightRequest.h
 /home/diego/catkin_ws/install/include/simulator/simulator_laserResponse.h
 /home/diego/catkin_ws/install/include/simulator/Parameters.h
 /home/diego/catkin_ws/install/include/simulator/simulator_robot_laser_values.h
@@ -33,10 +36,12 @@
 /home/diego/catkin_ws/install/include/simulator/simulator_laserRequest.h
 /home/diego/catkin_ws/install/include/simulator/simulator_robot_stepResponse.h
 /home/diego/catkin_ws/install/include/simulator/simulator_parameters.h
+/home/diego/catkin_ws/install/include/simulator/simulator_light.h
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/_package_simulator_base.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/_package_simulator_parameters.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/simulator-srv.asd
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/_package_simulator_robot_laser_values.lisp
+/home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/_package_simulator_light.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/simulator_robot_step.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/move_test.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/simulator_robot_laser_values.lisp
@@ -46,6 +51,7 @@
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/_package_simulator_laser.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/simulator_parameters.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/_package_simulator_robot_step.lisp
+/home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/simulator_light.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/_package_robot_step.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/robot_step.lisp
 /home/diego/catkin_ws/install/share/common-lisp/ros/simulator/srv/_package.lisp
@@ -65,6 +71,8 @@
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_simulator_robot_laser_values.py
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_simulator_robot_step.pyc
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_simulator_parameters.py
+/home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_simulator_light.py
+/home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_simulator_light.pyc
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_move_test.pyc
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_simulator_laser.pyc
 /home/diego/catkin_ws/install/lib/python2.7/dist-packages/simulator/srv/_simulator_base.py

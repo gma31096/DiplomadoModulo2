@@ -60,6 +60,7 @@ find_package(catkin REQUIRED COMPONENTS
    simulator_parameters.srv
    simulator_base.srv
    simulator_laser.srv
+   simulator_light.srv
    simulator_robot_laser_values.srv
 
  )
@@ -217,3 +218,7 @@ add_dependencies(base_node simulator_generate_messages_cpp)
 add_executable(laser_node src/simulator_physics/laser_node.cpp)
 target_link_libraries(laser_node ${catkin_LIBRARIES})
 add_dependencies(laser_node simulator_generate_messages_cpp)
+
+add_executable(light_node src/simulator_physics/light_node.cpp)
+target_link_libraries(light_node ${catkin_LIBRARIES})
+add_dependencies(light_node simulator_generate_messages_cpp)

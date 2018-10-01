@@ -323,6 +323,8 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 			
   	//printf("y1:%f x1:%f y2 %f x2 %f\n",y1,x1,y2,x2 );
     distance = sqrt( pow( x1-x2  ,2) + pow(y1-y2 ,2)  );
+    if (req.distance < 0)
+    	distance=-distance;
     res.distance = distance;
     //printf("distance %f \n",distance);
    return true;

@@ -8,6 +8,9 @@ simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_n
  /home/diego/catkin_ws/devel/include/simulator/simulator_laser.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_laserRequest.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_laserResponse.h
+ /home/diego/catkin_ws/devel/include/simulator/simulator_light.h
+ /home/diego/catkin_ws/devel/include/simulator/simulator_lightRequest.h
+ /home/diego/catkin_ws/devel/include/simulator/simulator_lightResponse.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_parameters.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_parametersRequest.h
  /home/diego/catkin_ws/devel/include/simulator/simulator_parametersResponse.h
@@ -19,6 +22,7 @@ simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_n
  /home/diego/catkin_ws/devel/include/simulator/simulator_robot_stepResponse.h
  /home/diego/catkin_ws/src/simulator/src/motion_planner/motion_planner_node.cpp
  /home/diego/catkin_ws/src/simulator/src/motion_planner/motion_planner_utilities.h
+ /home/diego/catkin_ws/src/simulator/src/state_machines/st_light_follower.h
  /home/diego/catkin_ws/src/simulator/src/utilities/simulator_structures.h
  /opt/ros/indigo/include/XmlRpcDecl.h
  /opt/ros/indigo/include/XmlRpcValue.h

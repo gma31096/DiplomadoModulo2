@@ -280,6 +280,19 @@ _simulator_generate_messages_check_deps_simulator_laser/fast:
 .PHONY : _simulator_generate_messages_check_deps_simulator_laser/fast
 
 #=============================================================================
+# Target rules for targets named _simulator_generate_messages_check_deps_simulator_light
+
+# Build rule for target.
+_simulator_generate_messages_check_deps_simulator_light: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _simulator_generate_messages_check_deps_simulator_light
+.PHONY : _simulator_generate_messages_check_deps_simulator_light
+
+# fast build rule for target.
+_simulator_generate_messages_check_deps_simulator_light/fast:
+	$(MAKE) -f simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_light.dir/build.make simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_light.dir/build
+.PHONY : _simulator_generate_messages_check_deps_simulator_light/fast
+
+#=============================================================================
 # Target rules for targets named _simulator_generate_messages_check_deps_simulator_parameters
 
 # Build rule for target.
@@ -343,6 +356,19 @@ laser_node: cmake_check_build_system
 laser_node/fast:
 	$(MAKE) -f simulator/CMakeFiles/laser_node.dir/build.make simulator/CMakeFiles/laser_node.dir/build
 .PHONY : laser_node/fast
+
+#=============================================================================
+# Target rules for targets named light_node
+
+# Build rule for target.
+light_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 light_node
+.PHONY : light_node
+
+# fast build rule for target.
+light_node/fast:
+	$(MAKE) -f simulator/CMakeFiles/light_node.dir/build.make simulator/CMakeFiles/light_node.dir/build
+.PHONY : light_node/fast
 
 #=============================================================================
 # Target rules for targets named motion_planner_node
@@ -601,11 +627,13 @@ help:
 	@echo "... _simulator_generate_messages_check_deps_Parameters"
 	@echo "... _simulator_generate_messages_check_deps_simulator_base"
 	@echo "... _simulator_generate_messages_check_deps_simulator_laser"
+	@echo "... _simulator_generate_messages_check_deps_simulator_light"
 	@echo "... _simulator_generate_messages_check_deps_simulator_parameters"
 	@echo "... _simulator_generate_messages_check_deps_simulator_robot_laser_values"
 	@echo "... _simulator_generate_messages_check_deps_simulator_robot_step"
 	@echo "... base_node"
 	@echo "... laser_node"
+	@echo "... light_node"
 	@echo "... motion_planner_node"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_lisp"

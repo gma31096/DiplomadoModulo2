@@ -8,6 +8,8 @@
     (:file "_package_simulator_robot_laser_values" :depends-on ("_package"))
     (:file "simulator_base" :depends-on ("_package_simulator_base"))
     (:file "_package_simulator_base" :depends-on ("_package"))
+    (:file "simulator_light" :depends-on ("_package_simulator_light"))
+    (:file "_package_simulator_light" :depends-on ("_package"))
     (:file "simulator_parameters" :depends-on ("_package_simulator_parameters"))
     (:file "_package_simulator_parameters" :depends-on ("_package"))
     (:file "simulator_robot_step" :depends-on ("_package_simulator_robot_step"))

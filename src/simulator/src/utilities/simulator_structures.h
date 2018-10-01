@@ -25,5 +25,10 @@ typedef struct next_position_
 	float robot_theta;
 } next_position;
 
+typedef struct movement_
+{
+	float twist;
+	float advance;
+} movement;
 
 

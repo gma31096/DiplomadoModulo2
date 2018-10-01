@@ -4,6 +4,7 @@
 #include "simulator/simulator_robot_laser_values.h"
 #include "simulator/simulator_base.h"
 #include "simulator/simulator_laser.h"
+#include "simulator/simulator_light.h"
 #include <string.h>
 
 parameters wait_start();
@@ -12,6 +13,7 @@ int laser_gui(float *lasers );
 float check_collision(float theta ,float distance ,int new_simulation );
 void get_lidar_values(float *lectures );
 int move_robot(float theta,float advance);
+int get_light_values();
 
 next_position next;
 int new_simulation = 1;
@@ -196,4 +198,26 @@ int move_robot(float theta,float advance)
   move_gui(theta ,res ,&next);
   ros::spinOnce();
   return 1;
+}
+
+
+
+int get_light_values(float *values)
+{
+  ros::NodeHandle n;
+  ros::ServiceClient client;
+  simulator::simulator_light srv;
+  client = n.serviceClient<simulator::simulator_light>("simulator_light"); //create the client
+  srv.request.req=1;
+
+ 
+  if (client.call(srv))
+  {
+      for(int i=0;i<8;i++)
+         values[i]=srv.response.values[i];
+  }
+  else
+  {
+    ROS_ERROR("Failed to call service get_parameters"); 
+  } 
 }

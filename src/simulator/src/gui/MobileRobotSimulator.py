@@ -251,8 +251,12 @@ class MobileRobotSimulator(threading.Thread):
 		if self.light >0:
 			self.w.delete(self.light)
 		self.light = self.w.create_image(event.x, event.y, image = self.gif2)
-		self.light_x = event.x / self.canvasX
-		self.light_y = event.y / self.canvasY
+		self.light_x = self.mapX*event.x / self.canvasX
+		self.light_y = self.mapY -  ( self.mapY * event.y ) / self.canvasY
+		print(self.light_x)
+		print(self.light_y)
+		tkMessageBox.showinfo("New light position ", "                 \nx :"+str(self.light_x)+"\n y :"+str(self.light_y)+"")
+	
 
 
 	def left_click(self,event):

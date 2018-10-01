@@ -7,6 +7,9 @@ simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_n
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_laser.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_laserRequest.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_laserResponse.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_light.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_lightRequest.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_lightResponse.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_parameters.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_parametersRequest.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_parametersResponse.h
@@ -18,6 +21,7 @@ simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_n
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/devel/include/simulator/simulator_robot_stepResponse.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/src/simulator/src/motion_planner/motion_planner_node.cpp
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/src/simulator/src/motion_planner/motion_planner_utilities.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/src/simulator/src/state_machines/st_light_follower.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/src/simulator/src/utilities/simulator_structures.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /opt/ros/indigo/include/XmlRpcDecl.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /opt/ros/indigo/include/XmlRpcValue.h

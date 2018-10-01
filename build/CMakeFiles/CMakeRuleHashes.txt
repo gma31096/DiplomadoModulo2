@@ -4,6 +4,7 @@
 03cff18e8708b98cf6fb1f4c4a156062 /home/diego/catkin_ws/devel/include/simulator/robot_step.h
 8aa3da248b3527df45c3c3651152d193 /home/diego/catkin_ws/devel/include/simulator/simulator_base.h
 a999899c0de6de1d72b17e650f84d6f5 /home/diego/catkin_ws/devel/include/simulator/simulator_laser.h
+80b1804d04d9e2b78246241bcaeb2f8b /home/diego/catkin_ws/devel/include/simulator/simulator_light.h
 94431b9d35e479dbc5647f5a0735e80c /home/diego/catkin_ws/devel/include/simulator/simulator_parameters.h
 c297147bd997fbe3c40ba564dc236a4d /home/diego/catkin_ws/devel/include/simulator/simulator_robot_laser_values.h
 682be2ddfcc5ed823e46f7766b66a4ac /home/diego/catkin_ws/devel/include/simulator/simulator_robot_step.h
@@ -14,6 +15,7 @@ e912ce21dbecaeb320bf8c6418ad0afb /home/diego/catkin_ws/devel/lib/python2.7/dist-
 96f27853f1c66df8ead2915f818914e7 /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_robot_step.py
 e3b9f7d86398e0cc1201d5086ce057f1 /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_base.py
 744f766a1bda7321c93b7a766896fa4e /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_laser.py
+b29bf81446e48e95e389140b10439933 /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_light.py
 2ed1507d5036292e28f90268208844a0 /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_parameters.py
 22abf577c8d04d9a924fd4a5da7a04ac /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_robot_laser_values.py
 735fa9ea0c256901dadd9b47aff50de0 /home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_robot_step.py
@@ -22,6 +24,7 @@ ae6a726613e8898a9d64b091b06b4820 /home/diego/catkin_ws/devel/share/common-lisp/r
 bb3ee50b7f7aca277ea4f42ff5d96b28 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/robot_step.lisp
 b2603849c5e0e80f9c20b3f81db6b973 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_base.lisp
 b8d928a5e55d95d173d06e9d467d171b /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_laser.lisp
+9fc33a5adb2359d88e527de9b0434362 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_light.lisp
 6c315f9cc1c2158d89d4ffb32d7862a5 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_parameters.lisp
 5ee8c99fef634f9636b7527a7b7ad795 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_laser_values.lisp
 b9ad1a9ba27481af9b221e1e2ec8cae2 /home/diego/catkin_ws/devel/share/common-lisp/ros/simulator/srv/simulator_robot_step.lisp
@@ -33,6 +36,7 @@ e73a3454258e25e1e888fb272eb47958 CMakeFiles/tests
 933ae9920fcfb4d255a567a13cdb0152 simulator/CMakeFiles/_simulator_generate_messages_check_deps_Parameters
 9fd82fa1b8248ff2a4e6055b5d2486bb simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_base
 6dba4959a9988e3844aaba4f8f535adf simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_laser
+f22f383f113663661173921f38c2e43b simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_light
 c380f28df88606bc67d985f8a68f82ca simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_parameters
 6f1729069ec3271c0c27e49ee8d5172c simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_laser_values
 4fdf2e5858ef225cef0c96a39e9f36a3 simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_step
