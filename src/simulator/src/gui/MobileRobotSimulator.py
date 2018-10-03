@@ -153,7 +153,7 @@ class MobileRobotSimulator(threading.Thread):
 								#	c1 = nodeXm
 								#	c2 = nodeYm
 								#	flagOnce = False
-							nodes_coords.append([nodeXm,nodeYm])
+							nodes_coords.append([nodeXm,nodeYm,numNode])
 								#draw.ellipse((nodeXm - 3 ,nodeYm - 3 ,nodeXm + 3 ,nodeYm + 3), outline = '#9C4FDB', fill = '#9C4FDB')
 								#draw.text( (nodeXm,nodeYm + 2) ,fill = "darkblue" ,text = str(numNode) )
 						#( connection 0 1 0.121195 )
@@ -168,7 +168,7 @@ class MobileRobotSimulator(threading.Thread):
 						flagOnce = False
 								
 					draw.ellipse((nodes_coords[x][0] - 3 ,nodes_coords[x][1] - 3 ,nodes_coords[x][0] + 3 ,nodes_coords[x][1] + 3), outline = '#9C4FDB', fill = '#9C4FDB')
-					draw.text( (nodes_coords[x][0],nodes_coords[x][1] + 2) ,fill = "darkblue" ,text = str(numNode) )
+					draw.text( (nodes_coords[x][0],nodes_coords[x][1] + 2) ,fill = "darkblue" ,text = str(nodes_coords[x][2]) )
 						#( connection 0 1 0.121195 )
 					draw.line( (c1,c2,nodes_coords[x][0],nodes_coords[x][1]), fill = '#9C4FDB')
 					c1 = nodes_coords[x][0]
@@ -674,7 +674,7 @@ class MobileRobotSimulator(threading.Thread):
 		#print(init_robotX)
 		#print(xf)
 		yf = -( distance * math.sin(self.robotAngle) )+ self.robotY
-		print(yf)
+		#print(yf)
 
 		x = auxX = init_robotX
 		y = auxY = init_robotY
@@ -715,7 +715,7 @@ class MobileRobotSimulator(threading.Thread):
 				if xf > auxX:
 					while x < xf:
 						y = -math.tan(self.robotAngle) * (x - auxX) + auxY
-						print(y)
+						#print(y)
 						x = x + self.sliderVelocity.get()
 						self.robotX=x
 						self.robotY=y
@@ -764,11 +764,5 @@ class MobileRobotSimulator(threading.Thread):
 		#self.w.create_rectangle(0.551021* self.canvasX, (self.canvasY-( 0.651132* self.canvasY )) ,  (0.422105* self.canvasX), (self.canvasY-(0.528609* self.canvasX)), outline='#000000', width=1)
 		#self.w.create_rectangle(0.430000* self.canvasX, (self.canvasY-( 0.630000* self.canvasY )) ,  (0.350000* self.canvasX), (self.canvasY-(0.550000* self.canvasX)), outline='#000000', width=1)
 		#self.w.create_oval(0.430000* self.canvasX, (self.canvasY-( 0.630000* self.canvasY )) ,  (0.350000* self.canvasX), (self.canvasY-(0.550000* self.canvasX)), outline='#000000', width=1)
-		algo = []
-		x= [1,2]
-		y=[4,5]
-		algo.append(x)
-		algo.append(y)
-		print(algo)
-		print(algo[0][1])
+		
 		self.root.mainloop()

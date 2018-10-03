@@ -15,12 +15,14 @@ int main(int argc ,char **argv)
   step steps[200];
   int sensor;
   int i;
+  int flagOnce;
   for(i = 0; i < 200; i++)steps[i].node=-1;
   
   movement movements;
   while(ros::ok())
   {
     simulation_init();// It waits for button "Run simulation"
+    flagOnce = 1;
     for(int k = 0; k < 2; k++) 
     {
       
@@ -42,18 +44,23 @@ int main(int argc ,char **argv)
           movements.advance = -.1;
         break;
         case 4:
+          if(flagOnce)
+          {
+            dijkstra(params.robot_x ,params.robot_y ,params.light_x ,params.light_y ,params.world_name,steps);
+            i=0;
+            while(steps[i].node != -1)
+            {
+              printf("%d  %d  \n",i,steps[i].node);
+              i++;
+            }
+            print_algorithm_graph (steps);
+
+            flagOnce = 0;
+          }
           for(i = 0; i < 200; i++)steps[i].node=-1;
           movements.twist = 3.1415; 
           movements.advance = .1;
-          dijkstra(17,20,params.world_name,steps);
-          i=0;
-          while(steps[i].node != -1)
-          {
-            printf("%d  %d  \n",i,steps[i].node);
-            i++;
-          }
-          print_algorithm_graph (steps);
-
+      
         break;
 
         case 5:

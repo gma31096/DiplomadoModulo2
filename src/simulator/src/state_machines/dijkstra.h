@@ -156,10 +156,12 @@ void dijkstra_algorithm(int D ,int L)
 	}
 }
 
-int dijkstra(int start, int goal, char *world_name,step *steps )
+int dijkstra(float rx ,float ry ,float lx ,float ly, char *world_name,step *steps )
 {
    char archivo[50];
    int i;
+   int start = 0;
+   int goal = 0;
    //"../data/obstacles/obstacles.top";
  
    strcpy(archivo,"./src/simulator/src/data/");
@@ -177,6 +179,19 @@ int dijkstra(int start, int goal, char *world_name,step *steps )
    }
    printf("Numero de nodos : %d \n",num_nodes=read_nodes(archivo));
 
+
+   for(i = 1; i < num_nodes; i++)
+   {
+   		if ( sqrt(pow( nodes[i].x - rx ,2) + pow( nodes[i].y - ry ,2)) < sqrt( pow( nodes[start].x - rx ,2) + pow( nodes[start].y - ry ,2)) )
+   		{	//	printf("r-n : %d Distancia %f  Node x %f  node y %f   rx %f  ry%f \n",i,sqrt(pow( nodes[i].x - rx ,2) + pow( nodes[i].y - ry ,2)),nodes[i].x,nodes[i].y,rx,ry  );
+   			start = i;
+   		}
+   		if (sqrt(pow( nodes[i].x - lx ,2) + pow( nodes[i].y - ly ,2)) < sqrt(pow( nodes[goal].x - lx ,2) + pow( nodes[goal].y - ly ,2) ) )
+   			goal = i;
+   }
+
+   printf("Start: %d Goal %d \n",start ,goal );
+
 /*
    for(int i=0; i<num_nodes; i++)
    {
@@ -186,7 +201,7 @@ int dijkstra(int start, int goal, char *world_name,step *steps )
    		printf(     "%d  %f \n",nodes[i].conections[j].node,nodes[i].conections[j].cost );
    }
 */
-   dijkstra_algorithm (goal ,start);
+   dijkstra_algorithm (goal ,start); // se pasan alreves para no tener que voltear la lista resultante
    int padre = start;
 
 

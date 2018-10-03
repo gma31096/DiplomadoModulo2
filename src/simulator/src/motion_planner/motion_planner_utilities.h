@@ -133,7 +133,7 @@ int laser_gui(float *lasers)
   }
   else
   {
-    ROS_ERROR("Failed to call service simulator_robot_step");
+    ROS_ERROR("Failed to call service simulator_robot_laser_values");
     
   }
   return 1;
@@ -159,7 +159,7 @@ float check_collision(float theta ,float distance ,int new_simulation )
   }
   else
   {
-    ROS_ERROR("Failed to call service get_parameters");    
+    ROS_ERROR("Failed to call service simulator_base");    
   }
 
   return final_distance;
@@ -187,7 +187,7 @@ void get_lidar_values(float *lectures )
   }
   else
   {
-    ROS_ERROR("Failed to call service get_parameters"); 
+    ROS_ERROR("Failed to call service simulator_laser"); 
   }
 }
 
@@ -219,7 +219,7 @@ int get_light_values(float *values)
   }
   else
   {
-    ROS_ERROR("Failed to call service get_parameters"); 
+    ROS_ERROR("Failed to call service  simulator_light"); 
   } 
 }
 
@@ -241,7 +241,7 @@ int print_algorithm_graph (step *steps )
   }
   else
   {
-    ROS_ERROR("Failed to call service simulator_robot_step");
+    ROS_ERROR("Failed to call service simulator_print_graph");
     
   }
   return 1;
