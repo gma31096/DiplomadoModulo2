@@ -23,7 +23,7 @@ int main(int argc ,char **argv)
   {
     simulation_init();// It waits for button "Run simulation"
     flagOnce = 1;
-    for(int k = 0; k < 2; k++) 
+    for(int k = 0; k < 1; k++) 
     {
       
       get_lidar_values(lecturas_lidar);
@@ -46,6 +46,7 @@ int main(int argc ,char **argv)
         case 4:
           if(flagOnce)
           {
+            for(i = 0; i < 200; i++)steps[i].node=-1;
             dijkstra(params.robot_x ,params.robot_y ,params.light_x ,params.light_y ,params.world_name,steps);
             i=0;
             while(steps[i].node != -1)
@@ -57,24 +58,31 @@ int main(int argc ,char **argv)
 
             flagOnce = 0;
           }
-          for(i = 0; i < 200; i++)steps[i].node=-1;
+          
           movements.twist = 3.1415; 
-          movements.advance = .1;
+          //movements.advance = .1;
       
         break;
 
         case 5:
-          for(i = 0; i < 200; i++)steps[i].node=-1;
-          movements.twist = 3.1415; 
-          movements.advance = -.1;
-          dfs(17,20,params.world_name,steps);
-          i=0;
-          while(steps[i].node != -1)
+          if(flagOnce)
           {
-            printf("%d  %d  \n",i,steps[i].node);
-            i++;
+            for(i = 0; i < 200; i++)steps[i].node=-1;
+            dfs(params.robot_x ,params.robot_y ,params.light_x ,params.light_y ,params.world_name,steps);
+            i=0;
+            while(steps[i].node != -1)
+            {
+              printf("%d  %d  \n",i,steps[i].node);
+              i++;
+            }
+            print_algorithm_graph (steps);
+            flagOnce = 0;
           }
-          print_algorithm_graph (steps);
+
+          
+          movements.twist = 3.1415; 
+          //movements.advance = -.1;
+          
 
         break;
 

@@ -121,11 +121,12 @@ void print_stack(){
 
 void dfs_algorithm(int D ,int L)
 {
+	 sp=0;
 	int menor,flagOnce;
 	int contador=0;
 	int node_actual = D;
 	int flagPush;
-
+	//nodes[node_actual].flag='Y';
 	while(node_actual != L)
 	{	
 		print_stack();
@@ -138,8 +139,9 @@ void dfs_algorithm(int D ,int L)
    			{
    				//printf("Node actual %d \n",node_actual);
    				nodes[nodes[node_actual].conections[j].node].flag = 'Y';
-   				push(node_actual);
-   				node_actual = nodes[node_actual].conections[j].node;
+   				if(nodes[node_actual].flag='N')push(node_actual);
+   				nodes[node_actual].flag='Y';
+   				node_actual = nodes[nodes[node_actual].conections[j].node].num_node;
    				//printf("Node actual %d \n",node_actual);
    				flagPush = 0;
    				break;	
@@ -163,11 +165,13 @@ void dfs_algorithm(int D ,int L)
 
 
 
-int dfs(int start, int goal, char *world_name,step *steps )
+int dfs(float rx ,float ry ,float lx ,float ly, char *world_name,step *steps )
 {
    //char archivo[]="../data/obstacles/obstacles.top";
     char archivo[50];
    int i;
+     int start = 0;
+   int goal = 0;
    //"../data/obstacles/obstacles.top";
    strcpy(archivo,"./src/simulator/src/data/");
    strcat(archivo,world_name);
@@ -184,7 +188,15 @@ int dfs(int start, int goal, char *world_name,step *steps )
    		nodes[i].acumulado = 0;
    }
    printf("NUmero de nodos #: %d \n",num_nodes=read_nodes(archivo));
-
+   for(i = 1; i < num_nodes; i++)
+   {
+   		if ( sqrt(pow( nodes[i].x - rx ,2) + pow( nodes[i].y - ry ,2)) < sqrt( pow( nodes[start].x - rx ,2) + pow( nodes[start].y - ry ,2)) )
+   		{	//	printf("r-n : %d Distancia %f  Node x %f  node y %f   rx %f  ry%f \n",i,sqrt(pow( nodes[i].x - rx ,2) + pow( nodes[i].y - ry ,2)),nodes[i].x,nodes[i].y,rx,ry  );
+   			start = i;
+   		}
+   		if (sqrt(pow( nodes[i].x - lx ,2) + pow( nodes[i].y - ly ,2)) < sqrt(pow( nodes[goal].x - lx ,2) + pow( nodes[goal].y - ly ,2) ) )
+   			goal = i;
+   }
    //for(int i=0; i<num_nodes; i++)
    //	printNode(i);
   
