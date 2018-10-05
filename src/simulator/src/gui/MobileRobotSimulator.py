@@ -280,6 +280,14 @@ class MobileRobotSimulator(threading.Thread):
 			self.steps_aux = int(self.entrySteps.get()) ;
 			self.entrySteps.delete ( 0, END )
 			self.entrySteps.insert ( 0, str(0)  )
+			
+			self.rewind_x = self.robotX
+			self.rewind_y = self.robotY
+
+			self.rewind_angle = self.robotAngle
+			
+			self.rewind=[];
+			
 		else: 
 			state = 'normal'
 			self.startFlag=False
@@ -311,6 +319,14 @@ class MobileRobotSimulator(threading.Thread):
 		#self.buttonShowNodes     
 		#self.buttonRunSimulation  
 		#self.buttonStop        
+
+	def rewindF(self):
+		algo = 0
+		self.robotX = self.rewind_x
+		self.robotY = self.rewind_y
+		self.robotAngle=self.rewind_angle
+		for i in self.rewind:
+			self.move_robot(algo)
 
 
 	def right_click(self,event):
@@ -443,7 +459,7 @@ class MobileRobotSimulator(threading.Thread):
 		# buttons
 
 		self.lableSimulator      = Label (self.rightMenu ,text = "Simulator" ,background = self.backgroundColor ,foreground = "#303133" ,font = self.headLineFont)
-		self.buttonShowNodes     = Button(self.rightMenu ,width = 20, text = "Show Nodes" ,command = lambda: self.move_robot(self.entryPoseX.get(),self.entryPoseY.get()))
+		self.buttonShowNodes     = Button(self.rightMenu ,width = 20, text = "Run last simu" ,command = self.rewindF )
 		self.buttonRunSimulation = Button(self.rightMenu ,width = 20, text = "Run simulation" ,command = lambda: self.s_t_simulation(True) )
 		self.buttonStop          = Button(self.rightMenu ,width = 20, text = "Stop" ,command = lambda: self.s_t_simulation(False) )
 
@@ -706,11 +722,15 @@ class MobileRobotSimulator(threading.Thread):
 			if yf <= auxY:
 				while y < yf:
 					y = y - self.sliderVelocity.get()
+					if(y > yf): 
+						break
 					self.robotY=y
 					self.plot_robot()
 			else:
 				while y > yf:
 					y = y + self.sliderVelocity.get()
+					if(y < yf): 
+						break
 					self.robotY=y
 					self.plot_robot()
 			self.robotY = yf
@@ -722,6 +742,8 @@ class MobileRobotSimulator(threading.Thread):
 					while y < yf:
 						x = -( (y - auxY) / math.tan(self.robotAngle) -auxX	)
 						y = y + self.sliderVelocity.get()
+						if(y > yf): 
+							break
 						self.robotX=x
 						self.robotY=y
 						self.plot_robot()	
@@ -729,6 +751,8 @@ class MobileRobotSimulator(threading.Thread):
 					while y > yf:
 						x = -( (y - auxY) / math.tan(self.robotAngle) -auxX)   
 						y = y - self.sliderVelocity.get()
+						if(y < yf): 
+							break
 						self.robotX=x
 						self.robotY=y
 						self.plot_robot()	
@@ -739,6 +763,8 @@ class MobileRobotSimulator(threading.Thread):
 						y = -math.tan(self.robotAngle) * (x - auxX) + auxY
 						#print(y)
 						x = x + self.sliderVelocity.get()
+						if(x > xf): 
+							break
 						self.robotX=x
 						self.robotY=y
 						self.plot_robot()	
@@ -746,11 +772,11 @@ class MobileRobotSimulator(threading.Thread):
 					while x > xf:
 						y = -math.tan(self.robotAngle) * (x - auxX) + auxY
 						x = x - self.sliderVelocity.get()
+						if(x < xf): 
+							break
 						self.robotX=x
 						self.robotY=y
 						self.plot_robot()	
-				
-					
 			self.robotX = xf
 			self.robotY = yf
 			self.plot_robot()
@@ -760,17 +786,21 @@ class MobileRobotSimulator(threading.Thread):
 	def handle_service(self,theta,distance):
 		self.p_giro = theta
 		self.p_distance = distance * self.canvasX 
-		
+
+		self.rewind.append( [self.p_giro,self.p_distance])
 		
 		self.steps_= self.steps_+1;
-
 		self.entrySteps.delete ( 0, END )
 		self.entrySteps.insert ( 0, str(self.steps_)  )
 
 		if self.steps_ == self.steps_aux:
-			self.s_t_simulation(False);
+			self.s_t_simulation(False)
+		elif( ( float(self.entryPoseX.get()) -self.light_x )**2 + (  float(self.entryPoseY.get())  - self.light_y )**2) < .05**2:
+			self.s_t_simulation(False)
+		else:
+			self.a.set(1)
 
-		self.a.set(1)
+		
 
 	def handle_print_graph(self,graph_list):
 		self.graph_list = graph_list 
