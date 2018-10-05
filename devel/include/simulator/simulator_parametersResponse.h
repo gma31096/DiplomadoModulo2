@@ -39,7 +39,8 @@ struct simulator_parametersResponse_
     , run(false)
     , light_x(0.0)
     , light_y(0.0)
-    , behavior(0)  {
+    , behavior(0)
+    , steps(0)  {
     }
   simulator_parametersResponse_(const ContainerAllocator& _alloc)
     : robot_x(0.0)
@@ -57,7 +58,8 @@ struct simulator_parametersResponse_
     , run(false)
     , light_x(0.0)
     , light_y(0.0)
-    , behavior(0)  {
+    , behavior(0)
+    , steps(0)  {
   (void)_alloc;
     }
 
@@ -110,6 +112,9 @@ struct simulator_parametersResponse_
 
    typedef int32_t _behavior_type;
   _behavior_type behavior;
+
+   typedef int32_t _steps_type;
+  _steps_type steps;
 
 
 
@@ -188,12 +193,12 @@ struct MD5Sum< ::simulator::simulator_parametersResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "0f43eeb51fd81d9b63386c0f199604d7";
+    return "c3a3242b503b35f6fa2f7b2245605401";
   }
 
   static const char* value(const ::simulator::simulator_parametersResponse_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x0f43eeb51fd81d9bULL;
-  static const uint64_t static_value2 = 0x63386c0f199604d7ULL;
+  static const uint64_t static_value1 = 0xc3a3242b503b35f6ULL;
+  static const uint64_t static_value2 = 0xfa2f7b2245605401ULL;
 };
 
 template<class ContainerAllocator>
@@ -228,6 +233,7 @@ bool run\n\
 float32 light_x\n\
 float32 light_y\n\
 int32 behavior\n\
+int32 steps\n\
 \n\
 ";
   }
@@ -263,6 +269,7 @@ namespace serialization
       stream.next(m.light_x);
       stream.next(m.light_y);
       stream.next(m.behavior);
+      stream.next(m.steps);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -313,6 +320,8 @@ struct Printer< ::simulator::simulator_parametersResponse_<ContainerAllocator> >
     Printer<float>::stream(s, indent + "  ", v.light_y);
     s << indent << "behavior: ";
     Printer<int32_t>::stream(s, indent + "  ", v.behavior);
+    s << indent << "steps: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.steps);
   }
 };
 

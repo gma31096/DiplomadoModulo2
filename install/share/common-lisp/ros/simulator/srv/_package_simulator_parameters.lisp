@@ -33,4 +33,6 @@
           LIGHT_Y
           BEHAVIOR-VAL
           BEHAVIOR
+          STEPS-VAL
+          STEPS
 ))

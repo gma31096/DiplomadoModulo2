@@ -43,10 +43,10 @@
   "simulator/simulator_parametersRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<simulator_parameters-request>)))
   "Returns md5sum for a message object of type '<simulator_parameters-request>"
-  "34dc8de2ad218e47da5a7a11c12a21d1")
+  "666381c29fe97dd3096923cea005a173")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'simulator_parameters-request)))
   "Returns md5sum for a message object of type 'simulator_parameters-request"
-  "34dc8de2ad218e47da5a7a11c12a21d1")
+  "666381c29fe97dd3096923cea005a173")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<simulator_parameters-request>)))
   "Returns full string definition for message of type '<simulator_parameters-request>"
   (cl:format cl:nil "bool request~%~%~%"))
@@ -144,6 +144,11 @@
     :reader behavior
     :initarg :behavior
     :type cl:integer
+    :initform 0)
+   (steps
+    :reader steps
+    :initarg :steps
+    :type cl:integer
     :initform 0))
 )
 
@@ -234,6 +239,11 @@
 (cl:defmethod behavior-val ((m <simulator_parameters-response>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-srv:behavior-val is deprecated.  Use simulator-srv:behavior instead.")
   (behavior m))
+
+(cl:ensure-generic-function 'steps-val :lambda-list '(m))
+(cl:defmethod steps-val ((m <simulator_parameters-response>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-srv:steps-val is deprecated.  Use simulator-srv:steps instead.")
+  (steps m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <simulator_parameters-response>) ostream)
   "Serializes a message object of type '<simulator_parameters-response>"
   (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'robot_x))))
@@ -306,6 +316,12 @@
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
   (cl:let* ((signed (cl:slot-value msg 'behavior)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
+    )
+  (cl:let* ((signed (cl:slot-value msg 'steps)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
     (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
@@ -402,6 +418,12 @@
       (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
       (cl:setf (cl:slot-value msg 'behavior) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
+    (cl:let ((unsigned 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'steps) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<simulator_parameters-response>)))
@@ -412,16 +434,16 @@
   "simulator/simulator_parametersResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<simulator_parameters-response>)))
   "Returns md5sum for a message object of type '<simulator_parameters-response>"
-  "34dc8de2ad218e47da5a7a11c12a21d1")
+  "666381c29fe97dd3096923cea005a173")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'simulator_parameters-response)))
   "Returns md5sum for a message object of type 'simulator_parameters-response"
-  "34dc8de2ad218e47da5a7a11c12a21d1")
+  "666381c29fe97dd3096923cea005a173")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<simulator_parameters-response>)))
   "Returns full string definition for message of type '<simulator_parameters-response>"
-  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%float32 robot_radio~%float32 robot_max_advance~%float32 robot_turn_angle~%int32 laser_num_sensors~%float32 laser_origin~%float32 laser_range~%float32 laser_value~%string world_name~%bool noise~%bool run~%float32 light_x~%float32 light_y~%int32 behavior~%~%~%~%"))
+  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%float32 robot_radio~%float32 robot_max_advance~%float32 robot_turn_angle~%int32 laser_num_sensors~%float32 laser_origin~%float32 laser_range~%float32 laser_value~%string world_name~%bool noise~%bool run~%float32 light_x~%float32 light_y~%int32 behavior~%int32 steps~%~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'simulator_parameters-response)))
   "Returns full string definition for message of type 'simulator_parameters-response"
-  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%float32 robot_radio~%float32 robot_max_advance~%float32 robot_turn_angle~%int32 laser_num_sensors~%float32 laser_origin~%float32 laser_range~%float32 laser_value~%string world_name~%bool noise~%bool run~%float32 light_x~%float32 light_y~%int32 behavior~%~%~%~%"))
+  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%float32 robot_radio~%float32 robot_max_advance~%float32 robot_turn_angle~%int32 laser_num_sensors~%float32 laser_origin~%float32 laser_range~%float32 laser_value~%string world_name~%bool noise~%bool run~%float32 light_x~%float32 light_y~%int32 behavior~%int32 steps~%~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <simulator_parameters-response>))
   (cl:+ 0
      4
@@ -437,6 +459,7 @@
      4 (cl:length (cl:slot-value msg 'world_name))
      1
      1
+     4
      4
      4
      4
@@ -460,6 +483,7 @@
     (cl:cons ':light_x (light_x msg))
     (cl:cons ':light_y (light_y msg))
     (cl:cons ':behavior (behavior msg))
+    (cl:cons ':steps (steps msg))
 ))
 (cl:defmethod roslisp-msg-protocol:service-request-type ((msg (cl:eql 'simulator_parameters)))
   'simulator_parameters-request)

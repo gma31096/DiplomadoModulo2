@@ -55,7 +55,7 @@ class MobileRobotSimulator(threading.Thread):
 
 	def kill(self):
 		self.root.quit()
-		self.stopped = False
+		self.stopped = True
 
 
 	def get_parameters(self):
@@ -125,6 +125,10 @@ class MobileRobotSimulator(threading.Thread):
 			parameters.append( int(self.entryBehavior.get() ))
 		except ValueError:
 			parameters.append(-1)
+		try:
+			parameters.append( int(self.entrySteps.get()))
+		except ValueError:
+			parameters.append(0)
 
 		return parameters
 
@@ -209,7 +213,7 @@ class MobileRobotSimulator(threading.Thread):
 						elif words[1] == "connection":				  #to get polygons vertex
 							c1 = int(words[2])
 							c2 = int(words[3])
-							#draw.line( (nodes_coords[c1][0],nodes_coords[c1][1] ,nodes_coords[c2][0] ,nodes_coords[c2][1] ) , fill = '#9C4FDB')
+							draw.line( (nodes_coords[c1][0],nodes_coords[c1][1] ,nodes_coords[c2][0] ,nodes_coords[c2][1] ) , fill = '#9C4FDB')
 							
 			map_file.close()
 			image.save('nodes.png')
@@ -272,12 +276,18 @@ class MobileRobotSimulator(threading.Thread):
 			state = 'disabled'
 			self.read_map()
 			self.startFlag=True
+			self.steps_ = 0 ;
+			self.steps_aux = int(self.entrySteps.get()) ;
+			self.entrySteps.delete ( 0, END )
+			self.entrySteps.insert ( 0, str(0)  )
 		else: 
 			state = 'normal'
 			self.startFlag=False
+			self.entrySteps.delete ( 0, END )
+			self.entrySteps.insert ( 0, str(self.steps_aux)  )
 
 		self.entryFile          .configure(state=state)     
-		self.entrySteps         .configure(state=state) 
+		#self.entrySteps         .configure(state=state) 
 		self.buttonBehaviorLess .configure(state=state)         
 		self.entryBehavior    	.configure(state=state)        
 		self.buttonBehaviorMore .configure(state=state)       
@@ -309,9 +319,9 @@ class MobileRobotSimulator(threading.Thread):
 		self.light = self.w.create_image(event.x, event.y, image = self.gif2)
 		self.light_x = self.mapX*event.x / self.canvasX
 		self.light_y = self.mapY -  ( self.mapY * event.y ) / self.canvasY
-		print(self.light_x)
-		print(self.light_y)
-		tkMessageBox.showinfo("New light position ", "                 \nx :"+str(self.light_x)+"\n y :"+str(self.light_y)+"")
+		self.entryLightX.config(text=str(self.light_x)[:4])
+		self.entryLightY.config(text=str(self.light_y)[:4])
+		#tkMessageBox.showinfo("New light position ", "                 \nx :"+str(self.light_x)+"\n y :"+str(self.light_y)+"")
 	
 
 
@@ -345,6 +355,8 @@ class MobileRobotSimulator(threading.Thread):
 		self.labelFile          = Label(self.rightMenu ,text = "File:"           ,background = self.backgroundColor ,font = self.lineFont)
 		self.labelSteps         = Label(self.rightMenu ,text = "Steps:"          ,background = self.backgroundColor ,font = self.lineFont)
 		self.labelBehavior		= Label(self.rightMenu ,text = "Behavior:"          ,background = self.backgroundColor ,font = self.lineFont)
+		self.labelLightX        = Label(self.rightMenu ,text = "Light X:"          ,background = self.backgroundColor ,font = self.lineFont)
+		self.labelLightY        = Label(self.rightMenu ,text = "Light Y:"          ,background = self.backgroundColor ,font = self.lineFont)
 		self.labelConfiguration = Label(self.rightMenu ,text = "Configurations:" ,background = self.backgroundColor ,font = self.lineFont)
 			
 		self.entryFile  = Entry(self.rightMenu ,width = 15 ,foreground = self.entryforegroundColor ,background = self.entrybackgroudColor )
@@ -355,6 +367,9 @@ class MobileRobotSimulator(threading.Thread):
 		self.entryBehavior    	         = Entry(self.rightMenu ,width = 4 ,foreground = self.entryforegroundColor ,background = self.entrybackgroudColor ,justify='center' )
 		self.buttonBehaviorMore          = Button(self.rightMenu ,width = 1, text = ">" ,command = self.behavioMore)
 		
+		self.entryLightX = Label(self.rightMenu ,text = "Click Right" ,background = self.backgroundColor ,font = self.lineFont ,justify='center')
+		self.entryLightY = Label(self.rightMenu ,text = "Click Right" ,background = self.backgroundColor ,font = self.lineFont ,justify='center')
+
 		self.entryFile.insert ( 0, 'random_2' )
 		self.entrySteps.insert( 0, '100' )
 		self.entryBehavior.insert ( 0, '1' )
@@ -439,7 +454,10 @@ class MobileRobotSimulator(threading.Thread):
 		self.labelFile         .grid(column = 0 ,row = 1 ,sticky = (N, W) ,padx = (10,5))
 		self.labelSteps        .grid(column = 0 ,row = 2 ,sticky = (N, W) ,padx = (10,5))
 		self.labelBehavior     .grid(column = 0 ,row = 3 ,sticky = (N, W) ,padx = (10,5))
-		self.labelConfiguration.grid(column = 0 ,row = 4 ,sticky = (N, W) ,padx = (10,5))
+		self.labelLightX       .grid(column = 0 ,row = 4 ,sticky = (N, W) ,padx = (10,5))
+		self.labelLightY       .grid(column = 0 ,row = 5 ,sticky = (N, W) ,padx = (10,5))
+
+		self.labelConfiguration.grid(column = 0 ,row = 7 ,sticky = (N, W) ,padx = (10,5))
 
 		self.entryFile       .grid(column = 1 ,row = 1 ,columnspan = 2 ,sticky = (N, W) ,padx = 5)
 		self.entrySteps		 .grid(column = 1 ,row = 2 ,columnspan = 2 ,sticky = (N, W) ,padx = 5)	
@@ -448,10 +466,14 @@ class MobileRobotSimulator(threading.Thread):
 		self.entryBehavior   .grid(column = 1 ,row = 3 ,columnspan = 1  ,padx = 5)
 		self.buttonBehaviorMore.grid(column = 1 ,row = 3 ,columnspan = 1 ,sticky = (N, E) ,padx = 5)
 		
-		self.checkShowPath   .grid(column = 1 ,row = 4  ,sticky = (N, W) ,padx = 5)
-		self.checkShowSensors.grid(column = 1 ,row = 5  ,sticky = (N, W) ,padx = 5)
-		self.checkAddNoise   .grid(column = 1 ,row = 6  ,sticky = (N, W) ,padx = 5)
-		self.checkShowNodes  .grid(column = 1 ,row = 7  ,sticky = (N, W) ,padx = 5) 
+		self.entryLightX.grid(column = 1 ,row = 4 ,columnspan = 2 ,sticky = (N, W) ,padx = 5)
+		self.entryLightY.grid(column = 1 ,row = 5 ,columnspan = 2 ,sticky = (N, W) ,padx = 5)
+		
+
+		self.checkShowPath   .grid(column = 1 ,row = 7  ,sticky = (N, W) ,padx = 5)
+		self.checkShowSensors.grid(column = 1 ,row = 8  ,sticky = (N, W) ,padx = 5)
+		self.checkAddNoise   .grid(column = 1 ,row = 9  ,sticky = (N, W) ,padx = 5)
+		self.checkShowNodes  .grid(column = 1 ,row = 10  ,sticky = (N, W) ,padx = 5) 
 
 		# Robot
 
@@ -475,16 +497,16 @@ class MobileRobotSimulator(threading.Thread):
 		
 		# Sensors
 
-		self.lableSensors       .grid(column = 0 ,row = 8  ,sticky = (N, W) ,padx = (5,5))     
-		self.labelNumSensors    .grid(column = 0 ,row = 9  ,sticky = (N, W) ,padx = (10,5))
-		self.labelOrigin        .grid(column = 0 ,row = 10  ,sticky = (N, W) ,padx = (10,5))
-		self.labelRange         .grid(column = 0 ,row = 11 ,sticky = (N, W) ,padx = (10,5))
-		self.labelValue         .grid(column = 0 ,row = 12 ,sticky = (N, W) ,padx = (10,5))
+		self.lableSensors       .grid(column = 0 ,row = 11  ,sticky = (N, W) ,padx = (5,5))     
+		self.labelNumSensors    .grid(column = 0 ,row = 12  ,sticky = (N, W) ,padx = (10,5))
+		self.labelOrigin        .grid(column = 0 ,row = 13  ,sticky = (N, W) ,padx = (10,5))
+		self.labelRange         .grid(column = 0 ,row = 14 ,sticky = (N, W) ,padx = (10,5))
+		self.labelValue         .grid(column = 0 ,row = 15 ,sticky = (N, W) ,padx = (10,5))
 
-		self.entryNumSensors    .grid(column = 1 ,row = 9  ,columnspan=2 ,sticky = (N, W) ,padx = 5)
-		self.entryOrigin        .grid(column = 1 ,row = 10  ,columnspan=2 ,sticky = (N, W) ,padx = 5)
-		self.entryRange         .grid(column = 1 ,row = 11 ,columnspan=2 ,sticky = (N, W) ,padx = 5)
-		self.entryValue         .grid(column = 1 ,row = 12 ,columnspan=2 ,sticky = (N, W) ,padx = 5)
+		self.entryNumSensors    .grid(column = 1 ,row = 12  ,columnspan=2 ,sticky = (N, W) ,padx = 5)
+		self.entryOrigin        .grid(column = 1 ,row = 13  ,columnspan=2 ,sticky = (N, W) ,padx = 5)
+		self.entryRange         .grid(column = 1 ,row = 14 ,columnspan=2 ,sticky = (N, W) ,padx = 5)
+		self.entryValue         .grid(column = 1 ,row = 15 ,columnspan=2 ,sticky = (N, W) ,padx = 5)
 
 		# buttons
 
@@ -738,6 +760,16 @@ class MobileRobotSimulator(threading.Thread):
 	def handle_service(self,theta,distance):
 		self.p_giro = theta
 		self.p_distance = distance * self.canvasX 
+		
+		
+		self.steps_= self.steps_+1;
+
+		self.entrySteps.delete ( 0, END )
+		self.entrySteps.insert ( 0, str(self.steps_)  )
+
+		if self.steps_ == self.steps_aux:
+			self.s_t_simulation(False);
+
 		self.a.set(1)
 
 	def handle_print_graph(self,graph_list):

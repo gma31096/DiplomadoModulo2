@@ -27,6 +27,7 @@ def handle_get_parameters(req):
 	resp.light_y = parameters[13]
 	resp.run = parameters[14]
 	resp.behavior = parameters[15]
+	resp.steps = parameters[16]
 
 	return resp
 
@@ -69,7 +70,8 @@ def ros():
 	c = rospy.Service('simulator_robot_laser_values', simulator_robot_laser_values, handle_robot_laser_values)
 	d = rospy.Service('simulator_print_graph', simulator_algorithm_result, handle_print_graph)
 	
-	rospy.spin()
+	while not gui.stopped:
+		pass
 
 if __name__ == "__main__":
     ros()

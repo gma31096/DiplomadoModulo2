@@ -225,7 +225,7 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 
 	if(req.new_simulation==1)
 	{
-			params = wait_start();
+			params = get_params();
 			strcpy(path,"./src/simulator/src/data/");
 			strcat(path,params.world_name);
 			strcat(path,"/");

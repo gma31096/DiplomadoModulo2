@@ -16,6 +16,7 @@ typedef struct parameters_
 	float light_x;
 	float light_y;
 	int behavior;
+	int steps;
 } parameters;
 
 typedef struct next_position_

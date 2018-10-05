@@ -19,17 +19,18 @@ int main(int argc ,char **argv)
   for(i = 0; i < 200; i++)steps[i].node=-1;
   
   movement movements;
-  while(ros::ok())
+  while( ros::ok()  )
   {
     simulation_init();// It waits for button "Run simulation"
     flagOnce = 1;
-    for(int k = 0; k < 1; k++) 
+
+    while(params.run ) 
     {
-      
+      printf("%f \n",params.robot_x );
       get_lidar_values(lecturas_lidar);
       get_light_values(lecturas_light);
     
-      switch ( params.behavior )
+      switch ( params.behavior)
       {
         case 1:
           sm_light_follower(lecturas_light,&movements);
@@ -44,6 +45,7 @@ int main(int argc ,char **argv)
           movements.advance = -.1;
         break;
         case 4:
+
           if(flagOnce)
           {
             for(i = 0; i < 200; i++)steps[i].node=-1;
@@ -58,13 +60,13 @@ int main(int argc ,char **argv)
 
             flagOnce = 0;
           }
-          
           movements.twist = 3.1415; 
-          //movements.advance = .1;
+          movements.advance = 0;
       
         break;
 
         case 5:
+        
           if(flagOnce)
           {
             for(i = 0; i < 200; i++)steps[i].node=-1;
@@ -79,11 +81,8 @@ int main(int argc ,char **argv)
             flagOnce = 0;
           }
 
-          
           movements.twist = 3.1415; 
-          //movements.advance = -.1;
-          
-
+          movements.advance = 0;
         break;
 
         default:
@@ -95,9 +94,10 @@ int main(int argc ,char **argv)
       move_robot(movements.twist,movements.advance);
       ros::spinOnce();
       new_simulation =0;
-      ros::spinOnce();
+      params = get_params();
     }
     ros::spinOnce();
+ 
   }
-  return 0;
+
 }

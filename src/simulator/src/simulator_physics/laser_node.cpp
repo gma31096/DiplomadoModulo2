@@ -275,7 +275,7 @@ bool check_environment(simulator::simulator_laser::Request  &req ,simulator::sim
 {
  
 	char path[50];
-	params = wait_start();
+	params = get_params();
 	float   valores[1024];
 		
 	if(req.new_simulation==1)

@@ -2,7 +2,7 @@
 #include "simulator/simulator_parameters.h"
 
 
-parameters wait_start()
+parameters get_params()
 {
   parameters params;
 
@@ -14,8 +14,6 @@ parameters wait_start()
   srv.request.request=1;
   params.run=0;
 
-  while(! params.run)
-  {
     if (client.call(srv))
     {
       params.robot_x             = srv.response.robot_x   ;
@@ -34,13 +32,14 @@ parameters wait_start()
       params.light_x             = srv.response.light_x;
       params.light_y             = srv.response.light_y;
       params.behavior            = srv.response.behavior; 
+      params.steps               = srv.response.steps;
     }
     else
     {
       ROS_ERROR("Failed to call service get_parameters");
       
     }
-  }
+  
 
   printf("Inicial parameters:\n" );
   printf("robot_x %f \n",params.robot_x )       ;   

@@ -14,7 +14,6 @@
 
 parameters params;
 
-
 int laser_gui(float *lasers)
 {
   
@@ -74,7 +73,7 @@ int main(int argc, char *argv[])
 
 	while(ros::ok())
 	{
-	params = wait_start();
+	params = get_params();
     get_lidar_values(lecturas);
 
 	ros::spinOnce();

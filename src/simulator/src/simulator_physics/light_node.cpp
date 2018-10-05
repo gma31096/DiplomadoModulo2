@@ -18,7 +18,7 @@ bool get_intensities(simulator::simulator_light::Request  &req ,simulator::simul
 	int sensor;
 	float step = 3.1415/4; 
 	float values[8];
-	params = wait_start();
+	params = get_params();
 
 	for(int i = 0; i < 8; i++)
 	{
