@@ -26,7 +26,9 @@ simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_n
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/src/simulator/src/motion_planner/motion_planner_utilities.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/src/simulator/src/state_machines/dfs.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/src/simulator/src/state_machines/dijkstra.h
-simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/src/simulator/src/state_machines/st_light_follower.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/src/simulator/src/state_machines/sm_avoidance.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/src/simulator/src/state_machines/sm_avoidance_destination.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/src/simulator/src/state_machines/sm_light_follower.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/diego/catkin_ws/src/simulator/src/utilities/simulator_structures.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /opt/ros/indigo/include/XmlRpcDecl.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /opt/ros/indigo/include/XmlRpcValue.h

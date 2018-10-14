@@ -116,10 +116,10 @@
   "simulator/simulator_laserRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<simulator_laser-request>)))
   "Returns md5sum for a message object of type '<simulator_laser-request>"
-  "66d6f75241bb6927d1a0ae712a806a98")
+  "411061852dc5f8a41040799d09b07364")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'simulator_laser-request)))
   "Returns md5sum for a message object of type 'simulator_laser-request"
-  "66d6f75241bb6927d1a0ae712a806a98")
+  "411061852dc5f8a41040799d09b07364")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<simulator_laser-request>)))
   "Returns full string definition for message of type '<simulator_laser-request>"
   (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%int32 new_simulation~%~%~%"))
@@ -148,7 +148,7 @@
     :reader sensors
     :initarg :sensors
     :type (cl:vector cl:float)
-   :initform (cl:make-array 1024 :element-type 'cl:float :initial-element 0.0)))
+   :initform (cl:make-array 100 :element-type 'cl:float :initial-element 0.0)))
 )
 
 (cl:defclass simulator_laser-response (<simulator_laser-response>)
@@ -174,9 +174,9 @@
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <simulator_laser-response>) istream)
   "Deserializes a message object of type '<simulator_laser-response>"
-  (cl:setf (cl:slot-value msg 'sensors) (cl:make-array 1024))
+  (cl:setf (cl:slot-value msg 'sensors) (cl:make-array 100))
   (cl:let ((vals (cl:slot-value msg 'sensors)))
-    (cl:dotimes (i 1024)
+    (cl:dotimes (i 100)
     (cl:let ((bits 0))
       (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
@@ -193,16 +193,16 @@
   "simulator/simulator_laserResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<simulator_laser-response>)))
   "Returns md5sum for a message object of type '<simulator_laser-response>"
-  "66d6f75241bb6927d1a0ae712a806a98")
+  "411061852dc5f8a41040799d09b07364")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'simulator_laser-response)))
   "Returns md5sum for a message object of type 'simulator_laser-response"
-  "66d6f75241bb6927d1a0ae712a806a98")
+  "411061852dc5f8a41040799d09b07364")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<simulator_laser-response>)))
   "Returns full string definition for message of type '<simulator_laser-response>"
-  (cl:format cl:nil "float32[1024] sensors~%~%~%~%"))
+  (cl:format cl:nil "float32[100] sensors~%~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'simulator_laser-response)))
   "Returns full string definition for message of type 'simulator_laser-response"
-  (cl:format cl:nil "float32[1024] sensors~%~%~%~%"))
+  (cl:format cl:nil "float32[100] sensors~%~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <simulator_laser-response>))
   (cl:+ 0
      0 (cl:reduce #'cl:+ (cl:slot-value msg 'sensors) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 4)))

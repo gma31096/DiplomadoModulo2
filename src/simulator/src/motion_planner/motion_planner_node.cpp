@@ -1,8 +1,9 @@
 #include "ros/ros.h"
 #include "../utilities/simulator_structures.h"
 #include "motion_planner_utilities.h"
-
-#include "../state_machines/st_light_follower.h"
+#include "../state_machines/sm_light_follower.h"
+#include "../state_machines/sm_avoidance.h"
+#include "../state_machines/sm_avoidance_destination.h"
 #include "../state_machines/dijkstra.h"
 #include "../state_machines/dfs.h"
 
@@ -10,12 +11,13 @@ int main(int argc ,char **argv)
 {  
   ros::init(argc ,argv ,"simulator_motion_planner_node");
   ros::NodeHandle n;
-  float lecturas_lidar[1024];
+  float lecturas_lidar[100];
   float lecturas_light[8];
   step steps[200];
   int sensor;
   int i;
   int flagOnce;
+  int est_sig;
   for(i = 0; i < 200; i++)steps[i].node=-1;
   
   movement movements;
@@ -24,9 +26,9 @@ int main(int argc ,char **argv)
     simulation_init();// It waits for button "Run simulation"
     flagOnce = 1;
 
-    while(params.run ) 
+    while(params.run) 
     {
-      printf("%f \n",params.robot_x );
+      //printf("%f \n",params.robot_x );
       get_lidar_values(lecturas_lidar);
       get_light_values(lecturas_light);
     
@@ -37,12 +39,27 @@ int main(int argc ,char **argv)
         break;
 
         case 2:
-          movements.twist = 0.5; 
-          movements.advance = .1;
+          if(flagOnce)
+          {
+            est_sig = 0;
+            flagOnce = 0;
+          }
+       
+          sm_avoid_obstacles(quantize_inputs(lecturas_lidar,params.laser_num_sensors,params.laser_value),&movements,&est_sig ,params.robot_max_advance ,params.robot_turn_angle);
+          
+          //movements.twist = 0.5; 
+          //movements.advance = .1;
         break;
         case 3:
-          movements.twist = 0.5; 
-          movements.advance = -.1;
+          if(flagOnce)
+          {
+            est_sig = 0;
+            flagOnce = 0;
+          }
+       
+          printf("State  %d\n", est_sig);
+          sm_avoidance_destination(quantize_light(lecturas_light),quantize_inputs(lecturas_lidar,params.laser_num_sensors,params.laser_value),&movements,&est_sig ,params.robot_max_advance ,params.robot_turn_angle);
+          
         break;
         case 4:
 
@@ -84,6 +101,10 @@ int main(int argc ,char **argv)
           movements.twist = 3.1415; 
           movements.advance = 0;
         break;
+        case 6:
+          movements.twist = 0.5; 
+          movements.advance = .1;
+        break;
 
         default:
           movements.twist = 1.5707; 
@@ -91,6 +112,7 @@ int main(int argc ,char **argv)
         break;
     
       }
+      printf("-- %f  %f \n",movements.twist ,movements.advance  );
       move_robot(movements.twist,movements.advance);
       ros::spinOnce();
       new_simulation =0;

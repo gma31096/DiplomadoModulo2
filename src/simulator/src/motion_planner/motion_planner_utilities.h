@@ -8,6 +8,7 @@
 #include "simulator/simulator_algorithm_result.h"
 #include <string.h>
 
+movement generate_output(int out ,float advance ,float twist);
 parameters wait_start();
 int move_gui(float angle ,float distance ,next_position *next );
 int laser_gui(float *lasers );
@@ -20,6 +21,53 @@ next_position next;
 int new_simulation = 1;
 parameters params;
 
+
+movement generate_output(int out ,float advance ,float twist)
+{
+
+  movement output;
+
+  switch(out){
+
+        case 0: // Stop
+                output.advance = 0.0f;
+                output.twist = 0.0f;
+                //printf("STOP\n");
+                break;
+
+        case 1: // Forward
+                output.advance=advance;
+                output.twist=0.0f;
+                //printf("FORWARD\n");
+                break;
+
+        case 2: // backward
+                output.advance=-advance;
+                output.twist=0.0f;
+                //printf("BACKWARD\n");
+                break;
+
+        case 3:// Turn left
+                output.advance=0.0f;
+                output.twist=twist;
+                //printf("LEFT\n");
+                break;
+
+          case 4: // Turn right
+                output.advance=0.0f;
+                output.twist=-twist;
+                //printf("RIGHT\n");
+                break;
+
+        default:printf("Output %d not defined used ", out);
+                output.advance=0.0f;
+                output.twist=0.0f;
+                break;
+  }
+
+  return(output);
+
+}
 
 parameters get_params()
 {
@@ -169,7 +217,7 @@ int laser_gui(float *lasers)
   simulator::simulator_robot_laser_values srv;
   client = n.serviceClient<simulator::simulator_robot_laser_values>("simulator_robot_laser_values"); //create the client
   
-   for(int i=0;i<1024;i++)
+   for(int i=0;i<100;i++)
       srv.request.sensors[i]=lasers[i];
         
   if (client.call(srv))
@@ -225,7 +273,7 @@ void get_lidar_values(float *lectures )
   if (client.call(srv))
   {
     
-    for(int i=0;i<1024;i++)
+    for(int i=0;i<100;i++)
       //printf("Valor : %f \n",lectures[i] = srv.response.sensors[i]);
       lectures[i] = srv.response.sensors[i];
     laser_gui(lectures);

@@ -3,4 +3,4 @@ float32 robot_y
 float32 robot_theta
 int32 new_simulation
 ---
-float32[1024] sensors
+float32[100] sensors

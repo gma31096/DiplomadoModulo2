@@ -35,7 +35,7 @@ struct simulator_laserResponse_
 
 
 
-   typedef boost::array<float, 1024>  _sensors_type;
+   typedef boost::array<float, 100>  _sensors_type;
   _sensors_type sensors;
 
 
@@ -115,12 +115,12 @@ struct MD5Sum< ::simulator::simulator_laserResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "b7c66021a50d0b84ad4cd13e2a7a878b";
+    return "e419bb63c59113a3a33a33958511350f";
   }
 
   static const char* value(const ::simulator::simulator_laserResponse_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xb7c66021a50d0b84ULL;
-  static const uint64_t static_value2 = 0xad4cd13e2a7a878bULL;
+  static const uint64_t static_value1 = 0xe419bb63c59113a3ULL;
+  static const uint64_t static_value2 = 0xa33a33958511350fULL;
 };
 
 template<class ContainerAllocator>
@@ -139,7 +139,7 @@ struct Definition< ::simulator::simulator_laserResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "float32[1024] sensors\n\
+    return "float32[100] sensors\n\
 \n\
 ";
   }

@@ -276,7 +276,7 @@ bool check_environment(simulator::simulator_laser::Request  &req ,simulator::sim
  
 	char path[50];
 	params = get_params();
-	float   valores[1024];
+	float   valores[100];
 		
 	if(req.new_simulation==1)
 	{
@@ -292,8 +292,7 @@ bool check_environment(simulator::simulator_laser::Request  &req ,simulator::sim
 	
 	int pingpong=1;
 
-    
-	for (int i =0 ; i<1024;i++)
+	for (int i =0 ; i<100;i++)
 		res.sensors[i] = valores[i];
 
 	return true;    

@@ -32,7 +32,7 @@ typedef struct Polygon_ {
 Polygon polygons_wrl[100];
 int num_polygons_wrl = 0;
 parameters params;
-
+float dimensions_room_x,dimensions_room_y;
 // it reads the file that conteins the environment description
 int ReadPolygons(char *file,Polygon *polygons){
 
@@ -42,7 +42,7 @@ int ReadPolygons(char *file,Polygon *polygons){
 	int num_poly = 0;
 	int flg = 0;
 	float tmp;
-	float dimensions_room_x,dimensions_room_y;
+	
 
 	fp = fopen(file,"r"); 
 	 
@@ -223,6 +223,10 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 	float distance;
 	char path[50];
 
+	if (req.distance == 0)
+		{res.distance = 0; return true;}
+
+
 	if(req.new_simulation==1)
 	{
 			params = get_params();
@@ -325,7 +329,8 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
     distance = sqrt( pow( x1-x2  ,2) + pow(y1-y2 ,2)  );
     if (req.distance < 0)
     	distance=-distance;
-    res.distance = distance;
+    res.distance = distance/dimensions_room_x;
+    printf("%f\n",res.distance );
     //printf("distance %f \n",distance);
    return true;
 }

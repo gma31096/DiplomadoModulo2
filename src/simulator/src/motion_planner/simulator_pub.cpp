@@ -22,7 +22,7 @@ int laser_gui(float *lasers)
   simulator::simulator_robot_laser_values srv;
   client = n.serviceClient<simulator::simulator_robot_laser_values>("simulator_robot_laser_values"); //create the client
   
-   for(int i=0;i<1024;i++)
+   for(int i=0;i<100;i++)
       srv.request.sensors[i]=lasers[i];
         
   if (client.call(srv))
@@ -53,7 +53,7 @@ void get_lidar_values(float *lectures )
   if (client.call(srv))
   {
     
-    for(int i=0;i<1024;i++)
+    for(int i=0;i<100;i++)
       //printf("Valor : %f \n",lectures[i] = srv.response.sensors[i]);
       lectures[i] = srv.response.sensors[i];
     laser_gui(lectures);
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 	ros::init(argc, argv, "simulator_pub_node");
 	ros::NodeHandle n;
 	
-	float lecturas[1024];
+	float lecturas[100];
 
 	while(ros::ok())
 	{

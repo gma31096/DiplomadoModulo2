@@ -11,7 +11,7 @@
     :reader sensors
     :initarg :sensors
     :type (cl:vector cl:float)
-   :initform (cl:make-array 1024 :element-type 'cl:float :initial-element 0.0)))
+   :initform (cl:make-array 100 :element-type 'cl:float :initial-element 0.0)))
 )
 
 (cl:defclass simulator_robot_laser_values-request (<simulator_robot_laser_values-request>)
@@ -37,9 +37,9 @@
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <simulator_robot_laser_values-request>) istream)
   "Deserializes a message object of type '<simulator_robot_laser_values-request>"
-  (cl:setf (cl:slot-value msg 'sensors) (cl:make-array 1024))
+  (cl:setf (cl:slot-value msg 'sensors) (cl:make-array 100))
   (cl:let ((vals (cl:slot-value msg 'sensors)))
-    (cl:dotimes (i 1024)
+    (cl:dotimes (i 100)
     (cl:let ((bits 0))
       (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
@@ -56,16 +56,16 @@
   "simulator/simulator_robot_laser_valuesRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<simulator_robot_laser_values-request>)))
   "Returns md5sum for a message object of type '<simulator_robot_laser_values-request>"
-  "7613cd23d5b6d8557cd0bb7c15272cc6")
+  "fed2e1160fc2ee00e074cbac3dfb8139")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'simulator_robot_laser_values-request)))
   "Returns md5sum for a message object of type 'simulator_robot_laser_values-request"
-  "7613cd23d5b6d8557cd0bb7c15272cc6")
+  "fed2e1160fc2ee00e074cbac3dfb8139")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<simulator_robot_laser_values-request>)))
   "Returns full string definition for message of type '<simulator_robot_laser_values-request>"
-  (cl:format cl:nil "float32[1024] sensors~%~%~%"))
+  (cl:format cl:nil "float32[100] sensors~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'simulator_robot_laser_values-request)))
   "Returns full string definition for message of type 'simulator_robot_laser_values-request"
-  (cl:format cl:nil "float32[1024] sensors~%~%~%"))
+  (cl:format cl:nil "float32[100] sensors~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <simulator_robot_laser_values-request>))
   (cl:+ 0
      0 (cl:reduce #'cl:+ (cl:slot-value msg 'sensors) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 4)))
@@ -132,10 +132,10 @@
   "simulator/simulator_robot_laser_valuesResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<simulator_robot_laser_values-response>)))
   "Returns md5sum for a message object of type '<simulator_robot_laser_values-response>"
-  "7613cd23d5b6d8557cd0bb7c15272cc6")
+  "fed2e1160fc2ee00e074cbac3dfb8139")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'simulator_robot_laser_values-response)))
   "Returns md5sum for a message object of type 'simulator_robot_laser_values-response"
-  "7613cd23d5b6d8557cd0bb7c15272cc6")
+  "fed2e1160fc2ee00e074cbac3dfb8139")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<simulator_robot_laser_values-response>)))
   "Returns full string definition for message of type '<simulator_robot_laser_values-response>"
   (cl:format cl:nil "int64 success~%~%~%"))

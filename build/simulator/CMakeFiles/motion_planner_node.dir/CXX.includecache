@@ -293,8 +293,12 @@ ros/ros.h
 /home/diego/catkin_ws/src/simulator/src/utilities/simulator_structures.h
 motion_planner_utilities.h
 /home/diego/catkin_ws/src/simulator/src/motion_planner/motion_planner_utilities.h
-../state_machines/st_light_follower.h
-/home/diego/catkin_ws/src/simulator/src/state_machines/st_light_follower.h
+../state_machines/sm_light_follower.h
+/home/diego/catkin_ws/src/simulator/src/state_machines/sm_light_follower.h
+../state_machines/sm_avoidance.h
+/home/diego/catkin_ws/src/simulator/src/state_machines/sm_avoidance.h
+../state_machines/sm_avoidance_destination.h
+/home/diego/catkin_ws/src/simulator/src/state_machines/sm_avoidance_destination.h
 ../state_machines/dijkstra.h
 /home/diego/catkin_ws/src/simulator/src/state_machines/dijkstra.h
 ../state_machines/dfs.h
@@ -336,7 +340,11 @@ stdlib.h
 string.h
 -
 
-/home/diego/catkin_ws/src/simulator/src/state_machines/st_light_follower.h
+/home/diego/catkin_ws/src/simulator/src/state_machines/sm_avoidance.h
+
+/home/diego/catkin_ws/src/simulator/src/state_machines/sm_avoidance_destination.h
+
+/home/diego/catkin_ws/src/simulator/src/state_machines/sm_light_follower.h
 
 /home/diego/catkin_ws/src/simulator/src/utilities/simulator_structures.h
 
