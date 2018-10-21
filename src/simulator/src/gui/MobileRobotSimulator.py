@@ -50,6 +50,8 @@ class MobileRobotSimulator(threading.Thread):
 		self.graph_list = [200]
 		for i in range(200):
 			self.graph_list.append(0)
+
+		self.rewind=[]
 		self.start()
 
 
@@ -186,7 +188,16 @@ class MobileRobotSimulator(threading.Thread):
 
 
 	def print_nodes(self):
+		wait_bg=self.w.create_rectangle(self.canvasX/2-30-120 ,self.canvasY/2-50 ,self.canvasX/2-30+120 ,self.canvasY/2+50 ,fill="white")
+		wait = self.w.create_text(self.canvasX/2-30,self.canvasY/2,fill="darkblue",font="Calibri 20 bold",
+                        text="PLEASE WAIT ...")
+		self.w.update()
+		self.print_nodes_lines()
+		self.w.delete(wait)
+		self.w.delete(wait_bg)
+		self.plot_robot()
 
+	def print_nodes_lines(self):
 		if not self.varShowNodes.get() :
 			self.w.delete(self.nodes_image)	
 			self.nodes=None
@@ -219,8 +230,7 @@ class MobileRobotSimulator(threading.Thread):
 			image.save('nodes.png')
 			self.gif1 = PhotoImage( file = 'nodes.png')
 			self.nodes_image = self.w.create_image(self.canvasX / 2, self.canvasY / 2, image = self.gif1)
-
-
+	
 	def read_map(self):
 		#pp=0
 		for polygon in self.polygonMap :
@@ -247,7 +257,7 @@ class MobileRobotSimulator(threading.Thread):
 							#pp=pp+1
 		except IOError:
 			tkMessageBox.showerror("World erros ", "World  '"+self.entryFile.get()+"' doesn' t exist \n Provide another file name ")
-	
+
 	def world_change(self,event):
 		self.read_map()
 		self.print_nodes()
@@ -270,36 +280,13 @@ class MobileRobotSimulator(threading.Thread):
 			self.entryBehavior.delete ( 0, END )
 			self.entryBehavior.insert ( 0, '1' )
 
-
-	def s_t_simulation(self,star_stop):
-		if star_stop :
-			state = 'disabled'
-			self.read_map()
-			self.startFlag=True
-			self.steps_ = 0 ;
-			self.steps_aux = int(self.entrySteps.get()) ;
-			self.entrySteps.delete ( 0, END )
-			self.entrySteps.insert ( 0, str(0)  )
-			
-			self.rewind_x = self.robotX
-			self.rewind_y = self.robotY
-
-			self.rewind_angle = self.robotAngle
-			
-			self.rewind=[];
-			
-		else: 
-			state = 'normal'
-			self.startFlag=False
-			self.entrySteps.delete ( 0, END )
-			self.entrySteps.insert ( 0, str(self.steps_aux)  )
-
+	def denable(self,state):
 		self.entryFile          .configure(state=state)     
 		#self.entrySteps         .configure(state=state) 
 		self.buttonBehaviorLess .configure(state=state)         
 		self.entryBehavior    	.configure(state=state)        
 		self.buttonBehaviorMore .configure(state=state)       
-		self.checkShowPath      .configure(state=state)  
+		self.checkFaster      .configure(state=state)  
 		self.checkShowSensors   .configure(state=state)  
 		self.checkAddNoise      .configure(state=state)    
 		self.checkShowNodes     .configure(state=state)             
@@ -314,20 +301,48 @@ class MobileRobotSimulator(threading.Thread):
 		self.entryOrigin        .configure(state=state)    
 		self.entryRange         .configure(state=state)    
 		self.entryValue         .configure(state=state)
+		self.buttonLastSimulation.configure(state=state)    
+		self.buttonRunSimulation.configure(state=state)  
+		#self.buttonStop 
 
 
-		#self.buttonShowNodes     
-		#self.buttonRunSimulation  
-		#self.buttonStop        
+	def s_t_simulation(self,star_stop):
+		if star_stop :
+			self.denable('disabled')
+			self.read_map()
+			self.startFlag=True
+			self.steps_ = 0 ;
+			self.steps_aux = int(self.entrySteps.get()) ;
+			self.entrySteps.delete ( 0, END )
+			self.entrySteps.insert ( 0, str(0)  )
+			
+			self.rewind_x = self.robotX
+			self.rewind_y = self.robotY
+			self.rewind_angle = self.robotAngle
+			
+			self.rewind=[];
+			
+		else: 
+			self.denable('normal')
+			self.startFlag=False
+			self.entrySteps.delete ( 0, END )
+			self.entrySteps.insert ( 0, str(self.steps_aux)  )
+       
 
 	def rewindF(self):
-		algo = 0
+		self.denable('disabled')
+		self.buttonStop.configure(state='disabled')
 		self.robotX = self.rewind_x
 		self.robotY = self.rewind_y
 		self.robotAngle=self.rewind_angle
 		for i in self.rewind:
-			self.move_robot(algo)
+			self.p_giro  = i[0]
+			self.p_distance = i[1]
+			self.move_robot(0)
+		self.denable('normal')
+		self.buttonStop.configure(state='normal')
 
+			
 
 	def right_click(self,event):
 		if self.light >0:
@@ -394,17 +409,17 @@ class MobileRobotSimulator(threading.Thread):
 
 		# Environment
 
-		self.varShowPath    = IntVar()
+		self.varFaster    = IntVar()
 		self.varShowSensors = IntVar()
 		self.varAddNoise    = IntVar()
 		self.varShowNodes   = IntVar()
 
-		self.checkShowPath    = Checkbutton(self.rightMenu ,text = 'Show path'    ,variable = self.varShowPath    ,onvalue = 1 ,offvalue = 0 ,background = self.backgroundColor)
+		self.checkFaster    = Checkbutton(self.rightMenu ,text = 'Fast Mode'    ,variable = self.varFaster    ,onvalue = 1 ,offvalue = 0 ,background = self.backgroundColor)
 		self.checkShowSensors = Checkbutton(self.rightMenu ,text = 'Show Sensors' ,variable = self.varShowSensors ,onvalue = 1 ,offvalue = 0 ,background = self.backgroundColor)
 		self.checkAddNoise    = Checkbutton(self.rightMenu ,text = 'Add Noise'    ,variable = self.varAddNoise    ,onvalue = 1 ,offvalue = 0 ,background = self.backgroundColor)
 		self.checkShowNodes   = Checkbutton(self.rightMenu ,text = 'Show Nodes'    ,variable = self.varShowNodes  ,onvalue = 1 ,offvalue = 0 ,background = self.backgroundColor ,command=self.print_nodes)
 
-		self.checkShowPath    .deselect()
+		self.checkFaster    .deselect()
 		self.checkShowSensors .deselect()
 		self.checkAddNoise    .deselect()
 		self.checkShowNodes   .deselect()
@@ -435,7 +450,7 @@ class MobileRobotSimulator(threading.Thread):
 		self.entryTurnAngle .insert ( 0, '0.7857' )
 
 		self.labelVelocity = Label(self.rightMenu ,text = "Execution velocity:"        ,background = self.backgroundColor ,font = self.lineFont)
-		self.sliderVelocity =Scale(self.rightMenu, from_=1, to=15, orient=HORIZONTAL ,length=300 ,background = self.backgroundColor ,font = self.lineFont)
+		self.sliderVelocity =Scale(self.rightMenu, from_=1, to=3, orient=HORIZONTAL ,length=300 ,background = self.backgroundColor ,font = self.lineFont)
 		
 
 		# Sensors
@@ -451,15 +466,15 @@ class MobileRobotSimulator(threading.Thread):
 		self.entryRange      = Entry(self.rightMenu, width = 8 ,background = self.entrybackgroudColor ,foreground = self.entryforegroundColor)
 		self.entryValue      = Entry(self.rightMenu, width = 8 ,background = self.entrybackgroudColor ,foreground = self.entryforegroundColor)
 
-		self.entryNumSensors   .insert ( 0, '2')
+		self.entryNumSensors   .insert ( 0, '50')
 		self.entryOrigin       .insert ( 0, '-1.5707' )
 		self.entryRange        .insert ( 0, '3.1415' )
-		self.entryValue        .insert ( 0, '0.3' )
+		self.entryValue        .insert ( 0, '0.05' )
 
 		# buttons
 
 		self.lableSimulator      = Label (self.rightMenu ,text = "Simulator" ,background = self.backgroundColor ,foreground = "#303133" ,font = self.headLineFont)
-		self.buttonShowNodes     = Button(self.rightMenu ,width = 20, text = "Run last simu" ,command = self.rewindF )
+		self.buttonLastSimulation     = Button(self.rightMenu ,width = 20, text = "Run last simu" ,command = self.rewindF )
 		self.buttonRunSimulation = Button(self.rightMenu ,width = 20, text = "Run simulation" ,command = lambda: self.s_t_simulation(True) )
 		self.buttonStop          = Button(self.rightMenu ,width = 20, text = "Stop" ,command = lambda: self.s_t_simulation(False) )
 
@@ -486,7 +501,7 @@ class MobileRobotSimulator(threading.Thread):
 		self.entryLightY.grid(column = 1 ,row = 5 ,columnspan = 2 ,sticky = (N, W) ,padx = 5)
 		
 
-		self.checkShowPath   .grid(column = 1 ,row = 7  ,sticky = (N, W) ,padx = 5)
+		self.checkFaster   .grid(column = 1 ,row = 7  ,sticky = (N, W) ,padx = 5)
 		self.checkShowSensors.grid(column = 1 ,row = 8  ,sticky = (N, W) ,padx = 5)
 		self.checkAddNoise   .grid(column = 1 ,row = 9  ,sticky = (N, W) ,padx = 5)
 		self.checkShowNodes  .grid(column = 1 ,row = 10  ,sticky = (N, W) ,padx = 5) 
@@ -527,7 +542,7 @@ class MobileRobotSimulator(threading.Thread):
 		# buttons
 
 		self.lableSimulator     .grid(column = 4 ,row = 11  ,sticky = (N, W) ,padx = (5,5))
-		self.buttonShowNodes    .grid(column = 4 ,row = 12  ,sticky = (N, W) ,padx = (10,5))
+		self.buttonLastSimulation   .grid(column = 4 ,row = 12  ,sticky = (N, W) ,padx = (10,5))
 		self.buttonRunSimulation.grid(column = 4 ,row = 13 ,sticky = (N, W) ,padx = (10,5))
 		self.buttonStop         .grid(column = 4 ,row = 14 ,sticky = (N, W) ,padx = (10,5))
 
@@ -555,6 +570,9 @@ class MobileRobotSimulator(threading.Thread):
 
 		self.w.bind("<Button-3>", self.right_click)
 		self.w.bind("<Button-1>", self.left_click)
+
+	def plot_robot_(self,*args):
+		self.plot_robot()
 
 
 	def print_grid(self):
@@ -586,10 +604,19 @@ class MobileRobotSimulator(threading.Thread):
 		except ValueError:
 			pass
 
+		time.sleep(.004)
 
 		if self.flagOnce :
 			self.delete_robot()
 		self.flagOnce=True
+
+
+		if self.varShowSensors.get():
+			self.plot_sensors(angle,x,y)
+		else:
+			for i in self.lasers:
+				self.w.delete(i)
+			self.lasers = []
 
 		radio = ( float(self.entryRadio.get() ) * self.canvasX ) / self.mapX
 		self.robot=self.w.create_oval(x-radio,y-radio, x+radio,y+radio   , outline='#F7CE3F', fill='#F7CE3F', width=1)
@@ -619,13 +646,6 @@ class MobileRobotSimulator(threading.Thread):
 		head.append( self.rotate_point( angle ,x ,y ,x + ( 5 * radio / 6 ) ,y ))
 		self.arrow=self.w.create_polygon( head , outline = '#1AAB4A' ,fill = '#1AAB4A', width = 1 )
 		self.w.update()
-		if self.varShowSensors.get():
-			self.plot_sensors(angle,x,y)
-		else:
-			for i in self.lasers:
-				self.w.delete(i)
-			self.lasers = []
-		
 
 	def get_ray(self,angle,x,y,r):
 
@@ -652,25 +672,6 @@ class MobileRobotSimulator(threading.Thread):
 			q,w =self.get_ray(f ,rx ,ry ,(self.sensors_value[i]  * self.canvasX ) / self.mapY)
 			self.lasers.append(self.w.create_line(rx ,ry ,q ,w ,fill = "#00DD41") )
 			f = f + step
-
-		#if self.flagF :
-		#	
-		#	for x in self.lasers:
-		#		self.w.delete(x)
-		#	self.lasers = []
-		#	for i in range(0, numSensor):	
-		#		q,w =self.get_ray(f ,rx ,ry ,x)
-		#		self.lasers.append(self.w.create_line(rx ,ry ,q ,w ,fill = "#00DD41") )
-		#		f = f + step
-		#	#self.flagF=False
-		#else:
-		#	for i in range(0, numSensor):	
-		#		q,w =self.get_ray(f ,rx ,ry ,x)
-		#		self.w.coords(self.lasers[i],rx ,ry,q,w )
-		#		f = f + step
-		#		#print "line "+str(rx)+" "+str(ry)+" "+str(self.get_ray(f ,rx ,ry ,x))
-		#	self.w.update()
-
 		
 	def delete_robot(self):
 		
@@ -681,7 +682,6 @@ class MobileRobotSimulator(threading.Thread):
 		self.w.delete(self.hokuyo)
 		
 	def move_robot(self,*args):
-
 		theta = float(self.p_giro)
 		distance = float(self.p_distance) 
 		
@@ -690,98 +690,103 @@ class MobileRobotSimulator(threading.Thread):
 		init_robotAngle = self.robotAngle
 		i = self.robotAngle
 
-		if theta ==0:
-			pass
-		else:
-			if theta > 0 :
-				while i < init_robotAngle + theta:
-					i = i + 0.0174533*self.sliderVelocity.get()
-					self.robotAngle = i
-					self.plot_robot()
-					
-			else:
-				while i > init_robotAngle + theta:
-					i = i - 0.0174533*self.sliderVelocity.get()
-					self.robotAngle = i
-					self.plot_robot()
-					
+		if self.varFaster.get():
 			self.robotAngle = init_robotAngle + theta
+			self.robotX=distance * math.cos(self.robotAngle) + self.robotX
+			self.robotY=-( distance * math.sin(self.robotAngle) )+ self.robotY
 			self.plot_robot()
+		
+		else:
 
-		xf = distance * math.cos(self.robotAngle) + self.robotX
-		#print(init_robotX)
-		#print(xf)
-		yf = -( distance * math.sin(self.robotAngle) )+ self.robotY
-		#print(yf)
-
-		x = auxX = init_robotX
-		y = auxY = init_robotY
-		m = -math.tan(self.robotAngle)
-
-		if xf==auxX :
-			if yf <= auxY:
-				while y < yf:
-					y = y - self.sliderVelocity.get()
-					if(y > yf): 
-						break
-					self.robotY=y
-					self.plot_robot()
+			if theta ==0:
+				pass
 			else:
-				while y > yf:
-					y = y + self.sliderVelocity.get()
-					if(y < yf): 
-						break
-					self.robotY=y
-					self.plot_robot()
-			self.robotY = yf
-			self.plot_robot()
-		else:    # Calculos con punto pendiente  y2 -y1= m ( x2 - x1)
-			if  m < -1 or  m > 1 : # Si los angulos caen en este rango en vez de evaluar y  evaluaremos x
+				if theta > 0 :
+					while i < init_robotAngle + theta:
+						i = i + (0.0174533*2)*self.sliderVelocity.get()
+						self.robotAngle = i
+						self.plot_robot()
+						
+				else:
+					while i > init_robotAngle + theta:
+						i = i - (0.0174533*2)*self.sliderVelocity.get()
+						self.robotAngle = i
+						self.plot_robot()
+						
+				self.robotAngle = init_robotAngle + theta
+				self.plot_robot()
 
-				if yf > auxY:
+			xf = distance * math.cos(self.robotAngle) + self.robotX
+
+			yf = -( distance * math.sin(self.robotAngle) )+ self.robotY
+
+
+			x = auxX = init_robotX
+			y = auxY = init_robotY
+			m = -math.tan(self.robotAngle)
+
+			if xf==auxX :
+				if yf <= auxY:
 					while y < yf:
-						x = -( (y - auxY) / math.tan(self.robotAngle) -auxX	)
-						y = y + self.sliderVelocity.get()
+						y = y - self.sliderVelocity.get()
 						if(y > yf): 
 							break
-						self.robotX=x
 						self.robotY=y
-						self.plot_robot()	
+						self.plot_robot()
 				else:
 					while y > yf:
-						x = -( (y - auxY) / math.tan(self.robotAngle) -auxX)   
-						y = y - self.sliderVelocity.get()
+						y = y + self.sliderVelocity.get()
 						if(y < yf): 
 							break
-						self.robotX=x
 						self.robotY=y
-						self.plot_robot()	
-			else:
+						self.plot_robot()
+				self.robotY = yf
+				self.plot_robot()
+			else:    # Calculos con punto pendiente  y2 -y1= m ( x2 - x1)
+				if  m < -1 or  m > 1 : # Si los angulos caen en este rango en vez de evaluar y  evaluaremos x
 
-				if xf > auxX:
-					while x < xf:
-						y = -math.tan(self.robotAngle) * (x - auxX) + auxY
-						#print(y)
-						x = x + self.sliderVelocity.get()
-						if(x > xf): 
-							break
-						self.robotX=x
-						self.robotY=y
-						self.plot_robot()	
+					if yf > auxY:
+						while y < yf:
+							x = -( (y - auxY) / math.tan(self.robotAngle) -auxX	)
+							y = y + self.sliderVelocity.get()
+							if(y > yf): 
+								break
+							self.robotX=x
+							self.robotY=y
+							self.plot_robot()	
+					else:
+						while y > yf:
+							x = -( (y - auxY) / math.tan(self.robotAngle) -auxX)   
+							y = y - self.sliderVelocity.get()
+							if(y < yf): 
+								break
+							self.robotX=x
+							self.robotY=y
+							self.plot_robot()	
 				else:
-					while x > xf:
-						y = -math.tan(self.robotAngle) * (x - auxX) + auxY
-						x = x - self.sliderVelocity.get()
-						if(x < xf): 
-							break
-						self.robotX=x
-						self.robotY=y
-						self.plot_robot()	
-			self.robotX = xf
-			self.robotY = yf
-			self.plot_robot()
 
-
+					if xf > auxX:
+						while x < xf:
+							y = -math.tan(self.robotAngle) * (x - auxX) + auxY
+							#print(y)
+							x = x + self.sliderVelocity.get()
+							if(x > xf): 
+								break
+							self.robotX=x
+							self.robotY=y
+							self.plot_robot()	
+					else:
+						while x > xf:
+							y = -math.tan(self.robotAngle) * (x - auxX) + auxY
+							x = x - self.sliderVelocity.get()
+							if(x < xf): 
+								break
+							self.robotX=x
+							self.robotY=y
+							self.plot_robot()	
+				self.robotX = xf
+				self.robotY = yf
+				self.plot_robot()
 
 	def handle_service(self,theta,distance):
 		self.p_giro = theta
@@ -790,7 +795,12 @@ class MobileRobotSimulator(threading.Thread):
 		
 		self.steps_= self.steps_+1;
 		self.entrySteps.delete ( 0, END )
-		self.entrySteps.insert ( 0, str(self.steps_)  )
+		
+		#Esto es para que al darle stop siempre te regrese a los steps deseados sino se da que le das stop durante un movimiento entonces al detenerse setea el ultimo step
+		if self.startFlag:
+			self.entrySteps.insert ( 0, str(self.steps_)  )
+		else:
+			self.entrySteps.insert ( 0, str(self.steps_aux)  )
 
 		if self.steps_ == self.steps_aux:
 			self.s_t_simulation(False)
@@ -799,8 +809,6 @@ class MobileRobotSimulator(threading.Thread):
 		else:
 			self.a.set(1)
 
-		
-
 	def handle_print_graph(self,graph_list):
 		self.graph_list = graph_list 
 		self.b.set(1)
@@ -808,5 +816,4 @@ class MobileRobotSimulator(threading.Thread):
 	def run(self):	
 		self.gui_init()
 		self.read_map()
-		
 		self.root.mainloop()

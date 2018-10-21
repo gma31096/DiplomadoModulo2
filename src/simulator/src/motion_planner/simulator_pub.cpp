@@ -73,11 +73,9 @@ int main(int argc, char *argv[])
 
 	while(ros::ok())
 	{
-	params = get_params();
+    params = get_params();
     get_lidar_values(lecturas);
-
-	ros::spinOnce();
-	
+    ros::spinOnce();
 	}
 	return 0;
 }

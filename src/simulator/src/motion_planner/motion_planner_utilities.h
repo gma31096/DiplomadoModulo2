@@ -1,4 +1,8 @@
 #include "ros/ros.h"
+
+#include "simulator/Parameters.h"
+#include "simulator/Laser_values.h"
+
 #include "simulator/simulator_robot_step.h"
 #include "simulator/simulator_parameters.h"
 #include "simulator/simulator_robot_laser_values.h"
@@ -9,17 +13,18 @@
 #include <string.h>
 
 movement generate_output(int out ,float advance ,float twist);
-parameters wait_start();
+//parameters wait_start();
 int move_gui(float angle ,float distance ,next_position *next );
-int laser_gui(float *lasers );
+//int laser_gui(float *lasers );
 float check_collision(float theta ,float distance ,int new_simulation );
-void get_lidar_values(float *lectures );
+//void get_lidar_values(float *lasers );
+int get_lidar_values(float *lasers);
 int move_robot(float theta,float advance);
 int get_light_values();
 
 next_position next;
 int new_simulation = 1;
-parameters params;
+//parameters params;
 
 
 movement generate_output(int out ,float advance ,float twist)
@@ -69,6 +74,7 @@ movement generate_output(int out ,float advance ,float twist)
 
 }
 
+/*
 parameters get_params()
 {
   parameters params;
@@ -109,8 +115,8 @@ parameters get_params()
   
   return params;
 }
-
-
+*/
+/*
 void simulation_init()
 {
   params = wait_start();
@@ -119,14 +125,17 @@ void simulation_init()
   next.robot_theta = params.robot_theta;
   new_simulation = 1;
 }
-
+*/
+/*
 parameters wait_start()
 {
   parameters params;
 
   ros::NodeHandle n;
   ros::ServiceClient client;
-  simulator::simulator_parameters srv;
+
+  ros::Subscriber params_sub = n.subscribe("simulator_parameters_pub",0, laserCallback);
+
   client = n.serviceClient<simulator::simulator_parameters>("simulator_get_parameters"); //create the client
   
   srv.request.request=1;
@@ -182,7 +191,7 @@ parameters wait_start()
 
   return params;
 }
-
+*/
 
 int move_gui(float angle ,float distance ,next_position *next )
 {
@@ -209,17 +218,43 @@ int move_gui(float angle ,float distance ,next_position *next )
   return 1;
 }
 
-int laser_gui(float *lasers)
+
+ros::Subscriber* sub;
+int prikaz=0;
+float lasers_aux[100];
+
+void laserCallback(const simulator::Laser_values::ConstPtr& msg)
+{
+
+    for(int i=0;i<100;i++)
+      lasers_aux[i] = msg->sensors[i];
+
+    prikaz=0;
+    sub->shutdown(); 
+    return;
+}
+
+
+int get_lidar_values(float *lasers)
 {
   
   ros::NodeHandle n;
-  ros::ServiceClient client;
-  simulator::simulator_robot_laser_values srv;
-  client = n.serviceClient<simulator::simulator_robot_laser_values>("simulator_robot_laser_values"); //create the client
-  
-   for(int i=0;i<100;i++)
-      srv.request.sensors[i]=lasers[i];
-        
+  //ros::ServiceClient client;
+  //simulator::simulator_robot_laser_values srv;
+  //client = n.serviceClient<simulator::simulator_robot_laser_values>("simulator_robot_laser_values"); //create the client
+  char topic[]="simulator_laser_pub";
+  //simulator::Laser_values msg = ros::topic::waitForMessage(topic);
+  sub = new ros::Subscriber;
+  *sub = n.subscribe("simulator_laser_pub", 1, laserCallback);
+  prikaz=1; 
+  while(ros::ok() && prikaz)
+  {
+          ros::spinOnce();
+  }
+  for(int i=0;i<100;i++)
+      lasers[i] = lasers_aux[i];
+
+   /*     
   if (client.call(srv))
   {     
       //printf("%s\n","Hecho lasers" );
@@ -228,7 +263,7 @@ int laser_gui(float *lasers)
   {
     ROS_ERROR("Failed to call service simulator_robot_laser_values");
     
-  }
+  }*/
   return 1;
 }
 
@@ -258,6 +293,7 @@ float check_collision(float theta ,float distance ,int new_simulation )
   return final_distance;
 }
 
+/*
 void get_lidar_values(float *lectures )
 {
   ros::NodeHandle n;
@@ -283,6 +319,7 @@ void get_lidar_values(float *lectures )
     ROS_ERROR("Failed to call service simulator_laser"); 
   }
 }
+*/
 
 
 int move_robot(float theta,float advance)

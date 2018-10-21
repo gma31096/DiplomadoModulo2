@@ -1,4 +1,6 @@
 #include "ros/ros.h"
+#include "simulator/Parameters.h"
+#include "simulator/Laser_values.h"
 #include "simulator/simulator_laser.h"
 #include "../utilities/simulator_structures.h"
 #include "../utilities/utilities.h"
@@ -14,9 +16,6 @@
 #define MAX_NUM_POLYGONS 100
 #define NUM_MAX_VERTEX 10
 #define STRSIZ 300
-#define SIZE_LINE 10000
-
-
 
 typedef struct Vertex_ {
         float x;
@@ -33,7 +32,8 @@ typedef struct Polygon_ {
 
 Polygon polygons_wrl[100];
 int num_polygons_wrl = 0;
-parameters params;
+float sensors[100];
+char actual_world[50];
 
 // it reads the file that conteins the environment description
 int ReadPolygons(char *file,Polygon *polygons){
@@ -50,9 +50,9 @@ int ReadPolygons(char *file,Polygon *polygons){
 	 
 	if( fp == NULL )
 	{
-		sprintf(data, "File %s does not exists\n", file);
-		printf("File %s does not exists\n", file);
-		exit(0);
+		sprintf(data, "File %s does not exist\n", file);
+		printf("File %s does not exist\n", file);
+		return(0);
 	}
 	//printf("World environment %s \n",file);
 
@@ -105,7 +105,6 @@ int ReadPolygons(char *file,Polygon *polygons){
 					if(polygons[num_poly].vertex[i].y > polygons[num_poly].max.y)  polygons[num_poly].max.y = polygons[num_poly].vertex[i].y;
 					if(polygons[num_poly].vertex[i].x < polygons[num_poly].min.x)  polygons[num_poly].min.x = polygons[num_poly].vertex[i].x;
 					if(polygons[num_poly].vertex[i].y < polygons[num_poly].min.y)  polygons[num_poly].min.y = polygons[num_poly].vertex[i].y;
-	
 					//printf("polygon vertex %d x %f y %f\n",i,polygons[num_poly].vertex[i].x,polygons[num_poly].vertex[i].y);
 					i++;
 				}
@@ -127,15 +126,17 @@ int ReadPolygons(char *file,Polygon *polygons){
 
 void read_environment(char *file, int debug)
 {
-
  	int i;                                                                            
 	int j;
-
 	/* it reads the polygons */
 	strcpy(polygons_wrl[0].name, "NULL");
 	if(debug == 1) printf("\nEnvironment file: %s\n", file);
 	num_polygons_wrl = ReadPolygons(file, polygons_wrl);
-	                                                                                                                                                       
+	if(num_polygons_wrl == 0)
+		printf("File doesnt exist %s \n",file);
+	else  
+		printf("Load: %s \n",file);
+                                                                                                                                
 	// it prints the polygons
 	if(debug == 1)
 	for(i = 0; i < num_polygons_wrl; i++)
@@ -153,7 +154,6 @@ void read_environment(char *file, int debug)
 	}
 }
 
-
 float getValue(Vertex p1, Vertex p2, Vertex p3 ,Vertex p4, float laser_value)
 {
 
@@ -163,8 +163,6 @@ float getValue(Vertex p1, Vertex p2, Vertex p3 ,Vertex p4, float laser_value)
 	denominadorTa =(p4.x-p3.x)*(p1.y-p2.y) - (p1.x-p2.x)*(p4.y-p3.y);
 	denominadorTb =(p4.x-p3.x)*(p1.y-p2.y) - (p1.x-p2.x)*(p4.y-p3.y);
 	
- 	
-
 	if( denominadorTa == 0 || denominadorTb ==0 )
 		return laser_value;
 
@@ -176,7 +174,6 @@ float getValue(Vertex p1, Vertex p2, Vertex p3 ,Vertex p4, float laser_value)
  	//printf("2 %f    %f \n",p2.x,p2.y );
  	//printf("3 %f    %f \n",p3.x,p3.y );
  	//printf("4 %f    %f \n",p4.x,p4.y );
-
 	if(  0 <= ta  && ta <=1 &&   0 <= tb && tb <=1  )
 	{
 		xi = p1.x  + ta * ( p2.x - p1.x ) ;
@@ -184,14 +181,10 @@ float getValue(Vertex p1, Vertex p2, Vertex p3 ,Vertex p4, float laser_value)
 		//printf("%s x %f  y% f \n","holaa",xi,yi );
 		//printf("x1 %f  y1 %f  x2 %f  y2%f \n",p1.x,p1.y,p2.x,p2.y );	
 		//printf("x3 %f  y3 %f  x4 %f  y4%f \n",p3.x,p3.y,p4.x,p4.y );
-
-				
 		return sqrt( pow(p1.x-xi,2) + pow(p1.y-yi,2)  ) ;
 	}		
 	else
 		return laser_value;
-	
-
 	//resa=[p1.x p1.y] + ta*( [p2.x p2.y]- [p1.x p1.y
 	//resb= [p3.x p3.y] + tb*( [p4.x p4.y]- [p3.x p3.y]  )
 
@@ -222,15 +215,13 @@ int getValues(float laser_num_sensors, float laser_origin, float laser_range,flo
 	for (i=0;i < laser_num_sensors;i++)
 		values[i]=laser_value;	
 
-
 	for(i = 0; i < num_polygons_wrl; i++)
 		if( (r_min.x < polygons_wrl[i].max.x && polygons_wrl[i].max.x <   r_max.x) || ( r_min.x < polygons_wrl[i].min.x && polygons_wrl[i].min.x < r_max.x)  || ( polygons_wrl[i].min.x < r_min.x && r_max.x < polygons_wrl[i].max.x )  )
 			if( (r_min.y < polygons_wrl[i].max.y && polygons_wrl[i].max.y < r_max.y) || ( r_min.y < polygons_wrl[i].min.y && polygons_wrl[i].min.y < r_max.y) || ( polygons_wrl[i].min.y < r_min.y && r_max.y < polygons_wrl[i].max.y )   )
-				printf("%i Aa\n",posible_collision[j++]=i );
+				//printf("%i Aa\n",
+				posible_collision[j++]=i;// );
 
-
-
-    f = params.robot_theta + laser_origin;
+    f = robot_theta + laser_origin;
 
     step = laser_range  / ( laser_num_sensors - 1 );
 
@@ -242,8 +233,6 @@ int getValues(float laser_num_sensors, float laser_origin, float laser_range,flo
 				{
 					p2.x = laser_value * cos( f ) + p1.x;
 					p2.y = laser_value * sin( f ) + p1.y;
-					
-					
 					//printf("Laser: %d  Poligon: %d  Valu: %f \n",k,i,values[k] );
 					aux = getValue(p1,p2,polygons_wrl[posible_collision[i]].vertex[m],polygons_wrl[ posible_collision[i] ].vertex[m+1],laser_value);
 					//printf("Laser: %d  Poligon: %d  Valu: %f \n",k,i,values[k] );
@@ -254,56 +243,57 @@ int getValues(float laser_num_sensors, float laser_origin, float laser_range,flo
 						values[k] = aux;
 
 					}
-				
 			}
 			f += step;
 			//printf(":::::::::: %f\n",f );
-    	
-		
     }
 	return 0;
 }
 
 
 
-
-	
-	
-
-
-bool check_environment(simulator::simulator_laser::Request  &req ,simulator::simulator_laser::Response &res)
+void laserCallback(const simulator::Parameters::ConstPtr& params)
 {
- 
 	char path[50];
-	params = get_params();
 	float   valores[100];
 		
-	if(req.new_simulation==1)
+	if( strcmp( params->world_name.c_str(),actual_world) ) 
 	{
 		strcpy(path,"./src/simulator/src/data/");
-		strcat(path,params.world_name);
+		strcat(path,params->world_name.c_str());
 		strcat(path,"/");
-		strcat(path,params.world_name);
+		strcat(path,params->world_name.c_str());
 		strcat(path,".wrl");
 		read_environment(path,0);
+		strcpy(actual_world,params->world_name.c_str());
 	}
-
-    getValues(params.laser_num_sensors ,params.laser_origin ,params.laser_range ,params.laser_value ,params.robot_x ,params.robot_y ,params.robot_theta ,valores);
 	
-	int pingpong=1;
-
+    getValues(params->laser_num_sensors ,params->laser_origin ,params->laser_range ,params->laser_value ,params->robot_x ,params->robot_y ,params->robot_theta ,valores);
+	
 	for (int i =0 ; i<100;i++)
-		res.sensors[i] = valores[i];
+		sensors[i] = valores[i];
 
-	return true;    
 }
 
 int main(int argc, char *argv[])
 {	
 	ros::init(argc, argv, "simulator_laser_node");
 	ros::NodeHandle n;
-	ros::ServiceServer service = n.advertiseService("simulator_laser", check_environment);	
-	ros::spin();
+	ros::Publisher laser_pub = n.advertise<simulator::Laser_values>("simulator_laser_pub", 0);
+	ros::Subscriber params_sub = n.subscribe("simulator_parameters_pub", 0, laserCallback);
+	simulator::Laser_values laser_msg;
+	int i;
+	ros::Rate loop_rate(40);
+	actual_world[0]='\0';
+	
+	while (ros::ok())
+	  {
+	    for(i=0;i<100;i++)
+	    	laser_msg.sensors[i] = sensors[i];
+	    laser_pub.publish(laser_msg);
+	    loop_rate.sleep();
+	    ros::spinOnce();
+	  }
 
 	return 0;
 }

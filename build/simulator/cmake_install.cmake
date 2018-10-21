@@ -33,7 +33,10 @@ IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/simulator/msg" TYPE FILE FILES "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/simulator/msg" TYPE FILE FILES
+    "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg"
+    "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg"
+    )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")

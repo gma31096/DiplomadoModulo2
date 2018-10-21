@@ -1,6 +1,7 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/simulator_generate_messages_py"
   "/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/_Parameters.py"
+  "/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/msg/_Laser_values.py"
   "/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_algorithm_result.py"
   "/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_laser.py"
   "/home/diego/catkin_ws/devel/lib/python2.7/dist-packages/simulator/srv/_simulator_light.py"

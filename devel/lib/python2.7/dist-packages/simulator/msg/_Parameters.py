@@ -7,7 +7,7 @@ import struct
 
 
 class Parameters(genpy.Message):
-  _md5sum = "4e7613e1bd8252f81ab8e53ca6b6c2a0"
+  _md5sum = "c3a3242b503b35f6fa2f7b2245605401"
   _type = "simulator/Parameters"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """float32 robot_x
@@ -25,9 +25,10 @@ bool noise
 bool run
 float32 light_x
 float32 light_y
-"""
-  __slots__ = ['robot_x','robot_y','robot_theta','robot_radio','robot_max_advance','robot_turn_angle','laser_num_sensors','laser_origin','laser_range','laser_value','world_name','noise','run','light_x','light_y']
-  _slot_types = ['float32','float32','float32','float32','float32','float32','int32','float32','float32','float32','string','bool','bool','float32','float32']
+int32 behavior
+int32 steps"""
+  __slots__ = ['robot_x','robot_y','robot_theta','robot_radio','robot_max_advance','robot_turn_angle','laser_num_sensors','laser_origin','laser_range','laser_value','world_name','noise','run','light_x','light_y','behavior','steps']
+  _slot_types = ['float32','float32','float32','float32','float32','float32','int32','float32','float32','float32','string','bool','bool','float32','float32','int32','int32']
 
   def __init__(self, *args, **kwds):
     """
@@ -37,7 +38,7 @@ float32 light_y
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       robot_x,robot_y,robot_theta,robot_radio,robot_max_advance,robot_turn_angle,laser_num_sensors,laser_origin,laser_range,laser_value,world_name,noise,run,light_x,light_y
+       robot_x,robot_y,robot_theta,robot_radio,robot_max_advance,robot_turn_angle,laser_num_sensors,laser_origin,laser_range,laser_value,world_name,noise,run,light_x,light_y,behavior,steps
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -76,6 +77,10 @@ float32 light_y
         self.light_x = 0.
       if self.light_y is None:
         self.light_y = 0.
+      if self.behavior is None:
+        self.behavior = 0
+      if self.steps is None:
+        self.steps = 0
     else:
       self.robot_x = 0.
       self.robot_y = 0.
@@ -92,6 +97,8 @@ float32 light_y
       self.run = False
       self.light_x = 0.
       self.light_y = 0.
+      self.behavior = 0
+      self.steps = 0
 
   def _get_types(self):
     """
@@ -117,7 +124,7 @@ float32 light_y
       else:
         buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_struct_2B2f.pack(_x.noise, _x.run, _x.light_x, _x.light_y))
+      buff.write(_struct_2B2f2i.pack(_x.noise, _x.run, _x.light_x, _x.light_y, _x.behavior, _x.steps))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -143,8 +150,8 @@ float32 light_y
         self.world_name = str[start:end]
       _x = self
       start = end
-      end += 10
-      (_x.noise, _x.run, _x.light_x, _x.light_y,) = _struct_2B2f.unpack(str[start:end])
+      end += 18
+      (_x.noise, _x.run, _x.light_x, _x.light_y, _x.behavior, _x.steps,) = _struct_2B2f2i.unpack(str[start:end])
       self.noise = bool(self.noise)
       self.run = bool(self.run)
       return self
@@ -171,7 +178,7 @@ float32 light_y
       else:
         buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_struct_2B2f.pack(_x.noise, _x.run, _x.light_x, _x.light_y))
+      buff.write(_struct_2B2f2i.pack(_x.noise, _x.run, _x.light_x, _x.light_y, _x.behavior, _x.steps))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -198,8 +205,8 @@ float32 light_y
         self.world_name = str[start:end]
       _x = self
       start = end
-      end += 10
-      (_x.noise, _x.run, _x.light_x, _x.light_y,) = _struct_2B2f.unpack(str[start:end])
+      end += 18
+      (_x.noise, _x.run, _x.light_x, _x.light_y, _x.behavior, _x.steps,) = _struct_2B2f2i.unpack(str[start:end])
       self.noise = bool(self.noise)
       self.run = bool(self.run)
       return self
@@ -207,5 +214,5 @@ float32 light_y
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_2B2f = struct.Struct("<2B2f")
+_struct_2B2f2i = struct.Struct("<2B2f2i")
 _struct_6fi3f = struct.Struct("<6fi3f")

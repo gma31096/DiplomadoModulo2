@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "simulator: 1 messages, 7 services")
+message(STATUS "simulator: 2 messages, 7 services")
 
 set(MSG_I_FLAGS "-Isimulator:/home/diego/catkin_ws/src/simulator/msg;-Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg")
 
@@ -55,6 +55,11 @@ add_custom_target(_simulator_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" ""
 )
 
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg" NAME_WE)
+add_custom_target(_simulator_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg" ""
+)
+
 #
 #  langs = gencpp;genlisp;genpy
 #
@@ -63,6 +68,12 @@ add_custom_target(_simulator_generate_messages_check_deps_${_filename}
 ### Generating Messages
 _generate_msg_cpp(simulator
   "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
+)
+_generate_msg_cpp(simulator
+  "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
@@ -140,6 +151,8 @@ get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Parame
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg" NAME_WE)
+add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(simulator_gencpp)
@@ -152,6 +165,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS simulator_generate_messages_cpp)
 ### Generating Messages
 _generate_msg_lisp(simulator
   "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
+)
+_generate_msg_lisp(simulator
+  "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
@@ -229,6 +248,8 @@ get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Parame
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg" NAME_WE)
+add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(simulator_genlisp)
@@ -241,6 +262,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS simulator_generate_messages_lisp)
 ### Generating Messages
 _generate_msg_py(simulator
   "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
+)
+_generate_msg_py(simulator
+  "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
@@ -317,6 +344,8 @@ add_dependencies(simulator_generate_messages_py _simulator_generate_messages_che
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

@@ -1,6 +1,7 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/simulator_generate_messages_cpp"
   "/home/diego/catkin_ws/devel/include/simulator/Parameters.h"
+  "/home/diego/catkin_ws/devel/include/simulator/Laser_values.h"
   "/home/diego/catkin_ws/devel/include/simulator/simulator_algorithm_result.h"
   "/home/diego/catkin_ws/devel/include/simulator/simulator_laser.h"
   "/home/diego/catkin_ws/devel/include/simulator/simulator_light.h"

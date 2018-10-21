@@ -1,4 +1,5 @@
 #include "ros/ros.h"
+#include "simulator/Parameters.h"
 #include "../utilities/simulator_structures.h"
 #include "../utilities/utilities.h"
 #include "simulator/simulator_robot_step.h"
@@ -32,7 +33,9 @@ typedef struct Polygon_ {
 Polygon polygons_wrl[100];
 int num_polygons_wrl = 0;
 parameters params;
+char actual_world[50];
 float dimensions_room_x,dimensions_room_y;
+
 // it reads the file that conteins the environment description
 int ReadPolygons(char *file,Polygon *polygons){
 
@@ -48,9 +51,9 @@ int ReadPolygons(char *file,Polygon *polygons){
 	 
 	if( fp == NULL )
 	{
-		sprintf(data, "File %s does not exists\n", file);
-		printf("File %s does not exists\n", file);
-		exit(0);
+		sprintf(data, "File %s does not exist\n", file);
+		printf("File %s does not exist\n", file);
+		return(0);
 	}
 	//printf("World environment %s \n",file);
 
@@ -128,12 +131,15 @@ void read_environment(char *file, int debug)
 
  	int i;                                                                            
 	int j;
-
 	/* it reads the polygons */
 	strcpy(polygons_wrl[0].name, "NULL");
 	if(debug == 1) printf("\nEnvironment file: %s\n", file);
 	num_polygons_wrl = ReadPolygons(file, polygons_wrl);
-	                                                                                                                                                       
+	
+	if(num_polygons_wrl == 0)
+		printf("File doesnt exist %s \n",file);
+	else  
+		printf("Load: %s \n",file);                                                                                                                                                     
 	// it prints the polygons
 	if(debug == 1)
 	for(i = 0; i < num_polygons_wrl; i++)
@@ -206,7 +212,7 @@ int sat(float robot_x, float robot_y, float robot_r)
 		 			{
 		 				//printf("Distancia al polig %f\n",pDistance(robot_x, robot_y, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y, polygons_wrl[i].vertex[j + 1].x, polygons_wrl[i].vertex[j + 1].y));
 		 				if( pDistance(robot_x, robot_y, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y, polygons_wrl[i].vertex[j + 1].x, polygons_wrl[i].vertex[j + 1].y) <= robot_r ) 
-						{	printf("******** Si esta intersectado :o\n");
+						{	
 						    return 1;
 		 				}
 		 				//else{ printf("Rx %f Ry %f v1x %f  V1y %f v2x %f v2y %f  \n",robot_x, robot_y, polygons_wrl[i].vertex[j].x, polygons_wrl[i].vertex[j].y, polygons_wrl[i].vertex[j + 1].x, polygons_wrl[i].vertex[j + 1].y) ;  }
@@ -226,18 +232,6 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 	if (req.distance == 0)
 		{res.distance = 0; return true;}
 
-
-	if(req.new_simulation==1)
-	{
-			params = get_params();
-			strcpy(path,"./src/simulator/src/data/");
-			strcat(path,params.world_name);
-			strcat(path,"/");
-			strcat(path,params.world_name);
-			strcat(path,".wrl");
-			//strcpy(path,"./src/simulator/src/data/random_2/random_2.wrl");	
-			read_environment(path,0);
-	}
 
 
 	if(m > 1 || m < -1 )
@@ -330,18 +324,54 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
     if (req.distance < 0)
     	distance=-distance;
     res.distance = distance/dimensions_room_x;
-    printf("%f\n",res.distance );
+   // printf("%f\n",res.distance );
     //printf("distance %f \n",distance);
    return true;
 }
 
+
+void paramsCallback(const simulator::Parameters::ConstPtr& paramss)
+{
+  char path[50];
+
+  params.robot_x             = paramss->robot_x   ;
+  params.robot_y             = paramss->robot_y   ;
+  params.robot_theta         = paramss->robot_theta   ;    
+  params.robot_radio         = paramss->robot_radio   ;    
+  params.robot_max_advance   = paramss->robot_max_advance   ;          
+  params.robot_turn_angle    = paramss->robot_turn_angle   ;         
+  params.laser_num_sensors   = paramss->laser_num_sensors   ;          
+  params.laser_origin        = paramss->laser_origin         ;     
+  params.laser_range         = paramss->laser_range   ;    
+  params.laser_value         = paramss->laser_value   ;    
+  strcpy(params.world_name ,paramss -> world_name.c_str());       
+  params.noise               = paramss->noise   ;   
+  params.run                 = paramss->run   ; 
+  params.light_x             = paramss->light_x;
+  params.light_y             = paramss->light_y;
+  params.behavior            = paramss->behavior; 
+
+    if(  strcmp( paramss->world_name.c_str(),actual_world) ) 
+	{
+		strcpy(path,"./src/simulator/src/data/");
+		strcat(path,paramss->world_name.c_str());
+		strcat(path,"/");
+		strcat(path,paramss->world_name.c_str());
+		strcat(path,".wrl");
+		read_environment(path,0);
+		strcat(actual_world,paramss->world_name.c_str());
+		strcpy(actual_world,paramss->world_name.c_str());
+	}
+
+}
 
 int main(int argc, char *argv[])
 {	
 	ros::init(argc, argv, "simulator_base_node");
 	ros::NodeHandle n;
 	ros::ServiceServer service = n.advertiseService("simulator_base", check_path);
-	
+	ros::Subscriber params_sub = n.subscribe("simulator_parameters_pub", 0, paramsCallback);
+		
 	ros::spin();
 	return 0;
 }

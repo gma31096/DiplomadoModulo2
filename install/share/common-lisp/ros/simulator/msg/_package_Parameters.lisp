@@ -29,4 +29,8 @@
           LIGHT_X
           LIGHT_Y-VAL
           LIGHT_Y
+          BEHAVIOR-VAL
+          BEHAVIOR
+          STEPS-VAL
+          STEPS
 ))

@@ -3,5 +3,7 @@
   (:export
    "<PARAMETERS>"
    "PARAMETERS"
+   "<LASER_VALUES>"
+   "LASER_VALUES"
   ))
 

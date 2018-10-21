@@ -38,7 +38,9 @@ struct Parameters_
     , noise(false)
     , run(false)
     , light_x(0.0)
-    , light_y(0.0)  {
+    , light_y(0.0)
+    , behavior(0)
+    , steps(0)  {
     }
   Parameters_(const ContainerAllocator& _alloc)
     : robot_x(0.0)
@@ -55,7 +57,9 @@ struct Parameters_
     , noise(false)
     , run(false)
     , light_x(0.0)
-    , light_y(0.0)  {
+    , light_y(0.0)
+    , behavior(0)
+    , steps(0)  {
   (void)_alloc;
     }
 
@@ -105,6 +109,12 @@ struct Parameters_
 
    typedef float _light_y_type;
   _light_y_type light_y;
+
+   typedef int32_t _behavior_type;
+  _behavior_type behavior;
+
+   typedef int32_t _steps_type;
+  _steps_type steps;
 
 
 
@@ -183,12 +193,12 @@ struct MD5Sum< ::simulator::Parameters_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "4e7613e1bd8252f81ab8e53ca6b6c2a0";
+    return "c3a3242b503b35f6fa2f7b2245605401";
   }
 
   static const char* value(const ::simulator::Parameters_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x4e7613e1bd8252f8ULL;
-  static const uint64_t static_value2 = 0x1ab8e53ca6b6c2a0ULL;
+  static const uint64_t static_value1 = 0xc3a3242b503b35f6ULL;
+  static const uint64_t static_value2 = 0xfa2f7b2245605401ULL;
 };
 
 template<class ContainerAllocator>
@@ -222,6 +232,8 @@ bool noise\n\
 bool run\n\
 float32 light_x\n\
 float32 light_y\n\
+int32 behavior\n\
+int32 steps\n\
 ";
   }
 
@@ -255,6 +267,8 @@ namespace serialization
       stream.next(m.run);
       stream.next(m.light_x);
       stream.next(m.light_y);
+      stream.next(m.behavior);
+      stream.next(m.steps);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -303,6 +317,10 @@ struct Printer< ::simulator::Parameters_<ContainerAllocator> >
     Printer<float>::stream(s, indent + "  ", v.light_x);
     s << indent << "light_y: ";
     Printer<float>::stream(s, indent + "  ", v.light_y);
+    s << indent << "behavior: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.behavior);
+    s << indent << "steps: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.steps);
   }
 };
 

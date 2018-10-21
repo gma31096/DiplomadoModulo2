@@ -7,10 +7,36 @@
 #include "../state_machines/dijkstra.h"
 #include "../state_machines/dfs.h"
 
+parameters params;
+
+void parametersCallback(const simulator::Parameters::ConstPtr& paramss)
+{
+  params.robot_x             = paramss->robot_x   ;
+  params.robot_y             = paramss->robot_y   ;
+  params.robot_theta         = paramss->robot_theta   ;    
+  params.robot_radio         = paramss->robot_radio   ;    
+  params.robot_max_advance   = paramss->robot_max_advance   ;          
+  params.robot_turn_angle    = paramss->robot_turn_angle   ;         
+  params.laser_num_sensors   = paramss->laser_num_sensors   ;          
+  params.laser_origin        = paramss->laser_origin         ;     
+  params.laser_range         = paramss->laser_range   ;    
+  params.laser_value         = paramss->laser_value   ;    
+  strcpy(params.world_name ,paramss -> world_name.c_str());       
+  params.noise               = paramss->noise   ;   
+  params.run                 = paramss->run   ; 
+  params.light_x             = paramss->light_x;
+  params.light_y             = paramss->light_y;
+  params.behavior            = paramss->behavior; 
+
+}
+
+
 int main(int argc ,char **argv)
 {  
   ros::init(argc ,argv ,"simulator_motion_planner_node");
   ros::NodeHandle n;
+  ros::Subscriber params_sub = n.subscribe("simulator_parameters_pub",0, parametersCallback);
+
   float lecturas_lidar[100];
   float lecturas_light[8];
   step steps[200];
@@ -23,15 +49,11 @@ int main(int argc ,char **argv)
   movement movements;
   while( ros::ok()  )
   {
-    simulation_init();// It waits for button "Run simulation"
-    flagOnce = 1;
-
+    flagOnce = 1; 
     while(params.run) 
     {
-      //printf("%f \n",params.robot_x );
-      get_lidar_values(lecturas_lidar);
       get_light_values(lecturas_light);
-    
+      get_lidar_values(lecturas_lidar);
       switch ( params.behavior)
       {
         case 1:
@@ -44,11 +66,8 @@ int main(int argc ,char **argv)
             est_sig = 0;
             flagOnce = 0;
           }
-       
           sm_avoid_obstacles(quantize_inputs(lecturas_lidar,params.laser_num_sensors,params.laser_value),&movements,&est_sig ,params.robot_max_advance ,params.robot_turn_angle);
           
-          //movements.twist = 0.5; 
-          //movements.advance = .1;
         break;
         case 3:
           if(flagOnce)
@@ -56,13 +75,9 @@ int main(int argc ,char **argv)
             est_sig = 0;
             flagOnce = 0;
           }
-       
-          printf("State  %d\n", est_sig);
           sm_avoidance_destination(quantize_light(lecturas_light),quantize_inputs(lecturas_lidar,params.laser_num_sensors,params.laser_value),&movements,&est_sig ,params.robot_max_advance ,params.robot_turn_angle);
-          
         break;
         case 4:
-
           if(flagOnce)
           {
             for(i = 0; i < 200; i++)steps[i].node=-1;
@@ -74,7 +89,6 @@ int main(int argc ,char **argv)
               i++;
             }
             print_algorithm_graph (steps);
-
             flagOnce = 0;
           }
           movements.twist = 3.1415; 
@@ -112,11 +126,11 @@ int main(int argc ,char **argv)
         break;
     
       }
-      printf("-- %f  %f \n",movements.twist ,movements.advance  );
+      //printf("-- %f  %f \n",movements.twist ,movements.advance  );
       move_robot(movements.twist,movements.advance);
       ros::spinOnce();
       new_simulation =0;
-      params = get_params();
+      //params = get_params();
     }
     ros::spinOnce();
  
