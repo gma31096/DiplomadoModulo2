@@ -1,7 +1,6 @@
 #include "ros/ros.h"
 #include "simulator/Parameters.h"
 #include "../utilities/simulator_structures.h"
-#include "../utilities/utilities.h"
 #include "simulator/simulator_light.h"
 
 #include <stdio.h>

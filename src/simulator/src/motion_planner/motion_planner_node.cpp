@@ -1,6 +1,7 @@
 #include "ros/ros.h"
 #include "../utilities/simulator_structures.h"
 #include "motion_planner_utilities.h"
+
 #include "../state_machines/sm_light_follower.h"
 #include "../state_machines/sm_avoidance.h"
 #include "../state_machines/sm_avoidance_destination.h"

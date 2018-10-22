@@ -1,7 +1,6 @@
 #include "ros/ros.h"
 #include "simulator/Parameters.h"
 #include "../utilities/simulator_structures.h"
-#include "../utilities/utilities.h"
 #include "simulator/simulator_robot_step.h"
 #include "simulator/simulator_parameters.h"
 #include "simulator/simulator_base.h"

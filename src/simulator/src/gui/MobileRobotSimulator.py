@@ -136,7 +136,7 @@ class MobileRobotSimulator(threading.Thread):
 
 	def print_graph(self,*args):
 			flagOnce=True;
-
+			numNode_=1
 			self.w.delete(self.nodes_image)	
 			nodes_coords = []
 			image = Image.new('RGBA', (self.canvasX, self.canvasY))
@@ -144,47 +144,43 @@ class MobileRobotSimulator(threading.Thread):
 			map_file = open('../data/'+self.entryFile.get()+'/'+self.entryFile.get()+'.top','r')                  #Open file
 			lines = map_file.readlines()                          #Split the file in lines
 			for line in lines: 									  #To read line by line
-				words = line.split()	                          #To separate  words 
+				words = line.split()	                          #To split  words 
 				if words:										  #To avoid empty lines							
 					if words[0] == "(":							  #To avoid coments
 						if words[1] == "num":			  #To get world dimensions
 							numNode = float (words[3])	
+							if numNode == 0:
+								numNode_=0
+								map_file.close()
+								break
 						elif words[1] == "node":				  #to get polygons vertex
 							numNode = words[2]
-				#			print(self.graph_list)
-							#if int(numNode) in self.graph_list:
+
 							nodeXm = float (words[3]) * self.canvasX / self.mapX
 							nodeYm = self.canvasY - ( float (words[4]) * self.canvasY) / self.mapY
-								#if flagOnce:
-								#	c1 = nodeXm
-								#	c2 = nodeYm
-								#	flagOnce = False
+	
 							nodes_coords.append([nodeXm,nodeYm,numNode])
-								#draw.ellipse((nodeXm - 3 ,nodeYm - 3 ,nodeXm + 3 ,nodeYm + 3), outline = '#9C4FDB', fill = '#9C4FDB')
-								#draw.text( (nodeXm,nodeYm + 2) ,fill = "darkblue" ,text = str(numNode) )
-						#( connection 0 1 0.121195 )
-								#draw.line( (c1,c2,nodeXm,nodeYm), fill = '#9C4FDB')
-								#c1 = nodeXm
-								#c2 = nodeYm
-			for x in self.graph_list:
-				if x != -1:
-					if flagOnce:
+		
+			if numNode_ != 0:
+				for x in self.graph_list:
+					if x != -1:
+						if flagOnce:
+							c1 = nodes_coords[x][0]
+							c2 = nodes_coords[x][1]
+							flagOnce = False
+									
+						draw.ellipse((nodes_coords[x][0] - 3 ,nodes_coords[x][1] - 3 ,nodes_coords[x][0] + 3 ,nodes_coords[x][1] + 3), outline = '#9C4FDB', fill = '#9C4FDB')
+						draw.text( (nodes_coords[x][0],nodes_coords[x][1] + 2) ,fill = "darkblue" ,text = str(nodes_coords[x][2]) )
+							#( connection 0 1 0.121195 )
+						draw.line( (c1,c2,nodes_coords[x][0],nodes_coords[x][1]), fill = '#9C4FDB')
 						c1 = nodes_coords[x][0]
 						c2 = nodes_coords[x][1]
-						flagOnce = False
-								
-					draw.ellipse((nodes_coords[x][0] - 3 ,nodes_coords[x][1] - 3 ,nodes_coords[x][0] + 3 ,nodes_coords[x][1] + 3), outline = '#9C4FDB', fill = '#9C4FDB')
-					draw.text( (nodes_coords[x][0],nodes_coords[x][1] + 2) ,fill = "darkblue" ,text = str(nodes_coords[x][2]) )
-						#( connection 0 1 0.121195 )
-					draw.line( (c1,c2,nodes_coords[x][0],nodes_coords[x][1]), fill = '#9C4FDB')
-					c1 = nodes_coords[x][0]
-					c2 = nodes_coords[x][1]
 
 
-			map_file.close()
-			image.save('nodes.png')
-			self.gif1 = PhotoImage( file = 'nodes.png')
-			self.nodes_image = self.w.create_image(self.canvasX / 2, self.canvasY / 2, image = self.gif1)
+				map_file.close()
+				image.save('nodes.png')
+				self.gif1 = PhotoImage( file = 'nodes.png')
+				self.nodes_image = self.w.create_image(self.canvasX / 2, self.canvasY / 2, image = self.gif1)
 
 
 	def print_nodes(self):
@@ -310,6 +306,7 @@ class MobileRobotSimulator(threading.Thread):
 		if star_stop :
 			self.denable('disabled')
 			self.read_map()
+			self.print_nodes()
 			self.startFlag=True
 			self.steps_ = 0 ;
 			self.steps_aux = int(self.entrySteps.get()) ;
@@ -320,7 +317,7 @@ class MobileRobotSimulator(threading.Thread):
 			self.rewind_y = self.robotY
 			self.rewind_angle = self.robotAngle
 			
-			self.rewind=[];
+			self.rewind=[]
 			
 		else: 
 			self.denable('normal')
@@ -335,10 +332,14 @@ class MobileRobotSimulator(threading.Thread):
 		self.robotX = self.rewind_x
 		self.robotY = self.rewind_y
 		self.robotAngle=self.rewind_angle
+		cta=1
 		for i in self.rewind:
 			self.p_giro  = i[0]
 			self.p_distance = i[1]
+			self.entryStepsExcec.config(text=str(cta))
+			cta = cta+1;
 			self.move_robot(0)
+
 		self.denable('normal')
 		self.buttonStop.configure(state='normal')
 
@@ -388,6 +389,7 @@ class MobileRobotSimulator(threading.Thread):
 		self.labelBehavior		= Label(self.rightMenu ,text = "Behavior:"          ,background = self.backgroundColor ,font = self.lineFont)
 		self.labelLightX        = Label(self.rightMenu ,text = "Light X:"          ,background = self.backgroundColor ,font = self.lineFont)
 		self.labelLightY        = Label(self.rightMenu ,text = "Light Y:"          ,background = self.backgroundColor ,font = self.lineFont)
+		self.labelStepsExcec        = Label(self.rightMenu ,text = "Steps:"          ,background = self.backgroundColor ,font = self.lineFont)
 		self.labelConfiguration = Label(self.rightMenu ,text = "Configurations:" ,background = self.backgroundColor ,font = self.lineFont)
 			
 		self.entryFile  = Entry(self.rightMenu ,width = 15 ,foreground = self.entryforegroundColor ,background = self.entrybackgroudColor )
@@ -400,7 +402,7 @@ class MobileRobotSimulator(threading.Thread):
 		
 		self.entryLightX = Label(self.rightMenu ,text = "Click Right" ,background = self.backgroundColor ,font = self.lineFont ,justify='center')
 		self.entryLightY = Label(self.rightMenu ,text = "Click Right" ,background = self.backgroundColor ,font = self.lineFont ,justify='center')
-
+		self.entryStepsExcec = Label(self.rightMenu ,text = "0" ,background = self.backgroundColor ,font = self.lineFont ,justify='center')
 		self.entryFile.insert ( 0, 'random_2' )
 		self.entrySteps.insert( 0, '100' )
 		self.entryBehavior.insert ( 0, '1' )
@@ -474,7 +476,7 @@ class MobileRobotSimulator(threading.Thread):
 		# buttons
 
 		self.lableSimulator      = Label (self.rightMenu ,text = "Simulator" ,background = self.backgroundColor ,foreground = "#303133" ,font = self.headLineFont)
-		self.buttonLastSimulation     = Button(self.rightMenu ,width = 20, text = "Run last simu" ,command = self.rewindF )
+		self.buttonLastSimulation     = Button(self.rightMenu ,width = 20, text = "Run last simu" ,state="disabled" ,command = self.rewindF  )
 		self.buttonRunSimulation = Button(self.rightMenu ,width = 20, text = "Run simulation" ,command = lambda: self.s_t_simulation(True) )
 		self.buttonStop          = Button(self.rightMenu ,width = 20, text = "Stop" ,command = lambda: self.s_t_simulation(False) )
 
@@ -487,6 +489,7 @@ class MobileRobotSimulator(threading.Thread):
 		self.labelBehavior     .grid(column = 0 ,row = 3 ,sticky = (N, W) ,padx = (10,5))
 		self.labelLightX       .grid(column = 0 ,row = 4 ,sticky = (N, W) ,padx = (10,5))
 		self.labelLightY       .grid(column = 0 ,row = 5 ,sticky = (N, W) ,padx = (10,5))
+		self.labelStepsExcec   .grid(column = 0 ,row = 6 ,sticky = (N, W) ,padx = (10,5))
 
 		self.labelConfiguration.grid(column = 0 ,row = 7 ,sticky = (N, W) ,padx = (10,5))
 
@@ -499,6 +502,7 @@ class MobileRobotSimulator(threading.Thread):
 		
 		self.entryLightX.grid(column = 1 ,row = 4 ,columnspan = 2 ,sticky = (N, W) ,padx = 5)
 		self.entryLightY.grid(column = 1 ,row = 5 ,columnspan = 2 ,sticky = (N, W) ,padx = 5)
+		self.entryStepsExcec.grid(column = 1 ,row = 6 ,columnspan = 2 ,sticky = (N, W) ,padx = 5)
 		
 
 		self.checkFaster   .grid(column = 1 ,row = 7  ,sticky = (N, W) ,padx = 5)
@@ -791,7 +795,7 @@ class MobileRobotSimulator(threading.Thread):
 	def handle_service(self,theta,distance):
 		self.p_giro = theta
 		self.p_distance = distance * self.canvasX 
-		self.rewind.append( [self.p_giro,self.p_distance])
+		
 		
 		self.steps_= self.steps_+1;
 		self.entrySteps.delete ( 0, END )
@@ -807,6 +811,8 @@ class MobileRobotSimulator(threading.Thread):
 		elif( ( float(self.entryPoseX.get()) -self.light_x )**2 + (  float(self.entryPoseY.get())  - self.light_y )**2) < .05**2:
 			self.s_t_simulation(False)
 		else:
+			self.entryStepsExcec.config(text=str(self.steps_)[:4])
+			self.rewind.append( [self.p_giro,self.p_distance])
 			self.a.set(1)
 
 	def handle_print_graph(self,graph_list):

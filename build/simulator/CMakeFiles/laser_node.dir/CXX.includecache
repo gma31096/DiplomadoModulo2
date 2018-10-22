@@ -209,8 +209,6 @@ simulator/simulator_laser.h
 /home/diego/catkin_ws/src/simulator/src/simulator_physics/simulator/simulator_laser.h
 ../utilities/simulator_structures.h
 /home/diego/catkin_ws/src/simulator/src/utilities/simulator_structures.h
-../utilities/utilities.h
-/home/diego/catkin_ws/src/simulator/src/utilities/utilities.h
 simulator/simulator_robot_step.h
 /home/diego/catkin_ws/src/simulator/src/simulator_physics/simulator/simulator_robot_step.h
 simulator/simulator_parameters.h
@@ -227,12 +225,6 @@ stdlib.h
 -
 
 /home/diego/catkin_ws/src/simulator/src/utilities/simulator_structures.h
-
-/home/diego/catkin_ws/src/simulator/src/utilities/utilities.h
-simulator/simulator_robot_step.h
-/home/diego/catkin_ws/src/simulator/src/utilities/simulator/simulator_robot_step.h
-simulator/simulator_parameters.h
-/home/diego/catkin_ws/src/simulator/src/utilities/simulator/simulator_parameters.h
 
 /opt/ros/indigo/include/XmlRpcDecl.h
 ros/macros.h
