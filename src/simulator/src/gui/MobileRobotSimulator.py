@@ -52,6 +52,7 @@ class MobileRobotSimulator(threading.Thread):
 			self.graph_list.append(0)
 
 		self.rewind=[]
+		self.trace_route= []
 		self.start()
 
 
@@ -318,6 +319,9 @@ class MobileRobotSimulator(threading.Thread):
 			self.rewind_angle = self.robotAngle
 			
 			self.rewind=[]
+			for trace in self.trace_route :
+				self.w.delete(trace)
+			self.trace_route = []
 			
 		else: 
 			self.denable('normal')
@@ -699,10 +703,14 @@ class MobileRobotSimulator(threading.Thread):
 		init_robotAngle = self.robotAngle
 		i = self.robotAngle
 
+		
+
 		if self.varFaster.get():
 			self.robotAngle = init_robotAngle + theta
 			self.robotX=distance * math.cos(self.robotAngle) + self.robotX
 			self.robotY=-( distance * math.sin(self.robotAngle) )+ self.robotY
+			xf = self.robotX
+			yf = self.robotY
 			self.plot_robot()
 		
 		else:
@@ -796,6 +804,9 @@ class MobileRobotSimulator(threading.Thread):
 				self.robotX = xf
 				self.robotY = yf
 				self.plot_robot()
+
+		self.trace_route.append(self.w.create_line(init_robotX ,init_robotY ,xf,yf,dash=(4, 4),   fill="#AB1111"))
+
 
 	def handle_service(self,theta,distance):
 		self.p_giro = theta
