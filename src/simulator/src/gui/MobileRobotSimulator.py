@@ -346,13 +346,18 @@ class MobileRobotSimulator(threading.Thread):
 			
 
 	def right_click(self,event):
-		if self.light >0:
-			self.w.delete(self.light)
-		self.light = self.w.create_image(event.x, event.y, image = self.gif2)
-		self.light_x = self.mapX*event.x / self.canvasX
-		self.light_y = self.mapY -  ( self.mapY * event.y ) / self.canvasY
-		self.entryLightX.config(text=str(self.light_x)[:4])
-		self.entryLightY.config(text=str(self.light_y)[:4])
+		if not self.startFlag:
+			if self.light >0:
+				self.w.delete(self.light)
+			self.light = self.w.create_image(event.x, event.y, image = self.gif2)
+			self.light_x = self.mapX*event.x / self.canvasX
+			self.light_y = self.mapY -  ( self.mapY * event.y ) / self.canvasY
+			self.entryLightX.config(text=str(self.light_x)[:4])
+			self.entryLightY.config(text=str(self.light_y)[:4])
+			self.s_t_simulation(True)
+
+
+
 		#tkMessageBox.showinfo("New light position ", "                 \nx :"+str(self.light_x)+"\n y :"+str(self.light_y)+"")
 	
 
@@ -405,7 +410,7 @@ class MobileRobotSimulator(threading.Thread):
 		self.entryStepsExcec = Label(self.rightMenu ,text = "0" ,background = self.backgroundColor ,font = self.lineFont ,justify='center')
 		self.entryFile.insert ( 0, 'random_2' )
 		self.entrySteps.insert( 0, '100' )
-		self.entryBehavior.insert ( 0, '1' )
+		self.entryBehavior.insert ( 0, '3' )
 
 		##### Rigth menu widgets declaration
 
@@ -422,7 +427,7 @@ class MobileRobotSimulator(threading.Thread):
 		self.checkShowNodes   = Checkbutton(self.rightMenu ,text = 'Show Nodes'    ,variable = self.varShowNodes  ,onvalue = 1 ,offvalue = 0 ,background = self.backgroundColor ,command=self.print_nodes)
 
 		self.checkFaster    .deselect()
-		self.checkShowSensors .deselect()
+		self.checkShowSensors .select()
 		self.checkAddNoise    .deselect()
 		self.checkShowNodes   .deselect()
 		# Robot 

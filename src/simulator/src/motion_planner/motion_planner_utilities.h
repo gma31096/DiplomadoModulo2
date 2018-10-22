@@ -225,12 +225,11 @@ float lasers_aux[100];
 
 void laserCallback(const simulator::Laser_values::ConstPtr& msg)
 {
-
     for(int i=0;i<100;i++)
       lasers_aux[i] = msg->sensors[i];
 
-    prikaz=0;
-    sub->shutdown(); 
+    //prikaz=0;
+    //sub->shutdown(); 
     return;
 }
 
@@ -238,6 +237,7 @@ void laserCallback(const simulator::Laser_values::ConstPtr& msg)
 int get_lidar_values(float *lasers)
 {
   
+  /*
   ros::NodeHandle n;
   //ros::ServiceClient client;
   //simulator::simulator_robot_laser_values srv;
@@ -251,6 +251,7 @@ int get_lidar_values(float *lasers)
   {
           ros::spinOnce();
   }
+  */
   for(int i=0;i<100;i++)
       lasers[i] = lasers_aux[i];
 

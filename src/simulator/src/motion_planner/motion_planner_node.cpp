@@ -37,6 +37,7 @@ int main(int argc ,char **argv)
   ros::init(argc ,argv ,"simulator_motion_planner_node");
   ros::NodeHandle n;
   ros::Subscriber params_sub = n.subscribe("simulator_parameters_pub",0, parametersCallback);
+  ros::Subscriber sub = n.subscribe("simulator_laser_pub", 0, laserCallback);
 
   float lecturas_lidar[100];
   float lecturas_light[8];
