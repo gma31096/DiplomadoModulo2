@@ -59,6 +59,7 @@ simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_n
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/gerardo/catkin_ws/src/simulator/src/state_machines/dfs.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/gerardo/catkin_ws/src/simulator/src/state_machines/dijkstra.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/gerardo/catkin_ws/src/simulator/src/state_machines/light_follower.h
+simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/gerardo/catkin_ws/src/simulator/src/state_machines/pared.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/gerardo/catkin_ws/src/simulator/src/state_machines/sm_avoidance.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/gerardo/catkin_ws/src/simulator/src/state_machines/sm_avoidance_destination.h
 simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_node.cpp.o: /home/gerardo/catkin_ws/src/simulator/src/state_machines/sm_destination.h

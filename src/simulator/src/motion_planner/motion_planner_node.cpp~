@@ -25,6 +25,7 @@
 #include "../state_machines/bfs.h"
 #include "../state_machines/Astar.h"
 #include "../state_machines/campos.h"
+#include "../state_machines/pared.h"
 #include "clips_ros/SimuladorRepresentation.h"
 #include "../behaviors/oracle.h"
 
@@ -384,14 +385,25 @@ int main(int argc ,char **argv)
                 user_sm(intensity,light_readings, lidar_readings, params.laser_num_sensors,params.laser_value,
                         q_light,q_inputs,&movements,&est_sig ,params.robot_max_advance ,params.robot_turn_angle);
                 break;
+	    case 88:
+                // Here it goes your code for selection 8
+                if(flagOnce)
+                {
+                    est_sig = 0;
+                    flagOnce = 0;
+                }
+                pared_sm(intensity,light_readings, lidar_readings, params.laser_num_sensors,params.laser_value,
+                        q_light,q_inputs,&movements,&est_sig ,params.robot_max_advance ,params.robot_turn_angle);
+                break;
 	    case 20:
 		if(flagOnce)
                 {
 		    est_sig = 0;
                     flagOnce = 0;
                 }
-		campos(intensity,light_readings, lidar_readings, params.laser_num_sensors,params.laser_value,
+		flg_result = campos(intensity,light_readings, lidar_readings, params.laser_num_sensors,params.laser_value,
                         q_light,q_inputs,&movements, &est_sig ,params.robot_max_advance ,params.robot_turn_angle);
+		if(flg_result == 1) stop();
 		break;	
 
             case 9:

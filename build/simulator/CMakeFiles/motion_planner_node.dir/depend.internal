@@ -60,6 +60,7 @@ simulator/CMakeFiles/motion_planner_node.dir/src/motion_planner/motion_planner_n
  /home/gerardo/catkin_ws/src/simulator/src/state_machines/dfs.h
  /home/gerardo/catkin_ws/src/simulator/src/state_machines/dijkstra.h
  /home/gerardo/catkin_ws/src/simulator/src/state_machines/light_follower.h
+ /home/gerardo/catkin_ws/src/simulator/src/state_machines/pared.h
  /home/gerardo/catkin_ws/src/simulator/src/state_machines/sm_avoidance.h
  /home/gerardo/catkin_ws/src/simulator/src/state_machines/sm_avoidance_destination.h
  /home/gerardo/catkin_ws/src/simulator/src/state_machines/sm_destination.h

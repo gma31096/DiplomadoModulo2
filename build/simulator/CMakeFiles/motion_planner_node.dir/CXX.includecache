@@ -743,6 +743,8 @@ motion_planner_utilities.h
 /home/gerardo/catkin_ws/src/simulator/src/state_machines/Astar.h
 ../state_machines/campos.h
 /home/gerardo/catkin_ws/src/simulator/src/state_machines/campos.h
+../state_machines/pared.h
+/home/gerardo/catkin_ws/src/simulator/src/state_machines/pared.h
 clips_ros/SimuladorRepresentation.h
 /home/gerardo/catkin_ws/src/simulator/src/motion_planner/clips_ros/SimuladorRepresentation.h
 ../behaviors/oracle.h
@@ -827,6 +829,10 @@ ros/package.h
 -
 
 /home/gerardo/catkin_ws/src/simulator/src/state_machines/light_follower.h
+
+/home/gerardo/catkin_ws/src/simulator/src/state_machines/pared.h
+math.h
+-
 
 /home/gerardo/catkin_ws/src/simulator/src/state_machines/sm_avoidance.h
 
