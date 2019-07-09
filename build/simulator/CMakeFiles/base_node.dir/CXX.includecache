@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/diego/catkin_ws/devel/include/simulator/Parameters.h
+/home/gerardo/catkin_ws/devel/include/simulator/Parameters.h
 string
 -
 vector
@@ -22,7 +22,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/catkin_ws/devel/include/simulator/simulator_base.h
+/home/gerardo/catkin_ws/devel/include/simulator/simulator_base.h
 ros/service_traits.h
 -
 simulator/simulator_baseRequest.h
@@ -30,7 +30,7 @@ simulator/simulator_baseRequest.h
 simulator/simulator_baseResponse.h
 -
 
-/home/diego/catkin_ws/devel/include/simulator/simulator_baseRequest.h
+/home/gerardo/catkin_ws/devel/include/simulator/simulator_baseRequest.h
 string
 -
 vector
@@ -46,7 +46,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/catkin_ws/devel/include/simulator/simulator_baseResponse.h
+/home/gerardo/catkin_ws/devel/include/simulator/simulator_baseResponse.h
 string
 -
 vector
@@ -62,7 +62,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/catkin_ws/devel/include/simulator/simulator_parameters.h
+/home/gerardo/catkin_ws/devel/include/simulator/simulator_parameters.h
 ros/service_traits.h
 -
 simulator/simulator_parametersRequest.h
@@ -70,7 +70,7 @@ simulator/simulator_parametersRequest.h
 simulator/simulator_parametersResponse.h
 -
 
-/home/diego/catkin_ws/devel/include/simulator/simulator_parametersRequest.h
+/home/gerardo/catkin_ws/devel/include/simulator/simulator_parametersRequest.h
 string
 -
 vector
@@ -86,7 +86,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/catkin_ws/devel/include/simulator/simulator_parametersResponse.h
+/home/gerardo/catkin_ws/devel/include/simulator/simulator_parametersResponse.h
 string
 -
 vector
@@ -102,7 +102,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/catkin_ws/devel/include/simulator/simulator_robot_step.h
+/home/gerardo/catkin_ws/devel/include/simulator/simulator_robot_step.h
 ros/service_traits.h
 -
 simulator/simulator_robot_stepRequest.h
@@ -110,7 +110,7 @@ simulator/simulator_robot_stepRequest.h
 simulator/simulator_robot_stepResponse.h
 -
 
-/home/diego/catkin_ws/devel/include/simulator/simulator_robot_stepRequest.h
+/home/gerardo/catkin_ws/devel/include/simulator/simulator_robot_stepRequest.h
 string
 -
 vector
@@ -126,7 +126,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/catkin_ws/devel/include/simulator/simulator_robot_stepResponse.h
+/home/gerardo/catkin_ws/devel/include/simulator/simulator_robot_stepResponse.h
 string
 -
 vector
@@ -142,19 +142,21 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/catkin_ws/src/simulator/src/simulator_physics/base_node.cpp
+/home/gerardo/catkin_ws/src/simulator/src/simulator_physics/base_node.cpp
 ros/ros.h
-/home/diego/catkin_ws/src/simulator/src/simulator_physics/ros/ros.h
+/home/gerardo/catkin_ws/src/simulator/src/simulator_physics/ros/ros.h
+ros/package.h
+-
 simulator/Parameters.h
-/home/diego/catkin_ws/src/simulator/src/simulator_physics/simulator/Parameters.h
+/home/gerardo/catkin_ws/src/simulator/src/simulator_physics/simulator/Parameters.h
 ../utilities/simulator_structures.h
-/home/diego/catkin_ws/src/simulator/src/utilities/simulator_structures.h
+/home/gerardo/catkin_ws/src/simulator/src/utilities/simulator_structures.h
 simulator/simulator_robot_step.h
-/home/diego/catkin_ws/src/simulator/src/simulator_physics/simulator/simulator_robot_step.h
+/home/gerardo/catkin_ws/src/simulator/src/simulator_physics/simulator/simulator_robot_step.h
 simulator/simulator_parameters.h
-/home/diego/catkin_ws/src/simulator/src/simulator_physics/simulator/simulator_parameters.h
+/home/gerardo/catkin_ws/src/simulator/src/simulator_physics/simulator/simulator_parameters.h
 simulator/simulator_base.h
-/home/diego/catkin_ws/src/simulator/src/simulator_physics/simulator/simulator_base.h
+/home/gerardo/catkin_ws/src/simulator/src/simulator_physics/simulator/simulator_base.h
 string.h
 -
 stdio.h
@@ -164,7 +166,7 @@ math.h
 stdlib.h
 -
 
-/home/diego/catkin_ws/src/simulator/src/utilities/simulator_structures.h
+/home/gerardo/catkin_ws/src/simulator/src/utilities/simulator_structures.h
 
 /opt/ros/indigo/include/XmlRpcDecl.h
 ros/macros.h
@@ -452,6 +454,16 @@ common.h
 boost/bind.hpp
 -
 XmlRpcValue.h
+-
+
+/opt/ros/indigo/include/ros/package.h
+string
+-
+utility
+-
+vector
+-
+map
 -
 
 /opt/ros/indigo/include/ros/param.h

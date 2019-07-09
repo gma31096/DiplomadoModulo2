@@ -1,7 +1,7 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/base_node.dir/src/simulator_physics/base_node.cpp.o"
-  "/home/diego/catkin_ws/devel/lib/simulator/base_node.pdb"
-  "/home/diego/catkin_ws/devel/lib/simulator/base_node"
+  "/home/gerardo/catkin_ws/devel/lib/simulator/base_node.pdb"
+  "/home/gerardo/catkin_ws/devel/lib/simulator/base_node"
 )
 
 # Per-language clean rules from dependency scanning.

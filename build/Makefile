@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/diego/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/gerardo/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/diego/catkin_ws/build
+CMAKE_BINARY_DIR = /home/gerardo/catkin_ws/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -120,9 +120,9 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/diego/catkin_ws/build/CMakeFiles /home/diego/catkin_ws/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gerardo/catkin_ws/build/CMakeFiles /home/gerardo/catkin_ws/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/diego/catkin_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gerardo/catkin_ws/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -241,6 +241,435 @@ gtest_main/fast:
 .PHONY : gtest_main/fast
 
 #=============================================================================
+# Target rules for targets named _clips_ros_generate_messages_check_deps_CFRParams
+
+# Build rule for target.
+_clips_ros_generate_messages_check_deps_CFRParams: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _clips_ros_generate_messages_check_deps_CFRParams
+.PHONY : _clips_ros_generate_messages_check_deps_CFRParams
+
+# fast build rule for target.
+_clips_ros_generate_messages_check_deps_CFRParams/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_CFRParams.dir/build.make clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_CFRParams.dir/build
+.PHONY : _clips_ros_generate_messages_check_deps_CFRParams/fast
+
+#=============================================================================
+# Target rules for targets named _clips_ros_generate_messages_check_deps_InitKDB
+
+# Build rule for target.
+_clips_ros_generate_messages_check_deps_InitKDB: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _clips_ros_generate_messages_check_deps_InitKDB
+.PHONY : _clips_ros_generate_messages_check_deps_InitKDB
+
+# fast build rule for target.
+_clips_ros_generate_messages_check_deps_InitKDB/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_InitKDB.dir/build.make clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_InitKDB.dir/build
+.PHONY : _clips_ros_generate_messages_check_deps_InitKDB/fast
+
+#=============================================================================
+# Target rules for targets named _clips_ros_generate_messages_check_deps_PlanningCFR
+
+# Build rule for target.
+_clips_ros_generate_messages_check_deps_PlanningCFR: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _clips_ros_generate_messages_check_deps_PlanningCFR
+.PHONY : _clips_ros_generate_messages_check_deps_PlanningCFR
+
+# fast build rule for target.
+_clips_ros_generate_messages_check_deps_PlanningCFR/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_PlanningCFR.dir/build.make clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_PlanningCFR.dir/build
+.PHONY : _clips_ros_generate_messages_check_deps_PlanningCFR/fast
+
+#=============================================================================
+# Target rules for targets named _clips_ros_generate_messages_check_deps_PlanningCmdClips
+
+# Build rule for target.
+_clips_ros_generate_messages_check_deps_PlanningCmdClips: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _clips_ros_generate_messages_check_deps_PlanningCmdClips
+.PHONY : _clips_ros_generate_messages_check_deps_PlanningCmdClips
+
+# fast build rule for target.
+_clips_ros_generate_messages_check_deps_PlanningCmdClips/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_PlanningCmdClips.dir/build.make clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_PlanningCmdClips.dir/build
+.PHONY : _clips_ros_generate_messages_check_deps_PlanningCmdClips/fast
+
+#=============================================================================
+# Target rules for targets named _clips_ros_generate_messages_check_deps_PlanningCmdSend
+
+# Build rule for target.
+_clips_ros_generate_messages_check_deps_PlanningCmdSend: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _clips_ros_generate_messages_check_deps_PlanningCmdSend
+.PHONY : _clips_ros_generate_messages_check_deps_PlanningCmdSend
+
+# fast build rule for target.
+_clips_ros_generate_messages_check_deps_PlanningCmdSend/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_PlanningCmdSend.dir/build.make clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_PlanningCmdSend.dir/build
+.PHONY : _clips_ros_generate_messages_check_deps_PlanningCmdSend/fast
+
+#=============================================================================
+# Target rules for targets named _clips_ros_generate_messages_check_deps_RecognizedSpeech
+
+# Build rule for target.
+_clips_ros_generate_messages_check_deps_RecognizedSpeech: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _clips_ros_generate_messages_check_deps_RecognizedSpeech
+.PHONY : _clips_ros_generate_messages_check_deps_RecognizedSpeech
+
+# fast build rule for target.
+_clips_ros_generate_messages_check_deps_RecognizedSpeech/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_RecognizedSpeech.dir/build.make clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_RecognizedSpeech.dir/build
+.PHONY : _clips_ros_generate_messages_check_deps_RecognizedSpeech/fast
+
+#=============================================================================
+# Target rules for targets named _clips_ros_generate_messages_check_deps_RepeatedSentence
+
+# Build rule for target.
+_clips_ros_generate_messages_check_deps_RepeatedSentence: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _clips_ros_generate_messages_check_deps_RepeatedSentence
+.PHONY : _clips_ros_generate_messages_check_deps_RepeatedSentence
+
+# fast build rule for target.
+_clips_ros_generate_messages_check_deps_RepeatedSentence/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_RepeatedSentence.dir/build.make clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_RepeatedSentence.dir/build
+.PHONY : _clips_ros_generate_messages_check_deps_RepeatedSentence/fast
+
+#=============================================================================
+# Target rules for targets named _clips_ros_generate_messages_check_deps_StrQueryKDB
+
+# Build rule for target.
+_clips_ros_generate_messages_check_deps_StrQueryKDB: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _clips_ros_generate_messages_check_deps_StrQueryKDB
+.PHONY : _clips_ros_generate_messages_check_deps_StrQueryKDB
+
+# fast build rule for target.
+_clips_ros_generate_messages_check_deps_StrQueryKDB/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_StrQueryKDB.dir/build.make clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_StrQueryKDB.dir/build
+.PHONY : _clips_ros_generate_messages_check_deps_StrQueryKDB/fast
+
+#=============================================================================
+# Target rules for targets named _clips_ros_generate_messages_check_deps_clearKDB
+
+# Build rule for target.
+_clips_ros_generate_messages_check_deps_clearKDB: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _clips_ros_generate_messages_check_deps_clearKDB
+.PHONY : _clips_ros_generate_messages_check_deps_clearKDB
+
+# fast build rule for target.
+_clips_ros_generate_messages_check_deps_clearKDB/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_clearKDB.dir/build.make clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_clearKDB.dir/build
+.PHONY : _clips_ros_generate_messages_check_deps_clearKDB/fast
+
+#=============================================================================
+# Target rules for targets named _clips_ros_generate_messages_check_deps_planning_cmd
+
+# Build rule for target.
+_clips_ros_generate_messages_check_deps_planning_cmd: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _clips_ros_generate_messages_check_deps_planning_cmd
+.PHONY : _clips_ros_generate_messages_check_deps_planning_cmd
+
+# fast build rule for target.
+_clips_ros_generate_messages_check_deps_planning_cmd/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_planning_cmd.dir/build.make clips_ros/CMakeFiles/_clips_ros_generate_messages_check_deps_planning_cmd.dir/build
+.PHONY : _clips_ros_generate_messages_check_deps_planning_cmd/fast
+
+#=============================================================================
+# Target rules for targets named clips_ros
+
+# Build rule for target.
+clips_ros: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clips_ros
+.PHONY : clips_ros
+
+# fast build rule for target.
+clips_ros/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/clips_ros.dir/build.make clips_ros/CMakeFiles/clips_ros.dir/build
+.PHONY : clips_ros/fast
+
+#=============================================================================
+# Target rules for targets named clips_ros_gencpp
+
+# Build rule for target.
+clips_ros_gencpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clips_ros_gencpp
+.PHONY : clips_ros_gencpp
+
+# fast build rule for target.
+clips_ros_gencpp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/clips_ros_gencpp.dir/build.make clips_ros/CMakeFiles/clips_ros_gencpp.dir/build
+.PHONY : clips_ros_gencpp/fast
+
+#=============================================================================
+# Target rules for targets named clips_ros_generate_messages
+
+# Build rule for target.
+clips_ros_generate_messages: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clips_ros_generate_messages
+.PHONY : clips_ros_generate_messages
+
+# fast build rule for target.
+clips_ros_generate_messages/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/clips_ros_generate_messages.dir/build.make clips_ros/CMakeFiles/clips_ros_generate_messages.dir/build
+.PHONY : clips_ros_generate_messages/fast
+
+#=============================================================================
+# Target rules for targets named clips_ros_generate_messages_cpp
+
+# Build rule for target.
+clips_ros_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clips_ros_generate_messages_cpp
+.PHONY : clips_ros_generate_messages_cpp
+
+# fast build rule for target.
+clips_ros_generate_messages_cpp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/clips_ros_generate_messages_cpp.dir/build.make clips_ros/CMakeFiles/clips_ros_generate_messages_cpp.dir/build
+.PHONY : clips_ros_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named clips_ros_generate_messages_lisp
+
+# Build rule for target.
+clips_ros_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clips_ros_generate_messages_lisp
+.PHONY : clips_ros_generate_messages_lisp
+
+# fast build rule for target.
+clips_ros_generate_messages_lisp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/clips_ros_generate_messages_lisp.dir/build.make clips_ros/CMakeFiles/clips_ros_generate_messages_lisp.dir/build
+.PHONY : clips_ros_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named clips_ros_generate_messages_py
+
+# Build rule for target.
+clips_ros_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clips_ros_generate_messages_py
+.PHONY : clips_ros_generate_messages_py
+
+# fast build rule for target.
+clips_ros_generate_messages_py/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/clips_ros_generate_messages_py.dir/build.make clips_ros/CMakeFiles/clips_ros_generate_messages_py.dir/build
+.PHONY : clips_ros_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named clips_ros_genlisp
+
+# Build rule for target.
+clips_ros_genlisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clips_ros_genlisp
+.PHONY : clips_ros_genlisp
+
+# fast build rule for target.
+clips_ros_genlisp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/clips_ros_genlisp.dir/build.make clips_ros/CMakeFiles/clips_ros_genlisp.dir/build
+.PHONY : clips_ros_genlisp/fast
+
+#=============================================================================
+# Target rules for targets named clips_ros_genpy
+
+# Build rule for target.
+clips_ros_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clips_ros_genpy
+.PHONY : clips_ros_genpy
+
+# fast build rule for target.
+clips_ros_genpy/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/clips_ros_genpy.dir/build.make clips_ros/CMakeFiles/clips_ros_genpy.dir/build
+.PHONY : clips_ros_genpy/fast
+
+#=============================================================================
+# Target rules for targets named geometry_msgs_generate_messages_cpp
+
+# Build rule for target.
+geometry_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 geometry_msgs_generate_messages_cpp
+.PHONY : geometry_msgs_generate_messages_cpp
+
+# fast build rule for target.
+geometry_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make clips_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+.PHONY : geometry_msgs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named geometry_msgs_generate_messages_lisp
+
+# Build rule for target.
+geometry_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 geometry_msgs_generate_messages_lisp
+.PHONY : geometry_msgs_generate_messages_lisp
+
+# fast build rule for target.
+geometry_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make clips_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
+.PHONY : geometry_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named geometry_msgs_generate_messages_py
+
+# Build rule for target.
+geometry_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 geometry_msgs_generate_messages_py
+.PHONY : geometry_msgs_generate_messages_py
+
+# fast build rule for target.
+geometry_msgs_generate_messages_py/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make clips_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
+.PHONY : geometry_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named roscpp_generate_messages_cpp
+
+# Build rule for target.
+roscpp_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_cpp
+.PHONY : roscpp_generate_messages_cpp
+
+# fast build rule for target.
+roscpp_generate_messages_cpp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make clips_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+.PHONY : roscpp_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named roscpp_generate_messages_lisp
+
+# Build rule for target.
+roscpp_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_lisp
+.PHONY : roscpp_generate_messages_lisp
+
+# fast build rule for target.
+roscpp_generate_messages_lisp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make clips_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+.PHONY : roscpp_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named roscpp_generate_messages_py
+
+# Build rule for target.
+roscpp_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_py
+.PHONY : roscpp_generate_messages_py
+
+# fast build rule for target.
+roscpp_generate_messages_py/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/roscpp_generate_messages_py.dir/build.make clips_ros/CMakeFiles/roscpp_generate_messages_py.dir/build
+.PHONY : roscpp_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named rosgraph_msgs_generate_messages_cpp
+
+# Build rule for target.
+rosgraph_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_cpp
+.PHONY : rosgraph_msgs_generate_messages_cpp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make clips_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named rosgraph_msgs_generate_messages_lisp
+
+# Build rule for target.
+rosgraph_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_lisp
+.PHONY : rosgraph_msgs_generate_messages_lisp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make clips_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named rosgraph_msgs_generate_messages_py
+
+# Build rule for target.
+rosgraph_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_py
+.PHONY : rosgraph_msgs_generate_messages_py
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_py/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make clips_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+.PHONY : rosgraph_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named std_msgs_generate_messages_cpp
+
+# Build rule for target.
+std_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 std_msgs_generate_messages_cpp
+.PHONY : std_msgs_generate_messages_cpp
+
+# fast build rule for target.
+std_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make clips_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
+.PHONY : std_msgs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named std_msgs_generate_messages_lisp
+
+# Build rule for target.
+std_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 std_msgs_generate_messages_lisp
+.PHONY : std_msgs_generate_messages_lisp
+
+# fast build rule for target.
+std_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make clips_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+.PHONY : std_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named std_msgs_generate_messages_py
+
+# Build rule for target.
+std_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 std_msgs_generate_messages_py
+.PHONY : std_msgs_generate_messages_py
+
+# fast build rule for target.
+std_msgs_generate_messages_py/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/std_msgs_generate_messages_py.dir/build.make clips_ros/CMakeFiles/std_msgs_generate_messages_py.dir/build
+.PHONY : std_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named std_srvs_generate_messages_cpp
+
+# Build rule for target.
+std_srvs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 std_srvs_generate_messages_cpp
+.PHONY : std_srvs_generate_messages_cpp
+
+# fast build rule for target.
+std_srvs_generate_messages_cpp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/std_srvs_generate_messages_cpp.dir/build.make clips_ros/CMakeFiles/std_srvs_generate_messages_cpp.dir/build
+.PHONY : std_srvs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named std_srvs_generate_messages_lisp
+
+# Build rule for target.
+std_srvs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 std_srvs_generate_messages_lisp
+.PHONY : std_srvs_generate_messages_lisp
+
+# fast build rule for target.
+std_srvs_generate_messages_lisp/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/std_srvs_generate_messages_lisp.dir/build.make clips_ros/CMakeFiles/std_srvs_generate_messages_lisp.dir/build
+.PHONY : std_srvs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named std_srvs_generate_messages_py
+
+# Build rule for target.
+std_srvs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 std_srvs_generate_messages_py
+.PHONY : std_srvs_generate_messages_py
+
+# fast build rule for target.
+std_srvs_generate_messages_py/fast:
+	$(MAKE) -f clips_ros/CMakeFiles/std_srvs_generate_messages_py.dir/build.make clips_ros/CMakeFiles/std_srvs_generate_messages_py.dir/build
+.PHONY : std_srvs_generate_messages_py/fast
+
+#=============================================================================
 # Target rules for targets named _simulator_generate_messages_check_deps_Laser_values
 
 # Build rule for target.
@@ -319,6 +748,19 @@ _simulator_generate_messages_check_deps_simulator_light/fast:
 .PHONY : _simulator_generate_messages_check_deps_simulator_light/fast
 
 #=============================================================================
+# Target rules for targets named _simulator_generate_messages_check_deps_simulator_object_interaction
+
+# Build rule for target.
+_simulator_generate_messages_check_deps_simulator_object_interaction: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _simulator_generate_messages_check_deps_simulator_object_interaction
+.PHONY : _simulator_generate_messages_check_deps_simulator_object_interaction
+
+# fast build rule for target.
+_simulator_generate_messages_check_deps_simulator_object_interaction/fast:
+	$(MAKE) -f simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_object_interaction.dir/build.make simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_object_interaction.dir/build
+.PHONY : _simulator_generate_messages_check_deps_simulator_object_interaction/fast
+
+#=============================================================================
 # Target rules for targets named _simulator_generate_messages_check_deps_simulator_parameters
 
 # Build rule for target.
@@ -356,6 +798,45 @@ _simulator_generate_messages_check_deps_simulator_robot_step: cmake_check_build_
 _simulator_generate_messages_check_deps_simulator_robot_step/fast:
 	$(MAKE) -f simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_step.dir/build.make simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_robot_step.dir/build
 .PHONY : _simulator_generate_messages_check_deps_simulator_robot_step/fast
+
+#=============================================================================
+# Target rules for targets named _simulator_generate_messages_check_deps_simulator_set_light_position
+
+# Build rule for target.
+_simulator_generate_messages_check_deps_simulator_set_light_position: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _simulator_generate_messages_check_deps_simulator_set_light_position
+.PHONY : _simulator_generate_messages_check_deps_simulator_set_light_position
+
+# fast build rule for target.
+_simulator_generate_messages_check_deps_simulator_set_light_position/fast:
+	$(MAKE) -f simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_set_light_position.dir/build.make simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_set_light_position.dir/build
+.PHONY : _simulator_generate_messages_check_deps_simulator_set_light_position/fast
+
+#=============================================================================
+# Target rules for targets named _simulator_generate_messages_check_deps_simulator_stop
+
+# Build rule for target.
+_simulator_generate_messages_check_deps_simulator_stop: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _simulator_generate_messages_check_deps_simulator_stop
+.PHONY : _simulator_generate_messages_check_deps_simulator_stop
+
+# fast build rule for target.
+_simulator_generate_messages_check_deps_simulator_stop/fast:
+	$(MAKE) -f simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_stop.dir/build.make simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_stop.dir/build
+.PHONY : _simulator_generate_messages_check_deps_simulator_stop/fast
+
+#=============================================================================
+# Target rules for targets named _simulator_generate_messages_check_deps_simulator_turtlebot
+
+# Build rule for target.
+_simulator_generate_messages_check_deps_simulator_turtlebot: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _simulator_generate_messages_check_deps_simulator_turtlebot
+.PHONY : _simulator_generate_messages_check_deps_simulator_turtlebot
+
+# fast build rule for target.
+_simulator_generate_messages_check_deps_simulator_turtlebot/fast:
+	$(MAKE) -f simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_turtlebot.dir/build.make simulator/CMakeFiles/_simulator_generate_messages_check_deps_simulator_turtlebot.dir/build
+.PHONY : _simulator_generate_messages_check_deps_simulator_turtlebot/fast
 
 #=============================================================================
 # Target rules for targets named base_node
@@ -410,82 +891,56 @@ motion_planner_node/fast:
 .PHONY : motion_planner_node/fast
 
 #=============================================================================
-# Target rules for targets named roscpp_generate_messages_cpp
+# Target rules for targets named move_turtlebot_node
 
 # Build rule for target.
-roscpp_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_cpp
-.PHONY : roscpp_generate_messages_cpp
+move_turtlebot_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 move_turtlebot_node
+.PHONY : move_turtlebot_node
 
 # fast build rule for target.
-roscpp_generate_messages_cpp/fast:
-	$(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_cpp.dir/build
-.PHONY : roscpp_generate_messages_cpp/fast
+move_turtlebot_node/fast:
+	$(MAKE) -f simulator/CMakeFiles/move_turtlebot_node.dir/build.make simulator/CMakeFiles/move_turtlebot_node.dir/build
+.PHONY : move_turtlebot_node/fast
 
 #=============================================================================
-# Target rules for targets named roscpp_generate_messages_lisp
+# Target rules for targets named sensor_msgs_generate_messages_cpp
 
 # Build rule for target.
-roscpp_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_lisp
-.PHONY : roscpp_generate_messages_lisp
+sensor_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sensor_msgs_generate_messages_cpp
+.PHONY : sensor_msgs_generate_messages_cpp
 
 # fast build rule for target.
-roscpp_generate_messages_lisp/fast:
-	$(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_lisp.dir/build
-.PHONY : roscpp_generate_messages_lisp/fast
+sensor_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
+.PHONY : sensor_msgs_generate_messages_cpp/fast
 
 #=============================================================================
-# Target rules for targets named roscpp_generate_messages_py
+# Target rules for targets named sensor_msgs_generate_messages_lisp
 
 # Build rule for target.
-roscpp_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_py
-.PHONY : roscpp_generate_messages_py
+sensor_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sensor_msgs_generate_messages_lisp
+.PHONY : sensor_msgs_generate_messages_lisp
 
 # fast build rule for target.
-roscpp_generate_messages_py/fast:
-	$(MAKE) -f simulator/CMakeFiles/roscpp_generate_messages_py.dir/build.make simulator/CMakeFiles/roscpp_generate_messages_py.dir/build
-.PHONY : roscpp_generate_messages_py/fast
+sensor_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
+.PHONY : sensor_msgs_generate_messages_lisp/fast
 
 #=============================================================================
-# Target rules for targets named rosgraph_msgs_generate_messages_cpp
+# Target rules for targets named sensor_msgs_generate_messages_py
 
 # Build rule for target.
-rosgraph_msgs_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_cpp
-.PHONY : rosgraph_msgs_generate_messages_cpp
+sensor_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sensor_msgs_generate_messages_py
+.PHONY : sensor_msgs_generate_messages_py
 
 # fast build rule for target.
-rosgraph_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named rosgraph_msgs_generate_messages_lisp
-
-# Build rule for target.
-rosgraph_msgs_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_lisp
-.PHONY : rosgraph_msgs_generate_messages_lisp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named rosgraph_msgs_generate_messages_py
-
-# Build rule for target.
-rosgraph_msgs_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_py
-.PHONY : rosgraph_msgs_generate_messages_py
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_py/fast:
-	$(MAKE) -f simulator/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
-.PHONY : rosgraph_msgs_generate_messages_py/fast
+sensor_msgs_generate_messages_py/fast:
+	$(MAKE) -f simulator/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
+.PHONY : sensor_msgs_generate_messages_py/fast
 
 #=============================================================================
 # Target rules for targets named simulator_gencpp
@@ -578,58 +1033,6 @@ simulator_genpy/fast:
 	$(MAKE) -f simulator/CMakeFiles/simulator_genpy.dir/build.make simulator/CMakeFiles/simulator_genpy.dir/build
 .PHONY : simulator_genpy/fast
 
-#=============================================================================
-# Target rules for targets named simulator_pub
-
-# Build rule for target.
-simulator_pub: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 simulator_pub
-.PHONY : simulator_pub
-
-# fast build rule for target.
-simulator_pub/fast:
-	$(MAKE) -f simulator/CMakeFiles/simulator_pub.dir/build.make simulator/CMakeFiles/simulator_pub.dir/build
-.PHONY : simulator_pub/fast
-
-#=============================================================================
-# Target rules for targets named std_msgs_generate_messages_cpp
-
-# Build rule for target.
-std_msgs_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 std_msgs_generate_messages_cpp
-.PHONY : std_msgs_generate_messages_cpp
-
-# fast build rule for target.
-std_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
-.PHONY : std_msgs_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named std_msgs_generate_messages_lisp
-
-# Build rule for target.
-std_msgs_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 std_msgs_generate_messages_lisp
-.PHONY : std_msgs_generate_messages_lisp
-
-# fast build rule for target.
-std_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
-.PHONY : std_msgs_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named std_msgs_generate_messages_py
-
-# Build rule for target.
-std_msgs_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 std_msgs_generate_messages_py
-.PHONY : std_msgs_generate_messages_py
-
-# fast build rule for target.
-std_msgs_generate_messages_py/fast:
-	$(MAKE) -f simulator/CMakeFiles/std_msgs_generate_messages_py.dir/build.make simulator/CMakeFiles/std_msgs_generate_messages_py.dir/build
-.PHONY : std_msgs_generate_messages_py/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -650,25 +1053,60 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... _simulator_generate_messages_check_deps_Laser_values"
-	@echo "... _simulator_generate_messages_check_deps_Parameters"
-	@echo "... _simulator_generate_messages_check_deps_simulator_algorithm_result"
-	@echo "... _simulator_generate_messages_check_deps_simulator_base"
-	@echo "... _simulator_generate_messages_check_deps_simulator_laser"
-	@echo "... _simulator_generate_messages_check_deps_simulator_light"
-	@echo "... _simulator_generate_messages_check_deps_simulator_parameters"
-	@echo "... _simulator_generate_messages_check_deps_simulator_robot_laser_values"
-	@echo "... _simulator_generate_messages_check_deps_simulator_robot_step"
-	@echo "... base_node"
-	@echo "... laser_node"
-	@echo "... light_node"
-	@echo "... motion_planner_node"
+	@echo "... _clips_ros_generate_messages_check_deps_CFRParams"
+	@echo "... _clips_ros_generate_messages_check_deps_InitKDB"
+	@echo "... _clips_ros_generate_messages_check_deps_PlanningCFR"
+	@echo "... _clips_ros_generate_messages_check_deps_PlanningCmdClips"
+	@echo "... _clips_ros_generate_messages_check_deps_PlanningCmdSend"
+	@echo "... _clips_ros_generate_messages_check_deps_RecognizedSpeech"
+	@echo "... _clips_ros_generate_messages_check_deps_RepeatedSentence"
+	@echo "... _clips_ros_generate_messages_check_deps_StrQueryKDB"
+	@echo "... _clips_ros_generate_messages_check_deps_clearKDB"
+	@echo "... _clips_ros_generate_messages_check_deps_planning_cmd"
+	@echo "... clips_ros"
+	@echo "... clips_ros_gencpp"
+	@echo "... clips_ros_generate_messages"
+	@echo "... clips_ros_generate_messages_cpp"
+	@echo "... clips_ros_generate_messages_lisp"
+	@echo "... clips_ros_generate_messages_py"
+	@echo "... clips_ros_genlisp"
+	@echo "... clips_ros_genpy"
+	@echo "... geometry_msgs_generate_messages_cpp"
+	@echo "... geometry_msgs_generate_messages_lisp"
+	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... std_msgs_generate_messages_cpp"
+	@echo "... std_msgs_generate_messages_lisp"
+	@echo "... std_msgs_generate_messages_py"
+	@echo "... std_srvs_generate_messages_cpp"
+	@echo "... std_srvs_generate_messages_lisp"
+	@echo "... std_srvs_generate_messages_py"
+	@echo "... _simulator_generate_messages_check_deps_Laser_values"
+	@echo "... _simulator_generate_messages_check_deps_Parameters"
+	@echo "... _simulator_generate_messages_check_deps_simulator_algorithm_result"
+	@echo "... _simulator_generate_messages_check_deps_simulator_base"
+	@echo "... _simulator_generate_messages_check_deps_simulator_laser"
+	@echo "... _simulator_generate_messages_check_deps_simulator_light"
+	@echo "... _simulator_generate_messages_check_deps_simulator_object_interaction"
+	@echo "... _simulator_generate_messages_check_deps_simulator_parameters"
+	@echo "... _simulator_generate_messages_check_deps_simulator_robot_laser_values"
+	@echo "... _simulator_generate_messages_check_deps_simulator_robot_step"
+	@echo "... _simulator_generate_messages_check_deps_simulator_set_light_position"
+	@echo "... _simulator_generate_messages_check_deps_simulator_stop"
+	@echo "... _simulator_generate_messages_check_deps_simulator_turtlebot"
+	@echo "... base_node"
+	@echo "... laser_node"
+	@echo "... light_node"
+	@echo "... motion_planner_node"
+	@echo "... move_turtlebot_node"
+	@echo "... sensor_msgs_generate_messages_cpp"
+	@echo "... sensor_msgs_generate_messages_lisp"
+	@echo "... sensor_msgs_generate_messages_py"
 	@echo "... simulator_gencpp"
 	@echo "... simulator_generate_messages"
 	@echo "... simulator_generate_messages_cpp"
@@ -676,10 +1114,6 @@ help:
 	@echo "... simulator_generate_messages_py"
 	@echo "... simulator_genlisp"
 	@echo "... simulator_genpy"
-	@echo "... simulator_pub"
-	@echo "... std_msgs_generate_messages_cpp"
-	@echo "... std_msgs_generate_messages_lisp"
-	@echo "... std_msgs_generate_messages_py"
 .PHONY : help
 
 

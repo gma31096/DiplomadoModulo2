@@ -1,23 +1,64 @@
 #!/usr/bin/env python
+
 from MobileRobotSimulator import *
 from simulator.srv import *
 from simulator.msg import Parameters
-from simulator.msg import Laser_values
+from sensor_msgs.msg import LaserScan
+from nav_msgs.msg import Odometry
+from tf.transformations import euler_from_quaternion 
+import tf
 import time
 import rospy
 
 gui=MobileRobotSimulator()
 
+def turtle_odometry(msg):
+	quaternion = (
+    msg.pose.pose.orientation.x,
+    msg.pose.pose.orientation.y,
+    msg.pose.pose.orientation.z,
+    msg.pose.pose.orientation.w)
+
+	euler = euler_from_quaternion(quaternion)
+	roll = euler[0]
+	pitch = euler[1]
+	yaw = euler[2]
+	gui.handle_turtle(msg.pose.pose.position.x,msg.pose.pose.position.y,yaw)
+	#msg.pose.pose.position
+	
+def handle_simulator_object_interaction(req):
+	print(req)
+	resp = simulator_object_interactionResponse()
+	resp.done = gui.handle_simulator_object_interaction(req.grasp,req.name)
+	print(gui.objects_data)
+	return resp
+
+def update_value(msg):
+	gui.handle_hokuyo(msg.ranges)
+	ranges=msg.ranges
+
+def handle_simulator_set_light_position(req):
+
+	resp = simulator_set_light_positionResponse()
+	gui.set_light_position(req.light_x,req.light_y)
+	return resp
+
+def handle_simulator_stop(req):
+
+	resp = simulator_stopResponse()
+	gui.s_t_simulation(False)
+	return resp
+
+
 def handle_robot_step(req):
 
 	resp = simulator_robot_stepResponse()
+	gui.sensors_values_aux = req.sensors;
 	gui.handle_service(req.theta,req.distance)
 	parameters = gui.get_parameters()
 	resp.robot_x = parameters[0]
 	resp.robot_y = parameters[1]
 	resp.theta = parameters[2]
-	#print ("DONE")
-
 	return resp
 
 def handle_print_graph(req):
@@ -25,28 +66,31 @@ def handle_print_graph(req):
 	resp = simulator_algorithm_resultResponse()
 	gui.handle_print_graph(req.nodes_algorithm)
 	resp.success=1;
-	#print ("DONE3")
 	return resp
-
-def callback(data):
-    gui.sensors_value = data.sensors;
-    #print("aqui")
 
 def ros():
 
 	rospy.init_node('simulator_gui_node')
 	a = rospy.Service('simulator_robot_step', simulator_robot_step, handle_robot_step)
-	d = rospy.Service('simulator_print_graph', simulator_algorithm_result, handle_print_graph)
-	
-	pub_params = rospy.Publisher('simulator_parameters_pub', Parameters, queue_size=1)
-	rospy.Subscriber("simulator_laser_pub", Laser_values, callback)
+	b = rospy.Service('simulator_print_graph', simulator_algorithm_result, handle_print_graph)
+	c = rospy.Service('simulator_stop', simulator_stop, handle_simulator_stop)
+	d = rospy.Service('simulator_set_light_position', simulator_set_light_position, handle_simulator_set_light_position)
+	e = rospy.Service('simulator_object_interaction', simulator_object_interaction, handle_simulator_object_interaction)
+	rospy.Subscriber('/scan',LaserScan,update_value,queue_size=1)
+	rospy.Subscriber('/odom',Odometry, turtle_odometry ,queue_size=1)
+	pub_params = rospy.Publisher('simulator_parameters_pub', Parameters, queue_size = 0)
+	#rospy.Subscriber("simulator_laser_pub", Laser_values, callback)
 
 	msg_params = Parameters()
-	rate = rospy.Rate(40)
+
+	rate = rospy.Rate(100)
 
 	while not gui.stopped:
 	#while not rospy.is_shutdown():
-	
+		#if gui.get_vel() :
+		#	rate = rospy.Rate(600)
+		#else:
+		#	rate = rospy.Rate(100)
 		parameters = gui.get_parameters()
 		msg_params.robot_x = parameters[0]
 		msg_params.robot_y = parameters[1]
@@ -65,10 +109,15 @@ def ros():
 		msg_params.run = parameters[14]
 		msg_params.behavior = parameters[15]
 		msg_params.steps = parameters[16]
+		msg_params.turtle = parameters[16]
+		pub_params.publish(msg_params)
+		rate.sleep()
+
+
+	for _ in range(2000):
+		msg_params.run = False
 		pub_params.publish(msg_params)
 		rate.sleep()
 
 if __name__ == "__main__":
     ros()
-
-

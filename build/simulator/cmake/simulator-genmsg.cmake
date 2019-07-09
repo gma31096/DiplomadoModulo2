@@ -1,8 +1,8 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "simulator: 2 messages, 7 services")
+message(STATUS "simulator: 2 messages, 11 services")
 
-set(MSG_I_FLAGS "-Isimulator:/home/diego/catkin_ws/src/simulator/msg;-Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg")
+set(MSG_I_FLAGS "-Isimulator:/home/gerardo/catkin_ws/src/simulator/msg;-Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg;-Isensor_msgs:/opt/ros/indigo/share/sensor_msgs/cmake/../msg;-Igeometry_msgs:/opt/ros/indigo/share/geometry_msgs/cmake/../msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -15,49 +15,69 @@ add_custom_target(simulator_generate_messages ALL)
 
 
 
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_laser.srv" NAME_WE)
 add_custom_target(_simulator_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/srv/simulator_laser.srv" ""
 )
 
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/msg/Laser_values.msg" NAME_WE)
 add_custom_target(_simulator_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/msg/Laser_values.msg" ""
 )
 
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_base.srv" NAME_WE)
 add_custom_target(_simulator_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/srv/simulator_base.srv" ""
 )
 
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_light.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_turtlebot.srv" NAME_WE)
 add_custom_target(_simulator_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/simulator_light.srv" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/srv/simulator_turtlebot.srv" ""
 )
 
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" NAME_WE)
 add_custom_target(_simulator_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" ""
 )
 
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_set_light_position.srv" NAME_WE)
 add_custom_target(_simulator_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/srv/simulator_set_light_position.srv" ""
 )
 
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_stop.srv" NAME_WE)
 add_custom_target(_simulator_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/srv/simulator_stop.srv" ""
 )
 
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/msg/Parameters.msg" NAME_WE)
 add_custom_target(_simulator_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/msg/Parameters.msg" ""
 )
 
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
 add_custom_target(_simulator_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_step.srv" ""
+)
+
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
+add_custom_target(_simulator_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/srv/simulator_parameters.srv" ""
+)
+
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_light.srv" NAME_WE)
+add_custom_target(_simulator_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/srv/simulator_light.srv" ""
+)
+
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv" NAME_WE)
+add_custom_target(_simulator_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv" ""
+)
+
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_object_interaction.srv" NAME_WE)
+add_custom_target(_simulator_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "simulator" "/home/gerardo/catkin_ws/src/simulator/srv/simulator_object_interaction.srv" ""
 )
 
 #
@@ -67,13 +87,13 @@ add_custom_target(_simulator_generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(simulator
-  "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg"
+  "/home/gerardo/catkin_ws/src/simulator/msg/Parameters.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
 )
 _generate_msg_cpp(simulator
-  "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg"
+  "/home/gerardo/catkin_ws/src/simulator/msg/Laser_values.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
@@ -81,43 +101,67 @@ _generate_msg_cpp(simulator
 
 ### Generating Services
 _generate_srv_cpp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_laser.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
 )
 _generate_srv_cpp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_set_light_position.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
 )
 _generate_srv_cpp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_light.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_object_interaction.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
 )
 _generate_srv_cpp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
 )
 _generate_srv_cpp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_base.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
 )
 _generate_srv_cpp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_stop.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
 )
 _generate_srv_cpp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_step.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
+)
+_generate_srv_cpp(simulator
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_parameters.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
+)
+_generate_srv_cpp(simulator
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_light.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
+)
+_generate_srv_cpp(simulator
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
+)
+_generate_srv_cpp(simulator
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_turtlebot.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/simulator
@@ -135,23 +179,31 @@ add_custom_target(simulator_generate_messages_cpp
 add_dependencies(simulator_generate_messages simulator_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_laser.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/msg/Laser_values.msg" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_base.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_light.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_turtlebot.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_set_light_position.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_stop.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/msg/Parameters.msg" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_light.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_object_interaction.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_cpp _simulator_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -164,13 +216,13 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS simulator_generate_messages_cpp)
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(simulator
-  "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg"
+  "/home/gerardo/catkin_ws/src/simulator/msg/Parameters.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
 )
 _generate_msg_lisp(simulator
-  "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg"
+  "/home/gerardo/catkin_ws/src/simulator/msg/Laser_values.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
@@ -178,43 +230,67 @@ _generate_msg_lisp(simulator
 
 ### Generating Services
 _generate_srv_lisp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_laser.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
 )
 _generate_srv_lisp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_set_light_position.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
 )
 _generate_srv_lisp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_light.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_object_interaction.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
 )
 _generate_srv_lisp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
 )
 _generate_srv_lisp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_base.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
 )
 _generate_srv_lisp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_stop.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
 )
 _generate_srv_lisp(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_step.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
+)
+_generate_srv_lisp(simulator
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_parameters.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
+)
+_generate_srv_lisp(simulator
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_light.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
+)
+_generate_srv_lisp(simulator
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
+)
+_generate_srv_lisp(simulator
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_turtlebot.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator
@@ -232,23 +308,31 @@ add_custom_target(simulator_generate_messages_lisp
 add_dependencies(simulator_generate_messages simulator_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_laser.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/msg/Laser_values.msg" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_base.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_light.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_turtlebot.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_set_light_position.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_stop.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/msg/Parameters.msg" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_light.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_object_interaction.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_lisp _simulator_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -261,13 +345,13 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS simulator_generate_messages_lisp)
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(simulator
-  "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg"
+  "/home/gerardo/catkin_ws/src/simulator/msg/Parameters.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
 )
 _generate_msg_py(simulator
-  "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg"
+  "/home/gerardo/catkin_ws/src/simulator/msg/Laser_values.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
@@ -275,43 +359,67 @@ _generate_msg_py(simulator
 
 ### Generating Services
 _generate_srv_py(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_laser.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
 )
 _generate_srv_py(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_set_light_position.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
 )
 _generate_srv_py(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_light.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_object_interaction.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
 )
 _generate_srv_py(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
 )
 _generate_srv_py(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_base.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
 )
 _generate_srv_py(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_stop.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
 )
 _generate_srv_py(simulator
-  "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv"
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_step.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
+)
+_generate_srv_py(simulator
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_parameters.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
+)
+_generate_srv_py(simulator
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_light.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
+)
+_generate_srv_py(simulator
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
+)
+_generate_srv_py(simulator
+  "/home/gerardo/catkin_ws/src/simulator/srv/simulator_turtlebot.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator
@@ -329,23 +437,31 @@ add_custom_target(simulator_generate_messages_py
 add_dependencies(simulator_generate_messages simulator_generate_messages_py)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_laser.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/msg/Laser_values.msg" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_laser.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_base.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_light.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_turtlebot.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_base.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_set_light_position.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Parameters.msg" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_stop.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/srv/simulator_robot_laser_values.srv" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/msg/Parameters.msg" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/diego/catkin_ws/src/simulator/msg/Laser_values.msg" NAME_WE)
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_robot_step.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_parameters.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_light.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_algorithm_result.srv" NAME_WE)
+add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/gerardo/catkin_ws/src/simulator/srv/simulator_object_interaction.srv" NAME_WE)
 add_dependencies(simulator_generate_messages_py _simulator_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -367,6 +483,9 @@ endif()
 if(TARGET std_msgs_generate_messages_cpp)
   add_dependencies(simulator_generate_messages_cpp std_msgs_generate_messages_cpp)
 endif()
+if(TARGET sensor_msgs_generate_messages_cpp)
+  add_dependencies(simulator_generate_messages_cpp sensor_msgs_generate_messages_cpp)
+endif()
 
 if(genlisp_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/simulator)
   # install generated code
@@ -377,6 +496,9 @@ if(genlisp_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/
 endif()
 if(TARGET std_msgs_generate_messages_lisp)
   add_dependencies(simulator_generate_messages_lisp std_msgs_generate_messages_lisp)
+endif()
+if(TARGET sensor_msgs_generate_messages_lisp)
+  add_dependencies(simulator_generate_messages_lisp sensor_msgs_generate_messages_lisp)
 endif()
 
 if(genpy_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simulator)
@@ -389,4 +511,7 @@ if(genpy_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/simu
 endif()
 if(TARGET std_msgs_generate_messages_py)
   add_dependencies(simulator_generate_messages_py std_msgs_generate_messages_py)
+endif()
+if(TARGET sensor_msgs_generate_messages_py)
+  add_dependencies(simulator_generate_messages_py sensor_msgs_generate_messages_py)
 endif()

@@ -91,7 +91,12 @@
     :reader steps
     :initarg :steps
     :type cl:integer
-    :initform 0))
+    :initform 0)
+   (turtle
+    :reader turtle
+    :initarg :turtle
+    :type cl:boolean
+    :initform cl:nil))
 )
 
 (cl:defclass Parameters (<Parameters>)
@@ -186,6 +191,11 @@
 (cl:defmethod steps-val ((m <Parameters>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-msg:steps-val is deprecated.  Use simulator-msg:steps instead.")
   (steps m))
+
+(cl:ensure-generic-function 'turtle-val :lambda-list '(m))
+(cl:defmethod turtle-val ((m <Parameters>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-msg:turtle-val is deprecated.  Use simulator-msg:turtle instead.")
+  (turtle m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <Parameters>) ostream)
   "Serializes a message object of type '<Parameters>"
   (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'robot_x))))
@@ -269,6 +279,7 @@
     (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
     )
+  (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'turtle) 1 0)) ostream)
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <Parameters>) istream)
   "Deserializes a message object of type '<Parameters>"
@@ -366,6 +377,7 @@
       (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
       (cl:setf (cl:slot-value msg 'steps) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
+    (cl:setf (cl:slot-value msg 'turtle) (cl:not (cl:zerop (cl:read-byte istream))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<Parameters>)))
@@ -376,16 +388,16 @@
   "simulator/Parameters")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<Parameters>)))
   "Returns md5sum for a message object of type '<Parameters>"
-  "c3a3242b503b35f6fa2f7b2245605401")
+  "eb9508f5e9e6604d74275a2ec9e9f522")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'Parameters)))
   "Returns md5sum for a message object of type 'Parameters"
-  "c3a3242b503b35f6fa2f7b2245605401")
+  "eb9508f5e9e6604d74275a2ec9e9f522")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<Parameters>)))
   "Returns full string definition for message of type '<Parameters>"
-  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%float32 robot_radio~%float32 robot_max_advance~%float32 robot_turn_angle~%int32 laser_num_sensors~%float32 laser_origin~%float32 laser_range~%float32 laser_value~%string world_name~%bool noise~%bool run~%float32 light_x~%float32 light_y~%int32 behavior~%int32 steps~%~%"))
+  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%float32 robot_radio~%float32 robot_max_advance~%float32 robot_turn_angle~%int32 laser_num_sensors~%float32 laser_origin~%float32 laser_range~%float32 laser_value~%string world_name~%bool noise~%bool run~%float32 light_x~%float32 light_y~%int32 behavior~%int32 steps~%bool turtle~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'Parameters)))
   "Returns full string definition for message of type 'Parameters"
-  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%float32 robot_radio~%float32 robot_max_advance~%float32 robot_turn_angle~%int32 laser_num_sensors~%float32 laser_origin~%float32 laser_range~%float32 laser_value~%string world_name~%bool noise~%bool run~%float32 light_x~%float32 light_y~%int32 behavior~%int32 steps~%~%"))
+  (cl:format cl:nil "float32 robot_x~%float32 robot_y~%float32 robot_theta~%float32 robot_radio~%float32 robot_max_advance~%float32 robot_turn_angle~%int32 laser_num_sensors~%float32 laser_origin~%float32 laser_range~%float32 laser_value~%string world_name~%bool noise~%bool run~%float32 light_x~%float32 light_y~%int32 behavior~%int32 steps~%bool turtle~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <Parameters>))
   (cl:+ 0
      4
@@ -405,6 +417,7 @@
      4
      4
      4
+     1
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <Parameters>))
   "Converts a ROS message object to a list"
@@ -426,4 +439,5 @@
     (cl:cons ':light_y (light_y msg))
     (cl:cons ':behavior (behavior msg))
     (cl:cons ':steps (steps msg))
+    (cl:cons ':turtle (turtle msg))
 ))

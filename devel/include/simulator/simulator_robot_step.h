@@ -40,7 +40,7 @@ template<>
 struct MD5Sum< ::simulator::simulator_robot_step > {
   static const char* value()
   {
-    return "851b8b2ccdd280507cfab4425c086df0";
+    return "61c07095849b4725350f87062a0db530";
   }
 
   static const char* value(const ::simulator::simulator_robot_step&) { return value(); }

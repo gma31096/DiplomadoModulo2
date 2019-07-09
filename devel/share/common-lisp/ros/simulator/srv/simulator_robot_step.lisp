@@ -16,7 +16,17 @@
     :reader distance
     :initarg :distance
     :type cl:float
-    :initform 0.0))
+    :initform 0.0)
+   (sensors
+    :reader sensors
+    :initarg :sensors
+    :type (cl:vector cl:float)
+   :initform (cl:make-array 512 :element-type 'cl:float :initial-element 0.0))
+   (stop
+    :reader stop
+    :initarg :stop
+    :type cl:boolean
+    :initform cl:nil))
 )
 
 (cl:defclass simulator_robot_step-request (<simulator_robot_step-request>)
@@ -36,6 +46,16 @@
 (cl:defmethod distance-val ((m <simulator_robot_step-request>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-srv:distance-val is deprecated.  Use simulator-srv:distance instead.")
   (distance m))
+
+(cl:ensure-generic-function 'sensors-val :lambda-list '(m))
+(cl:defmethod sensors-val ((m <simulator_robot_step-request>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-srv:sensors-val is deprecated.  Use simulator-srv:sensors instead.")
+  (sensors m))
+
+(cl:ensure-generic-function 'stop-val :lambda-list '(m))
+(cl:defmethod stop-val ((m <simulator_robot_step-request>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader simulator-srv:stop-val is deprecated.  Use simulator-srv:stop instead.")
+  (stop m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <simulator_robot_step-request>) ostream)
   "Serializes a message object of type '<simulator_robot_step-request>"
   (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'theta))))
@@ -48,6 +68,13 @@
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
+  (cl:map cl:nil #'(cl:lambda (ele) (cl:let ((bits (roslisp-utils:encode-single-float-bits ele)))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)))
+   (cl:slot-value msg 'sensors))
+  (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'stop) 1 0)) ostream)
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <simulator_robot_step-request>) istream)
   "Deserializes a message object of type '<simulator_robot_step-request>"
@@ -63,6 +90,16 @@
       (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
     (cl:setf (cl:slot-value msg 'distance) (roslisp-utils:decode-single-float-bits bits)))
+  (cl:setf (cl:slot-value msg 'sensors) (cl:make-array 512))
+  (cl:let ((vals (cl:slot-value msg 'sensors)))
+    (cl:dotimes (i 512)
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+    (cl:setf (cl:aref vals i) (roslisp-utils:decode-single-float-bits bits)))))
+    (cl:setf (cl:slot-value msg 'stop) (cl:not (cl:zerop (cl:read-byte istream))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<simulator_robot_step-request>)))
@@ -73,26 +110,30 @@
   "simulator/simulator_robot_stepRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<simulator_robot_step-request>)))
   "Returns md5sum for a message object of type '<simulator_robot_step-request>"
-  "851b8b2ccdd280507cfab4425c086df0")
+  "61c07095849b4725350f87062a0db530")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'simulator_robot_step-request)))
   "Returns md5sum for a message object of type 'simulator_robot_step-request"
-  "851b8b2ccdd280507cfab4425c086df0")
+  "61c07095849b4725350f87062a0db530")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<simulator_robot_step-request>)))
   "Returns full string definition for message of type '<simulator_robot_step-request>"
-  (cl:format cl:nil "float32 theta~%float32 distance~%~%~%"))
+  (cl:format cl:nil "float32 theta~%float32 distance~%float32[512] sensors~%bool stop~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'simulator_robot_step-request)))
   "Returns full string definition for message of type 'simulator_robot_step-request"
-  (cl:format cl:nil "float32 theta~%float32 distance~%~%~%"))
+  (cl:format cl:nil "float32 theta~%float32 distance~%float32[512] sensors~%bool stop~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <simulator_robot_step-request>))
   (cl:+ 0
      4
      4
+     0 (cl:reduce #'cl:+ (cl:slot-value msg 'sensors) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 4)))
+     1
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <simulator_robot_step-request>))
   "Converts a ROS message object to a list"
   (cl:list 'simulator_robot_step-request
     (cl:cons ':theta (theta msg))
     (cl:cons ':distance (distance msg))
+    (cl:cons ':sensors (sensors msg))
+    (cl:cons ':stop (stop msg))
 ))
 ;//! \htmlinclude simulator_robot_step-response.msg.html
 
@@ -214,10 +255,10 @@
   "simulator/simulator_robot_stepResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<simulator_robot_step-response>)))
   "Returns md5sum for a message object of type '<simulator_robot_step-response>"
-  "851b8b2ccdd280507cfab4425c086df0")
+  "61c07095849b4725350f87062a0db530")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'simulator_robot_step-response)))
   "Returns md5sum for a message object of type 'simulator_robot_step-response"
-  "851b8b2ccdd280507cfab4425c086df0")
+  "61c07095849b4725350f87062a0db530")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<simulator_robot_step-response>)))
   "Returns full string definition for message of type '<simulator_robot_step-response>"
   (cl:format cl:nil "int64 success~%float32 robot_x~%float32 robot_y~%float32 theta~%~%~%~%"))

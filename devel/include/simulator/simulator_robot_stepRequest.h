@@ -25,13 +25,19 @@ struct simulator_robot_stepRequest_
 
   simulator_robot_stepRequest_()
     : theta(0.0)
-    , distance(0.0)  {
-    }
+    , distance(0.0)
+    , sensors()
+    , stop(false)  {
+      sensors.assign(0.0);
+  }
   simulator_robot_stepRequest_(const ContainerAllocator& _alloc)
     : theta(0.0)
-    , distance(0.0)  {
+    , distance(0.0)
+    , sensors()
+    , stop(false)  {
   (void)_alloc;
-    }
+      sensors.assign(0.0);
+  }
 
 
 
@@ -40,6 +46,12 @@ struct simulator_robot_stepRequest_
 
    typedef float _distance_type;
   _distance_type distance;
+
+   typedef boost::array<float, 512>  _sensors_type;
+  _sensors_type sensors;
+
+   typedef uint8_t _stop_type;
+  _stop_type stop;
 
 
 
@@ -75,7 +87,7 @@ namespace message_traits
 
 
 // BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'std_msgs': ['/opt/ros/indigo/share/std_msgs/cmake/../msg'], 'simulator': ['/home/diego/catkin_ws/src/simulator/msg']}
+// {'sensor_msgs': ['/opt/ros/indigo/share/sensor_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/indigo/share/std_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/indigo/share/geometry_msgs/cmake/../msg'], 'simulator': ['/home/gerardo/catkin_ws/src/simulator/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
@@ -118,12 +130,12 @@ struct MD5Sum< ::simulator::simulator_robot_stepRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "428ccb9659c7d3f0c6c3a803af59d6ab";
+    return "55fcd6c1882b7be6df8bd89be472cdeb";
   }
 
   static const char* value(const ::simulator::simulator_robot_stepRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x428ccb9659c7d3f0ULL;
-  static const uint64_t static_value2 = 0xc6c3a803af59d6abULL;
+  static const uint64_t static_value1 = 0x55fcd6c1882b7be6ULL;
+  static const uint64_t static_value2 = 0xdf8bd89be472cdebULL;
 };
 
 template<class ContainerAllocator>
@@ -144,6 +156,8 @@ struct Definition< ::simulator::simulator_robot_stepRequest_<ContainerAllocator>
   {
     return "float32 theta\n\
 float32 distance\n\
+float32[512] sensors\n\
+bool stop\n\
 ";
   }
 
@@ -164,6 +178,8 @@ namespace serialization
     {
       stream.next(m.theta);
       stream.next(m.distance);
+      stream.next(m.sensors);
+      stream.next(m.stop);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -186,6 +202,14 @@ struct Printer< ::simulator::simulator_robot_stepRequest_<ContainerAllocator> >
     Printer<float>::stream(s, indent + "  ", v.theta);
     s << indent << "distance: ";
     Printer<float>::stream(s, indent + "  ", v.distance);
+    s << indent << "sensors[]" << std::endl;
+    for (size_t i = 0; i < v.sensors.size(); ++i)
+    {
+      s << indent << "  sensors[" << i << "]: ";
+      Printer<float>::stream(s, indent + "  ", v.sensors[i]);
+    }
+    s << indent << "stop: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.stop);
   }
 };
 

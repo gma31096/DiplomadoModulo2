@@ -1,4 +1,5 @@
 #include "ros/ros.h"
+#include <ros/package.h>
 #include "simulator/Parameters.h"
 #include "../utilities/simulator_structures.h"
 #include "simulator/simulator_robot_step.h"
@@ -331,7 +332,9 @@ bool check_path(simulator::simulator_base::Request  &req ,simulator::simulator_b
 
 void paramsCallback(const simulator::Parameters::ConstPtr& paramss)
 {
-  char path[50];
+  std::string paths = ros::package::getPath("simulator");
+  char path[100];
+
 
   params.robot_x             = paramss->robot_x   ;
   params.robot_y             = paramss->robot_y   ;
@@ -352,7 +355,8 @@ void paramsCallback(const simulator::Parameters::ConstPtr& paramss)
 
     if(  strcmp( paramss->world_name.c_str(),actual_world) ) 
 	{
-		strcpy(path,"./src/simulator/src/data/");
+		strcpy(path,paths.c_str());
+		strcat(path,"/src/data/");
 		strcat(path,paramss->world_name.c_str());
 		strcat(path,"/");
 		strcat(path,paramss->world_name.c_str());

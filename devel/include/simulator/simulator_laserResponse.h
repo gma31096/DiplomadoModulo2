@@ -35,7 +35,7 @@ struct simulator_laserResponse_
 
 
 
-   typedef boost::array<float, 100>  _sensors_type;
+   typedef boost::array<float, 512>  _sensors_type;
   _sensors_type sensors;
 
 
@@ -72,7 +72,7 @@ namespace message_traits
 
 
 // BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'std_msgs': ['/opt/ros/indigo/share/std_msgs/cmake/../msg'], 'simulator': ['/home/diego/catkin_ws/src/simulator/msg']}
+// {'sensor_msgs': ['/opt/ros/indigo/share/sensor_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/indigo/share/std_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/indigo/share/geometry_msgs/cmake/../msg'], 'simulator': ['/home/gerardo/catkin_ws/src/simulator/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
@@ -115,12 +115,12 @@ struct MD5Sum< ::simulator::simulator_laserResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "e419bb63c59113a3a33a33958511350f";
+    return "8603e386fc4f503ff79022b9055ceccc";
   }
 
   static const char* value(const ::simulator::simulator_laserResponse_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xe419bb63c59113a3ULL;
-  static const uint64_t static_value2 = 0xa33a33958511350fULL;
+  static const uint64_t static_value1 = 0x8603e386fc4f503fULL;
+  static const uint64_t static_value2 = 0xf79022b9055cecccULL;
 };
 
 template<class ContainerAllocator>
@@ -139,7 +139,7 @@ struct Definition< ::simulator::simulator_laserResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "float32[100] sensors\n\
+    return "float32[512] sensors\n\
 \n\
 ";
   }

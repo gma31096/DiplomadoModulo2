@@ -16,7 +16,8 @@ SET(CMAKE_TARGET_LINKED_INFO_FILES
 
 # The include file search paths:
 SET(CMAKE_C_TARGET_INCLUDE_PATH
-  "/home/diego/catkin_ws/devel/include"
+  "/home/gerardo/catkin_ws/devel/include"
+  "/home/gerardo/catkin_ws/src/clips_ros/src"
   "/opt/ros/indigo/include"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

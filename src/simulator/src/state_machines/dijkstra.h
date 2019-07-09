@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ros/package.h>
 
 typedef struct conection_
 {
@@ -95,10 +96,10 @@ int read_nodes(char *file)
 
 void printNode(int i)
 {
-	printf("\n\n");
-   	printf("# %d  x   %f y %f\n",nodes[i].num_node,nodes[i].x,nodes[i].y );
-   	printf("flag: %c parent: %d   acumulado: %f  \n",nodes[i].flag,nodes[i].parent,nodes[i].acumulado  );
-   	printf("num_conections %d \n",nodes[i].num_conections);
+	   //printf("\n\n");
+   	//printf("# %d  x   %f y %f\n",nodes[i].num_node,nodes[i].x,nodes[i].y );
+   	//printf("flag: %c parent: %d   acumulado: %f  \n",nodes[i].flag,nodes[i].parent,nodes[i].acumulado  );
+   	//printf("num_conections %d \n",nodes[i].num_conections);
    	for(int j=0 ; j < nodes[i].num_conections; j++  )
    		printf(     "%d  %f \n",nodes[i].conections[j].node,nodes[i].conections[j].cost );
   
@@ -158,13 +159,14 @@ void dijkstra_algorithm(int D ,int L)
 
 int dijkstra(float rx ,float ry ,float lx ,float ly, char *world_name,step *steps )
 {
-   char archivo[50];
+   char archivo[150];
    int i;
    int start = 0;
    int goal = 0;
    //"../data/obstacles/obstacles.top";
- 
-   strcpy(archivo,"./src/simulator/src/data/");
+   std::string paths = ros::package::getPath("simulator");
+   strcpy(archivo,paths.c_str());
+   strcat(archivo,"/src/data/");
    strcat(archivo,world_name);
    strcat(archivo,"/");
    strcat(archivo,world_name);
@@ -177,7 +179,8 @@ int dijkstra(float rx ,float ry ,float lx ,float ly, char *world_name,step *step
    		nodes[i].parent = -1;
    		nodes[i].acumulado = 0;
    }
-   printf("Numero de nodos : %d \n",num_nodes=read_nodes(archivo));
+   num_nodes=read_nodes(archivo);
+   //printf("Numero de nodos : %d \n",num_nodes;
 
 
    for(i = 1; i < num_nodes; i++)
@@ -190,7 +193,7 @@ int dijkstra(float rx ,float ry ,float lx ,float ly, char *world_name,step *step
    			goal = i;
    }
 
-   printf("Start: %d Goal %d \n",start ,goal );
+//printf("Start: %d Goal %d \n",start ,goal );
 
 /*
    for(int i=0; i<num_nodes; i++)
@@ -205,17 +208,17 @@ int dijkstra(float rx ,float ry ,float lx ,float ly, char *world_name,step *step
    int padre = start;
 
 
-   printf("\n");
+  // printf("\n");
    i=0;
    while( padre != -1)
    {
-   	 printf(" %d ",padre);
+   	 //printf(" %d ",padre);
    	 steps[i].node = nodes[padre].num_node;
-   	 printf("nombre:%d ",nodes[padre].num_node);
+   	// printf("nombre:%d ",nodes[padre].num_node);
    	 steps[i].x = nodes[padre].x;
    	 steps[i++].y = nodes[padre].y;
    	 padre= nodes[padre].parent;
    }
-   printf("\n");
+  // printf("\n");
 	return 0;
 } 

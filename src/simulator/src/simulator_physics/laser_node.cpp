@@ -1,16 +1,21 @@
 #include "ros/ros.h"
+#include <ros/package.h>
 #include "simulator/Parameters.h"
-#include "simulator/Laser_values.h"
+//#include "simulator/Laser_values.h"
 #include "simulator/simulator_laser.h"
 #include "../utilities/simulator_structures.h"
 #include "simulator/simulator_robot_step.h"
 #include "simulator/simulator_parameters.h"
-#include "simulator/simulator_base.h"
+#include "sensor_msgs/LaserScan.h"
+#include "std_msgs/Header.h"
+//#include "simulator/simulator_base.h"
 #include <string.h>
 
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+
+#include <boost/thread/thread.hpp>  
 
 #define MAX_NUM_POLYGONS 100
 #define NUM_MAX_VERTEX 10
@@ -31,8 +36,13 @@ typedef struct Polygon_ {
 
 Polygon polygons_wrl[100];
 int num_polygons_wrl = 0;
-float sensors[100];
+float sensors[512];
+float X_pose,Y_pose;
 char actual_world[50];
+double robot_x;
+double robot_y;
+double robot_theta;
+parameters params;
 
 // it reads the file that conteins the environment description
 int ReadPolygons(char *file,Polygon *polygons){
@@ -204,10 +214,10 @@ int getValues(float laser_num_sensors, float laser_origin, float laser_range,flo
 	r_max.x = robot_x + laser_value; r_max.y = robot_y + laser_value;
 	r_min.x = robot_x - laser_value; r_min.y = robot_y - laser_value;
 
-	int posible_collision[100];
+	int posible_collision[512];
 	 //printf("self.w.create_rectangle(%f* self.canvasX, (self.canvasY-( %f* self.canvasY )) ,  (%f* self.canvasX), (self.canvasY-(%f* self.canvasX)), outline='#000000', width=1)\n", r_max.x, r_max.y, r_min.x, r_min.y);
 	
-	for (i=0;i < 100;i++)
+	for (i=0;i < 512;i++)
 		posible_collision[i]=-1;
 	j=0;
 
@@ -251,48 +261,114 @@ int getValues(float laser_num_sensors, float laser_origin, float laser_range,flo
 
 
 
-void laserCallback(const simulator::Parameters::ConstPtr& params)
+void paramsCallback(const simulator::Parameters::ConstPtr& paramss)
 {
-	char path[50];
-	float   valores[100];
-		
-	if( strcmp( params->world_name.c_str(),actual_world) ) 
+	  std::string paths = ros::package::getPath("simulator");
+  	  char path[100];
+
+	  params.robot_x             = paramss->robot_x   ;
+	  params.robot_y             = paramss->robot_y   ;
+	  params.robot_theta         = paramss->robot_theta   ;    
+	  params.robot_radio         = paramss->robot_radio   ;    
+	  params.robot_max_advance   = paramss->robot_max_advance   ;          
+	  params.robot_turn_angle    = paramss->robot_turn_angle   ;         
+	  params.laser_num_sensors   = paramss->laser_num_sensors   ;          
+	  params.laser_origin        = paramss->laser_origin         ;     
+	  params.laser_range         = paramss->laser_range   ;    
+	  params.laser_value         = paramss->laser_value   ;    
+	  strcpy(params.world_name ,paramss -> world_name.c_str());       
+	  params.noise               = paramss->noise   ;   
+	  params.run                 = paramss->run   ; 
+	  params.light_x             = paramss->light_x;
+	  params.light_y             = paramss->light_y;
+	  params.behavior            = paramss->behavior; 
+
+	if( strcmp( paramss->world_name.c_str(),actual_world) ) 
 	{
-		strcpy(path,"./src/simulator/src/data/");
-		strcat(path,params->world_name.c_str());
+		strcpy(path,paths.c_str());
+		strcat(path,"/src/data/");
+		strcat(path,paramss->world_name.c_str());
 		strcat(path,"/");
-		strcat(path,params->world_name.c_str());
+		strcat(path,paramss->world_name.c_str());
 		strcat(path,".wrl");
 		read_environment(path,0);
-		strcpy(actual_world,params->world_name.c_str());
+		strcpy(actual_world,paramss->world_name.c_str());
 	}
-	
-    getValues(params->laser_num_sensors ,params->laser_origin ,params->laser_range ,params->laser_value ,params->robot_x ,params->robot_y ,params->robot_theta ,valores);
-	
-	for (int i =0 ; i<100;i++)
-		sensors[i] = valores[i];
-
 }
+
+
+bool laserCallback(simulator::simulator_laser::Request  &req ,simulator::simulator_laser::Response &res)
+{
+	float   valores1[512];
+	float   valores2[50];
+	int j=0;
+	getValues(params.laser_num_sensors ,params.laser_origin ,params.laser_range ,params.laser_value ,req.robot_x ,req.robot_y ,req.robot_theta ,valores1);
+	
+	for (int i =0 ; i<params.laser_num_sensors;i++,j++)
+		res.sensors[i] = valores1[i];
+
+
+	//boost::thread first (getValues,params.laser_num_sensors/2 ,params.laser_origin ,params.laser_range/2 ,params.laser_value ,req.robot_x ,req.robot_y ,req.robot_theta ,valores1);
+	//boost::thread second (getValues,params.laser_num_sensors/2 ,params.laser_origin + params.laser_range/2 ,params.laser_range/2 ,params.laser_value ,req.robot_x ,req.robot_y ,req.robot_theta ,valores2);
+	//first.join();
+	//second.join();
+	//for (int i =0 ; i<params.laser_num_sensors/2;i++,j++)
+	//	res.sensors[j] = valores1[i];
+
+	//for (int i =0 ; i<params.laser_num_sensors/2;i++,j++)
+	//	res.sensors[j] = valores2[i];
+
+	return true;
+}
+
 
 int main(int argc, char *argv[])
 {	
 	ros::init(argc, argv, "simulator_laser_node");
 	ros::NodeHandle n;
-	ros::Publisher laser_pub = n.advertise<simulator::Laser_values>("simulator_laser_pub", 0);
-	ros::Subscriber params_sub = n.subscribe("simulator_parameters_pub", 0, laserCallback);
-	simulator::Laser_values laser_msg;
-	int i;
-	ros::Rate loop_rate(40);
-	actual_world[0]='\0';
+	ros::Subscriber params_sub = n.subscribe("simulator_parameters_pub", 0, paramsCallback);
+	ros::ServiceServer service = n.advertiseService("simulator_laser_serv", laserCallback);
+	ros::spin();
+	/*
+	ros::Publisher pubLaseScan = n.advertise<sensor_msgs::LaserScan>("/scan_simul", 1);
 	
+	actual_world[0] = '\0';
+	
+	char a[200]="/home/pumas/Documents/diego/catkin_ws/src/simulator/src/data/random_2/random_2.wrl";
+	
+	read_environment(a,0);
+	float   valores1[512];
+	float   valores2[50];
+    std_msgs::Header header;
+    sensor_msgs::LaserScan msg;
+    ros::Rate loop_rate(50);
+
 	while (ros::ok())
-	  {
-	    for(i=0;i<100;i++)
-	    	laser_msg.sensors[i] = sensors[i];
-	    laser_pub.publish(laser_msg);
-	    loop_rate.sleep();
+	{
+		
+	header.frame_id = "base_laser_link";
+	msg.header = header;
+	msg.angle_min = params.laser_origin;
+	msg.angle_max = params.laser_origin + params.laser_range;
+	msg.angle_increment = params.laser_range / (float)params.laser_num_sensors;
+	msg.range_min = 0.0;
+	msg.range_max = params.laser_value;
+	msg.ranges.resize(params.laser_num_sensors);
+
+
+	getValues(params.laser_num_sensors ,params.laser_origin ,params.laser_range ,params.laser_value ,params.robot_x ,params.robot_y ,params.robot_theta ,valores1);
+	
+	for (int i =0 ; i<params.laser_num_sensors;i++)
+		//printf("%f \n",valores1[i] );
+		msg.ranges[i] = valores1[i];
+
+		pubLaseScan.publish(msg);
+	    
 	    ros::spinOnce();
-	  }
+	     loop_rate.sleep();
+
+	}
+	*/
 
 	return 0;
 }

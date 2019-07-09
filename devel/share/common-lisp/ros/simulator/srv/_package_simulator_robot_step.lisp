@@ -3,6 +3,10 @@
           THETA
           DISTANCE-VAL
           DISTANCE
+          SENSORS-VAL
+          SENSORS
+          STOP-VAL
+          STOP
           SUCCESS-VAL
           SUCCESS
           ROBOT_X-VAL

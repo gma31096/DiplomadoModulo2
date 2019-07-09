@@ -1,7 +1,7 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/laser_node.dir/src/simulator_physics/laser_node.cpp.o"
-  "/home/diego/catkin_ws/devel/lib/simulator/laser_node.pdb"
-  "/home/diego/catkin_ws/devel/lib/simulator/laser_node"
+  "/home/gerardo/catkin_ws/devel/lib/simulator/laser_node.pdb"
+  "/home/gerardo/catkin_ws/devel/lib/simulator/laser_node"
 )
 
 # Per-language clean rules from dependency scanning.

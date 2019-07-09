@@ -7,7 +7,7 @@ import struct
 
 
 class Parameters(genpy.Message):
-  _md5sum = "c3a3242b503b35f6fa2f7b2245605401"
+  _md5sum = "eb9508f5e9e6604d74275a2ec9e9f522"
   _type = "simulator/Parameters"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """float32 robot_x
@@ -26,9 +26,11 @@ bool run
 float32 light_x
 float32 light_y
 int32 behavior
-int32 steps"""
-  __slots__ = ['robot_x','robot_y','robot_theta','robot_radio','robot_max_advance','robot_turn_angle','laser_num_sensors','laser_origin','laser_range','laser_value','world_name','noise','run','light_x','light_y','behavior','steps']
-  _slot_types = ['float32','float32','float32','float32','float32','float32','int32','float32','float32','float32','string','bool','bool','float32','float32','int32','int32']
+int32 steps
+bool turtle
+"""
+  __slots__ = ['robot_x','robot_y','robot_theta','robot_radio','robot_max_advance','robot_turn_angle','laser_num_sensors','laser_origin','laser_range','laser_value','world_name','noise','run','light_x','light_y','behavior','steps','turtle']
+  _slot_types = ['float32','float32','float32','float32','float32','float32','int32','float32','float32','float32','string','bool','bool','float32','float32','int32','int32','bool']
 
   def __init__(self, *args, **kwds):
     """
@@ -38,7 +40,7 @@ int32 steps"""
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       robot_x,robot_y,robot_theta,robot_radio,robot_max_advance,robot_turn_angle,laser_num_sensors,laser_origin,laser_range,laser_value,world_name,noise,run,light_x,light_y,behavior,steps
+       robot_x,robot_y,robot_theta,robot_radio,robot_max_advance,robot_turn_angle,laser_num_sensors,laser_origin,laser_range,laser_value,world_name,noise,run,light_x,light_y,behavior,steps,turtle
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -81,6 +83,8 @@ int32 steps"""
         self.behavior = 0
       if self.steps is None:
         self.steps = 0
+      if self.turtle is None:
+        self.turtle = False
     else:
       self.robot_x = 0.
       self.robot_y = 0.
@@ -99,6 +103,7 @@ int32 steps"""
       self.light_y = 0.
       self.behavior = 0
       self.steps = 0
+      self.turtle = False
 
   def _get_types(self):
     """
@@ -124,7 +129,7 @@ int32 steps"""
       else:
         buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_struct_2B2f2i.pack(_x.noise, _x.run, _x.light_x, _x.light_y, _x.behavior, _x.steps))
+      buff.write(_struct_2B2f2iB.pack(_x.noise, _x.run, _x.light_x, _x.light_y, _x.behavior, _x.steps, _x.turtle))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -150,10 +155,11 @@ int32 steps"""
         self.world_name = str[start:end]
       _x = self
       start = end
-      end += 18
-      (_x.noise, _x.run, _x.light_x, _x.light_y, _x.behavior, _x.steps,) = _struct_2B2f2i.unpack(str[start:end])
+      end += 19
+      (_x.noise, _x.run, _x.light_x, _x.light_y, _x.behavior, _x.steps, _x.turtle,) = _struct_2B2f2iB.unpack(str[start:end])
       self.noise = bool(self.noise)
       self.run = bool(self.run)
+      self.turtle = bool(self.turtle)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -178,7 +184,7 @@ int32 steps"""
       else:
         buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_struct_2B2f2i.pack(_x.noise, _x.run, _x.light_x, _x.light_y, _x.behavior, _x.steps))
+      buff.write(_struct_2B2f2iB.pack(_x.noise, _x.run, _x.light_x, _x.light_y, _x.behavior, _x.steps, _x.turtle))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -205,14 +211,15 @@ int32 steps"""
         self.world_name = str[start:end]
       _x = self
       start = end
-      end += 18
-      (_x.noise, _x.run, _x.light_x, _x.light_y, _x.behavior, _x.steps,) = _struct_2B2f2i.unpack(str[start:end])
+      end += 19
+      (_x.noise, _x.run, _x.light_x, _x.light_y, _x.behavior, _x.steps, _x.turtle,) = _struct_2B2f2iB.unpack(str[start:end])
       self.noise = bool(self.noise)
       self.run = bool(self.run)
+      self.turtle = bool(self.turtle)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_2B2f2i = struct.Struct("<2B2f2i")
+_struct_2B2f2iB = struct.Struct("<2B2f2iB")
 _struct_6fi3f = struct.Struct("<6fi3f")

@@ -1,0 +1,8 @@
+prefix=/home/gerardo/catkin_ws/install
+
+Name: clips_ros
+Description: Description of clips_ros
+Version: 0.0.0
+Cflags: -I/home/gerardo/catkin_ws/install/include
+Libs: -L/home/gerardo/catkin_ws/install/lib -lclips_ros
+Requires: geometry_msgs roscpp rospy std_msgs std_srvs

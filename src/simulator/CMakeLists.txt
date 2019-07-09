@@ -11,7 +11,9 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  sensor_msgs
   message_generation
+  clips_ros
 )
 
 ## System dependencies are found with CMake's conventions
@@ -64,6 +66,10 @@ find_package(catkin REQUIRED COMPONENTS
    simulator_light.srv
    simulator_robot_laser_values.srv
    simulator_algorithm_result.srv
+   simulator_stop.srv
+   simulator_set_light_position.srv
+   simulator_turtlebot.srv
+   simulator_object_interaction.srv
 
  )
 
@@ -78,6 +84,7 @@ find_package(catkin REQUIRED COMPONENTS
  generate_messages(
    DEPENDENCIES
    std_msgs
+   sensor_msgs
  )
 
 ################################################
@@ -112,7 +119,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES simulator
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+#  CATKIN_DEPENDS roscpp rospy std_msgs clips
 #  DEPENDS system_lib
 )
 
@@ -209,10 +216,6 @@ add_executable(motion_planner_node src/motion_planner/motion_planner_node.cpp)
 target_link_libraries(motion_planner_node ${catkin_LIBRARIES})
 add_dependencies(motion_planner_node simulator_generate_messages_cpp)
 
-add_executable(simulator_pub src/motion_planner/simulator_pub.cpp)
-target_link_libraries(simulator_pub ${catkin_LIBRARIES})
-add_dependencies(simulator_pub simulator_generate_messages_cpp)
-
 add_executable(base_node src/simulator_physics/base_node.cpp)
 target_link_libraries(base_node ${catkin_LIBRARIES})
 add_dependencies(base_node simulator_generate_messages_cpp)
@@ -224,3 +227,7 @@ add_dependencies(laser_node simulator_generate_messages_cpp)
 add_executable(light_node src/simulator_physics/light_node.cpp)
 target_link_libraries(light_node ${catkin_LIBRARIES})
 add_dependencies(light_node simulator_generate_messages_cpp)
+
+add_executable(move_turtlebot_node src/turtlebot/move_turtlebot_node.cpp)
+target_link_libraries(move_turtlebot_node ${catkin_LIBRARIES})
+add_dependencies(move_turtlebot_node simulator_generate_messages_cpp)

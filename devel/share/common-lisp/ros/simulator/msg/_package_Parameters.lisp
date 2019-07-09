@@ -33,4 +33,6 @@
           BEHAVIOR
           STEPS-VAL
           STEPS
+          TURTLE-VAL
+          TURTLE
 ))

@@ -1,3 +1,19 @@
+
+/***********************************************
+*                                              *
+*      light_node.cpp                          *
+*                                              *
+*      Jesus Savage                            *
+*      Diego Cordero                           *
+*                                              *
+*              Bio-Robotics Laboratory         *
+*              UNAM, 2019                      *
+*                                              *
+*                                              *
+************************************************/
+
+
+
 #include "ros/ros.h"
 #include "simulator/Parameters.h"
 #include "../utilities/simulator_structures.h"
@@ -39,26 +55,30 @@ bool get_intensities(simulator::simulator_light::Request  &req ,simulator::simul
 	int sensor;
 	float step = 3.1415/4; 
 	float values[8];
+	int i;
 
-	for(int i = 0; i < 8; i++)
+	x = params.robot_radio * cos(step) + params.robot_x;
+    y = params.robot_y;
+    res.values[0] = values[0] =  1 / sqrt( pow(x - params.light_x ,2) + pow(y - params.light_y,2));
+
+	for(int i = 1; i < 8; i++)
 	{
 		x = params.robot_radio * cos( params.robot_theta + i * step) + params.robot_x;
 		y = params.robot_radio * sin( params.robot_theta + i * step) + params.robot_y;
-		//printf("%d %f %f\n",i,x,y );
-		res.values[i] = values[i] = sqrt( pow(x - params.light_x ,2) + pow(y - params.light_y,2));
-		//printf("%d: %f \n",i,values[i] );
+		res.values[i] = values[i] =  1 / sqrt( pow(x - params.light_x ,2) + pow(y - params.light_y,2));
 	}
 	sensor = 0;
 
 	for(int i = 1; i < 8; i++)
 	{
-		if( values[i] < values[sensor])
+		if( values[i] > values[sensor])
 			sensor = i;
 	}
-	//printf("El sensor %d \n",sensor );
 	return true;
-
 }
+
+
+
 
 int main(int argc, char *argv[])
 {	

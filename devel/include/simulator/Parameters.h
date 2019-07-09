@@ -40,7 +40,8 @@ struct Parameters_
     , light_x(0.0)
     , light_y(0.0)
     , behavior(0)
-    , steps(0)  {
+    , steps(0)
+    , turtle(false)  {
     }
   Parameters_(const ContainerAllocator& _alloc)
     : robot_x(0.0)
@@ -59,7 +60,8 @@ struct Parameters_
     , light_x(0.0)
     , light_y(0.0)
     , behavior(0)
-    , steps(0)  {
+    , steps(0)
+    , turtle(false)  {
   (void)_alloc;
     }
 
@@ -116,6 +118,9 @@ struct Parameters_
    typedef int32_t _steps_type;
   _steps_type steps;
 
+   typedef uint8_t _turtle_type;
+  _turtle_type turtle;
+
 
 
 
@@ -150,7 +155,7 @@ namespace message_traits
 
 
 // BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
-// {'std_msgs': ['/opt/ros/indigo/share/std_msgs/cmake/../msg'], 'simulator': ['/home/diego/catkin_ws/src/simulator/msg']}
+// {'sensor_msgs': ['/opt/ros/indigo/share/sensor_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/indigo/share/std_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/indigo/share/geometry_msgs/cmake/../msg'], 'simulator': ['/home/gerardo/catkin_ws/src/simulator/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
@@ -193,12 +198,12 @@ struct MD5Sum< ::simulator::Parameters_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "c3a3242b503b35f6fa2f7b2245605401";
+    return "eb9508f5e9e6604d74275a2ec9e9f522";
   }
 
   static const char* value(const ::simulator::Parameters_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xc3a3242b503b35f6ULL;
-  static const uint64_t static_value2 = 0xfa2f7b2245605401ULL;
+  static const uint64_t static_value1 = 0xeb9508f5e9e6604dULL;
+  static const uint64_t static_value2 = 0x74275a2ec9e9f522ULL;
 };
 
 template<class ContainerAllocator>
@@ -234,6 +239,7 @@ float32 light_x\n\
 float32 light_y\n\
 int32 behavior\n\
 int32 steps\n\
+bool turtle\n\
 ";
   }
 
@@ -269,6 +275,7 @@ namespace serialization
       stream.next(m.light_y);
       stream.next(m.behavior);
       stream.next(m.steps);
+      stream.next(m.turtle);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -321,6 +328,8 @@ struct Printer< ::simulator::Parameters_<ContainerAllocator> >
     Printer<int32_t>::stream(s, indent + "  ", v.behavior);
     s << indent << "steps: ";
     Printer<int32_t>::stream(s, indent + "  ", v.steps);
+    s << indent << "turtle: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.turtle);
   }
 };
 
